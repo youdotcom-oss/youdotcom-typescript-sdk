@@ -1,0 +1,21 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    You.com Agents API:
+        inputs:
+            - location: ./openapi_schemas/openapi_unified_agents.yaml
+            - location: ./openapi_schemas/openapi_search_v1.yaml
+            - location: ./openapi_schemas/openapi_contents.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/youcom/documentation/you-com-agents-api
+targets:
+    you:
+        target: typescript
+        source: You.com Agents API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/youcom/documentation/you-com-agents-api-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

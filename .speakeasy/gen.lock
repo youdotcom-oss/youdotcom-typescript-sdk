@@ -1,0 +1,621 @@
+lockVersion: 2.0.0
+id: 8f64bc72-2c6f-46dd-98c7-06d8491c2a24
+management:
+  docChecksum: 87d8a3aa83857b0965da301e7ae23e76
+  docVersion: 0.0.1
+  speakeasyVersion: 1.662.0
+  generationVersion: 2.763.3
+  releaseVersion: 0.9.5
+  configChecksum: 9d983925eb13cb4c6a7de9a31c0803b3
+features:
+  typescript:
+    acceptHeaders: 2.81.2
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.12
+    core: 3.26.10
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.1
+    enumUnions: 0.1.0
+    enums: 2.83.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.14
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.83.0
+    methodArguments: 0.1.2
+    methodServerURLs: 2.82.1
+    nullables: 0.1.1
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.3.0
+    serverEvents: 0.1.12
+    unions: 2.86.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/advancedagentrunsrequest.md
+  - docs/models/advancedagentrunsrequestagent.md
+  - docs/models/agentrunsbatchresponse.md
+  - docs/models/agentrunsresponseoutput.md
+  - docs/models/agentrunsresponseoutputtype.md
+  - docs/models/agentrunsresponsewebsearchresult.md
+  - docs/models/agentrunsstreamingresponse.md
+  - docs/models/computetool.md
+  - docs/models/computetooltype.md
+  - docs/models/country.md
+  - docs/models/customagentrunsrequest.md
+  - docs/models/data.md
+  - docs/models/detail.md
+  - docs/models/errors/agentruns400responseerror.md
+  - docs/models/errors/agentruns401responseerror.md
+  - docs/models/errors/agentruns422responseerror.md
+  - docs/models/errors/contentsforbiddenerror.md
+  - docs/models/errors/contentsinternalservererror.md
+  - docs/models/errors/contentsunauthorizederror.md
+  - docs/models/errors/searchforbiddenerror.md
+  - docs/models/errors/searchinternalservererror.md
+  - docs/models/errors/searchunauthorizederror.md
+  - docs/models/expressagentrunsrequest.md
+  - docs/models/expressagentrunsrequestagent.md
+  - docs/models/expressagentrunsrequesttool.md
+  - docs/models/expressagentrunsrequesttype.md
+  - docs/models/freshness.md
+  - docs/models/input.md
+  - docs/models/livecrawl.md
+  - docs/models/livecrawlformats.md
+  - docs/models/loc.md
+  - docs/models/operations/agentsrunsrequest.md
+  - docs/models/operations/agentsrunsresponse.md
+  - docs/models/operations/contentsrequest.md
+  - docs/models/operations/contentsresponse.md
+  - docs/models/operations/country.md
+  - docs/models/operations/format.md
+  - docs/models/operations/formatenum1.md
+  - docs/models/operations/formatenum2.md
+  - docs/models/operations/freshness.md
+  - docs/models/operations/livecrawl.md
+  - docs/models/operations/livecrawlformats.md
+  - docs/models/operations/metadata.md
+  - docs/models/operations/news.md
+  - docs/models/operations/results.md
+  - docs/models/operations/safesearch.md
+  - docs/models/operations/searchrequest.md
+  - docs/models/operations/searchresponse.md
+  - docs/models/operations/web.md
+  - docs/models/reportverbosity.md
+  - docs/models/researchtool.md
+  - docs/models/researchtooltype.md
+  - docs/models/responsecreated.md
+  - docs/models/responsecreatedtype.md
+  - docs/models/responsedone.md
+  - docs/models/responsedoneresponse.md
+  - docs/models/responsedonetype.md
+  - docs/models/responseoutputcontentfull.md
+  - docs/models/responseoutputcontentfullresponse.md
+  - docs/models/responseoutputcontentfulltype.md
+  - docs/models/responseoutputitemadded.md
+  - docs/models/responseoutputitemaddedresponse.md
+  - docs/models/responseoutputitemaddedtype.md
+  - docs/models/responseoutputitemdone.md
+  - docs/models/responseoutputitemdoneresponse.md
+  - docs/models/responseoutputitemdonetype.md
+  - docs/models/responseoutputtextdelta.md
+  - docs/models/responseoutputtextdeltaresponse.md
+  - docs/models/responseoutputtextdeltatype.md
+  - docs/models/responsestarting.md
+  - docs/models/responsestartingtype.md
+  - docs/models/role.md
+  - docs/models/safesearch.md
+  - docs/models/searcheffort.md
+  - docs/models/security.md
+  - docs/models/sourcetype.md
+  - docs/models/tool.md
+  - docs/models/typemessageanswer.md
+  - docs/models/typewebsearchresults.md
+  - docs/models/verbosity.md
+  - docs/models/workflowconfig.md
+  - docs/sdks/you/README.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/agentsRuns.example.ts
+  - examples/package.json
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/agentsRuns.ts
+  - src/funcs/contents.ts
+  - src/funcs/search.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/event-streams.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/advancedagentrunsrequest.ts
+  - src/models/agentruns422responseerror.ts
+  - src/models/agentrunsbatchresponse.ts
+  - src/models/agentrunsresponseoutput.ts
+  - src/models/agentrunsresponsewebsearchresult.ts
+  - src/models/agentrunsstreamingresponse.ts
+  - src/models/computetool.ts
+  - src/models/country.ts
+  - src/models/customagentrunsrequest.ts
+  - src/models/errors/agentruns400responseerror.ts
+  - src/models/errors/agentruns401responseerror.ts
+  - src/models/errors/agentruns422responseerror.ts
+  - src/models/errors/contents.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/search.ts
+  - src/models/errors/youdefaulterror.ts
+  - src/models/errors/youerror.ts
+  - src/models/expressagentrunsrequest.ts
+  - src/models/freshness.ts
+  - src/models/index.ts
+  - src/models/livecrawl.ts
+  - src/models/livecrawlformats.ts
+  - src/models/operations/agentsruns.ts
+  - src/models/operations/contents.ts
+  - src/models/operations/index.ts
+  - src/models/operations/search.ts
+  - src/models/reportverbosity.ts
+  - src/models/researchtool.ts
+  - src/models/responsecreated.ts
+  - src/models/responsedone.ts
+  - src/models/responseoutputcontentfull.ts
+  - src/models/responseoutputitemadded.ts
+  - src/models/responseoutputitemdone.ts
+  - src/models/responseoutputtextdelta.ts
+  - src/models/responsestarting.ts
+  - src/models/safesearch.ts
+  - src/models/searcheffort.ts
+  - src/models/security.ts
+  - src/models/verbosity.ts
+  - src/sdk/index.ts
+  - src/sdk/sdk.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/defaultToZeroValue.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/primitives.ts
+  - src/types/rfcdate.ts
+  - src/types/smartUnion.ts
+  - src/types/streams.ts
+  - src/types/unrecognized.ts
+  - tsconfig.json
+examples:
+  post_/v1/agents/runs:
+    express_batch:
+      requestBody:
+        application/json: {"agent": "express", "input": "What is the capital of France?", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": [{"text": "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).", "type": "web_search.results", "content": [{"source_type": "web_search", "citation_uri": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes", "provider": "<value>", "title": "103 Easy 30-Minute Dinner Recipes That Will Save Your Weeknights", "snippet": "Apr 11, 2025 ... These quick dinner ideas will help you get a meal on the table in half an hour or less. ... It's a simple recipe ready in under half an hour with ...", "thumbnail_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTNucjGK8ZqfurwAmyuyhQ-7n7AVZHoJwUqfsqRYuCqlIpMwepNDEE_M&s", "url": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes"}]}]}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    express_stream:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": true, "tools": [{"type": "web_search"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": [{"text": "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).", "type": "web_search.results", "content": [{"source_type": "web_search", "citation_uri": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes", "provider": "<value>", "title": "103 Easy 30-Minute Dinner Recipes That Will Save Your Weeknights", "snippet": "Apr 11, 2025 ... These quick dinner ideas will help you get a meal on the table in half an hour or less. ... It's a simple recipe ready in under half an hour with ...", "thumbnail_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTNucjGK8ZqfurwAmyuyhQ-7n7AVZHoJwUqfsqRYuCqlIpMwepNDEE_M&s", "url": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes"}]}]}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    advanced_batch:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": [{"text": "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).", "type": "web_search.results", "content": [{"source_type": "web_search", "citation_uri": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes", "provider": "<value>", "title": "103 Easy 30-Minute Dinner Recipes That Will Save Your Weeknights", "snippet": "Apr 11, 2025 ... These quick dinner ideas will help you get a meal on the table in half an hour or less. ... It's a simple recipe ready in under half an hour with ...", "thumbnail_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTNucjGK8ZqfurwAmyuyhQ-7n7AVZHoJwUqfsqRYuCqlIpMwepNDEE_M&s", "url": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes"}]}]}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    advanced_stream:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": [{"text": "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).", "type": "web_search.results", "content": [{"source_type": "web_search", "citation_uri": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes", "provider": "<value>", "title": "103 Easy 30-Minute Dinner Recipes That Will Save Your Weeknights", "snippet": "Apr 11, 2025 ... These quick dinner ideas will help you get a meal on the table in half an hour or less. ... It's a simple recipe ready in under half an hour with ...", "thumbnail_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTNucjGK8ZqfurwAmyuyhQ-7n7AVZHoJwUqfsqRYuCqlIpMwepNDEE_M&s", "url": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes"}]}]}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    custom_batch:
+      requestBody:
+        application/json: {"agent": "63773261-b4de-4d8f-9dfd-cff206a5cb51", "input": "What is the capital of France?", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": [{"text": "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).", "type": "web_search.results", "content": [{"source_type": "web_search", "citation_uri": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes", "provider": "<value>", "title": "103 Easy 30-Minute Dinner Recipes That Will Save Your Weeknights", "snippet": "Apr 11, 2025 ... These quick dinner ideas will help you get a meal on the table in half an hour or less. ... It's a simple recipe ready in under half an hour with ...", "thumbnail_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTNucjGK8ZqfurwAmyuyhQ-7n7AVZHoJwUqfsqRYuCqlIpMwepNDEE_M&s", "url": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes"}]}]}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    custom_stream:
+      requestBody:
+        application/json: {"agent": "63773261-b4de-4d8f-9dfd-cff206a5cb51", "input": "Tell me about the history of Paris", "stream": true}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": [{"text": "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).", "type": "web_search.results", "content": [{"source_type": "web_search", "citation_uri": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes", "provider": "<value>", "title": "103 Easy 30-Minute Dinner Recipes That Will Save Your Weeknights", "snippet": "Apr 11, 2025 ... These quick dinner ideas will help you get a meal on the table in half an hour or less. ... It's a simple recipe ready in under half an hour with ...", "thumbnail_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTNucjGK8ZqfurwAmyuyhQ-7n7AVZHoJwUqfsqRYuCqlIpMwepNDEE_M&s", "url": "https://www.foodnetwork.com/recipes/photos/30-minute-dinner-recipes"}]}]}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+  agentsruns:
+    express_batch:
+      requestBody:
+        application/json: {"agent": "express", "input": "What is the capital of France?", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    express_stream:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": true, "tools": [{"type": "web_search"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    advanced_batch:
+      requestBody:
+        application/json: {"agent": "advanced", "input": "You are a biologist studying the impacts of microplastics. Explain what microplastics are to a group of engineers, explain the impacts of microplastics on the body, and what the common sources and dosages of microplastics are. Highlight what a safe dosage might be and how to achieve it", "stream": false, "tools": [{"type": "research", "search_effort": "auto", "report_verbosity": "medium"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    advanced_stream:
+      requestBody:
+        application/json: {"agent": "advanced", "input": "Analyze the economic impact of renewable energy adoption", "stream": true, "tools": [{"type": "compute"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    custom_batch:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    custom_stream:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+  AgentsRuns:
+    express_batch:
+      requestBody:
+        application/json: {"agent": "express", "input": "What is the capital of France?", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    express_stream:
+      requestBody:
+        application/json: {"agent": "express", "input": "What are some great recipes I can make in under half an hour", "stream": true, "tools": [{"type": "web_search"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    advanced_batch:
+      requestBody:
+        application/json: {"agent": "advanced", "input": "You are a biologist studying the impacts of microplastics. Explain what microplastics are to a group of engineers, explain the impacts of microplastics on the body, and what the common sources and dosages of microplastics are. Highlight what a safe dosage might be and how to achieve it", "stream": false, "tools": [{"type": "research", "search_effort": "auto", "report_verbosity": "medium"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    advanced_stream:
+      requestBody:
+        application/json: {"agent": "advanced", "input": "Analyze the economic impact of renewable energy adoption", "stream": true, "tools": [{"type": "compute"}]}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    custom_batch:
+      requestBody:
+        application/json: {"agent": "63773261-b4de-4d8f-9dfd-cff206a5cb51", "input": "What is the capital of France?", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    custom_stream:
+      requestBody:
+        application/json: {"agent": "63773261-b4de-4d8f-9dfd-cff206a5cb51", "input": "Tell me about the history of Paris", "stream": true}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+  get_/v1/search:
+    speakeasy-default-get-/v1-/search:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "200":
+          application/json: {"results": {"web": [{"url": "https://you.com", "title": "The World's Greatest Search Engine!", "description": "Search on YDC", "snippets": ["I'm an AI assistant that helps you get more done. What can I help you with?"], "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "page_age": "2025-06-25T11:41:00", "authors": ["John Doe"], "favicon_url": "https://someurl.com/favicon"}], "news": [{"title": "Exclusive | You.com becomes the backbone of the EU's AI strategy", "description": "As the EU's AI strategy is being debated, You.com becomes the backbone of the EU's AI strategy.", "page_age": "2025-06-25T11:41:00", "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "url": "https://www.you.com/news/eu-ai-strategy-youcom"}]}, "metadata": {"request_uuid": "942ccbdd-7705-4d9c-9d37-4ef386658e90", "query": "Your query", "latency": 0.123}}
+        "401":
+          application/json: {}
+        "403":
+          application/json: {}
+        "500":
+          application/json: {}
+    missingApiKey:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "401":
+          application/json: {"detail": "API key is required"}
+    invalidOrExpired:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+    otherAuthParsing:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "401":
+          application/json: {"detail": "<error message>"}
+    missingScopes:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "403":
+          application/json: {"detail": "Missing required scopes"}
+    authFailure:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "500":
+          application/json: {"detail": "Internal authentication error"}
+    authorizationFailure:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "500":
+          application/json: {"detail": "Internal authorization error"}
+  search:
+    speakeasy-default-search:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "200":
+          application/json: {"results": {"web": [{"url": "https://you.com", "title": "The World's Greatest Search Engine!", "description": "Search on YDC", "snippets": ["I'm an AI assistant that helps you get more done. What can I help you with?"], "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "page_age": "2025-06-25T11:41:00", "authors": ["John Doe"], "favicon_url": "https://someurl.com/favicon"}], "news": [{"title": "Exclusive | You.com becomes the backbone of the EU's AI strategy", "description": "As the EU's AI strategy is being debated, You.com becomes the backbone of the EU's AI strategy.", "page_age": "2025-06-25T11:41:00", "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "url": "https://www.you.com/news/eu-ai-strategy-youcom"}]}, "metadata": {"request_uuid": "942ccbdd-7705-4d9c-9d37-4ef386658e90", "query": "Your query", "latency": 0.123}}
+        "401":
+          application/json: {}
+        "403":
+          application/json: {}
+        "500":
+          application/json: {}
+    missingApiKey:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "401":
+          application/json: {"detail": "API key is required"}
+    invalidOrExpired:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+    otherAuthParsing:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "401":
+          application/json: {"detail": "<error message>"}
+    missingScopes:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "403":
+          application/json: {"detail": "Missing required scopes"}
+    authFailure:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "500":
+          application/json: {"detail": "Internal authentication error"}
+    authorizationFailure:
+      parameters:
+        query:
+          query: "Your query"
+      responses:
+        "500":
+          application/json: {"detail": "Internal authorization error"}
+  post_/v1/contents:
+    missingApiKey:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "401":
+          application/json: {"detail": "API key is required"}
+    invalidOrExpired:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+    otherAuthParsing:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "401":
+          application/json: {"detail": "<error message>"}
+    missingScopes:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "403":
+          application/json: {"detail": "Missing required scopes"}
+    authFailure:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "500":
+          application/json: {"detail": "Internal authentication error"}
+    authorizationFailure:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "500":
+          application/json: {"detail": "Internal authorization error"}
+  contents:
+    missingApiKey:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "401":
+          application/json: {"detail": "API key is required"}
+    invalidOrExpired:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+    otherAuthParsing:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "401":
+          application/json: {"detail": "<error message>"}
+    missingScopes:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "403":
+          application/json: {"detail": "Missing required scopes"}
+    authFailure:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "500":
+          application/json: {"detail": "Internal authentication error"}
+    authorizationFailure:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "500":
+          application/json: {"detail": "Internal authorization error"}
+examplesVersion: 1.0.2
