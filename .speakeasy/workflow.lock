@@ -1,0 +1,39 @@
+speakeasyVersion: 1.662.0
+sources:
+    You.com Agents API:
+        sourceNamespace: you-com-agents-api
+        sourceRevisionDigest: sha256:c867180a5b3f856d1c4101197edb0c012d7bc0ef3589b0d205392a0c709288a7
+        sourceBlobDigest: sha256:1bc704f727055fe59b7ca0855847ce187f72829cb8cefe1ed798929488d5110d
+        tags:
+            - latest
+            - 0.0.1
+targets:
+    you:
+        source: You.com Agents API
+        sourceNamespace: you-com-agents-api
+        sourceRevisionDigest: sha256:c867180a5b3f856d1c4101197edb0c012d7bc0ef3589b0d205392a0c709288a7
+        sourceBlobDigest: sha256:1bc704f727055fe59b7ca0855847ce187f72829cb8cefe1ed798929488d5110d
+        codeSamplesNamespace: you-com-agents-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:04020a39b569041f9e90378605e0c25d45ba70dc1b299c4eebadc58eca65a986
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        You.com Agents API:
+            inputs:
+                - location: ./openapi_schemas/openapi_unified_agents.yaml
+                - location: ./openapi_schemas/openapi_search_v1.yaml
+                - location: ./openapi_schemas/openapi_contents.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/youcom/documentation/you-com-agents-api
+    targets:
+        you:
+            target: typescript
+            source: You.com Agents API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/youcom/documentation/you-com-agents-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false
