@@ -21,7 +21,7 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
  * * `message.answer` for text responses
  * * `web_search.results` for output that contains web links. `web_search.results` only appear when you use the `research` tool or express agent with web_search
  */
-export const AgentRunsResponseOutputType = {
+export const Type = {
   MessageAnswer: "message.answer",
   WebSearchResults: "web_search.results",
 } as const;
@@ -32,9 +32,7 @@ export const AgentRunsResponseOutputType = {
  * * `message.answer` for text responses
  * * `web_search.results` for output that contains web links. `web_search.results` only appear when you use the `research` tool or express agent with web_search
  */
-export type AgentRunsResponseOutputType = OpenEnum<
-  typeof AgentRunsResponseOutputType
->;
+export type Type = OpenEnum<typeof Type>;
 
 /**
  * The response populated by the agent.
@@ -55,7 +53,7 @@ export type AgentRunsResponseOutput = {
    * * `message.answer` for text responses
    * * `web_search.results` for output that contains web links. `web_search.results` only appear when you use the `research` tool or express agent with web_search
    */
-  type: AgentRunsResponseOutputType;
+  type: Type;
   /**
    * The text response of the agent.
    *
@@ -66,10 +64,8 @@ export type AgentRunsResponseOutput = {
 };
 
 /** @internal */
-export const AgentRunsResponseOutputType$inboundSchema: z.ZodMiniType<
-  AgentRunsResponseOutputType,
-  unknown
-> = openEnums.inboundSchema(AgentRunsResponseOutputType);
+export const Type$inboundSchema: z.ZodMiniType<Type, unknown> = openEnums
+  .inboundSchema(Type);
 
 /** @internal */
 export const AgentRunsResponseOutput$inboundSchema: z.ZodMiniType<
@@ -77,7 +73,7 @@ export const AgentRunsResponseOutput$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   text: types.optional(types.string()),
-  type: AgentRunsResponseOutputType$inboundSchema,
+  type: Type$inboundSchema,
   content: types.optional(
     z.array(AgentRunsResponseWebSearchResult$inboundSchema),
   ),

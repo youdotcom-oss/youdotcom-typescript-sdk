@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 8f64bc72-2c6f-46dd-98c7-06d8491c2a24
 management:
-  docChecksum: 87d8a3aa83857b0965da301e7ae23e76
+  docChecksum: 7b31d1e817d9f423b48e485f32956356
   docVersion: 0.0.1
-  speakeasyVersion: 1.662.0
-  generationVersion: 2.763.3
-  releaseVersion: 0.9.5
-  configChecksum: 9d983925eb13cb4c6a7de9a31c0803b3
+  speakeasyVersion: 1.666.2
+  generationVersion: 2.768.1
+  releaseVersion: 0.10.7
+  configChecksum: 42dae701ac385597468ec2fa7230b4d9
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.10
+    core: 3.26.14
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
@@ -27,9 +27,9 @@ features:
     nullables: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.3.0
+    sdkHooks: 0.4.0
     serverEvents: 0.1.12
-    unions: 2.86.0
+    unions: 2.86.3
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -41,14 +41,11 @@ generatedFiles:
   - USAGE.md
   - docs/lib/utils/retryconfig.md
   - docs/models/advancedagentrunsrequest.md
-  - docs/models/advancedagentrunsrequestagent.md
   - docs/models/agentrunsbatchresponse.md
   - docs/models/agentrunsresponseoutput.md
-  - docs/models/agentrunsresponseoutputtype.md
   - docs/models/agentrunsresponsewebsearchresult.md
   - docs/models/agentrunsstreamingresponse.md
   - docs/models/computetool.md
-  - docs/models/computetooltype.md
   - docs/models/country.md
   - docs/models/customagentrunsrequest.md
   - docs/models/data.md
@@ -63,9 +60,7 @@ generatedFiles:
   - docs/models/errors/searchinternalservererror.md
   - docs/models/errors/searchunauthorizederror.md
   - docs/models/expressagentrunsrequest.md
-  - docs/models/expressagentrunsrequestagent.md
   - docs/models/expressagentrunsrequesttool.md
-  - docs/models/expressagentrunsrequesttype.md
   - docs/models/freshness.md
   - docs/models/input.md
   - docs/models/livecrawl.md
@@ -91,34 +86,24 @@ generatedFiles:
   - docs/models/operations/web.md
   - docs/models/reportverbosity.md
   - docs/models/researchtool.md
-  - docs/models/researchtooltype.md
   - docs/models/responsecreated.md
-  - docs/models/responsecreatedtype.md
   - docs/models/responsedone.md
   - docs/models/responsedoneresponse.md
-  - docs/models/responsedonetype.md
   - docs/models/responseoutputcontentfull.md
   - docs/models/responseoutputcontentfullresponse.md
-  - docs/models/responseoutputcontentfulltype.md
   - docs/models/responseoutputitemadded.md
   - docs/models/responseoutputitemaddedresponse.md
-  - docs/models/responseoutputitemaddedtype.md
   - docs/models/responseoutputitemdone.md
   - docs/models/responseoutputitemdoneresponse.md
-  - docs/models/responseoutputitemdonetype.md
   - docs/models/responseoutputtextdelta.md
   - docs/models/responseoutputtextdeltaresponse.md
-  - docs/models/responseoutputtextdeltatype.md
   - docs/models/responsestarting.md
-  - docs/models/responsestartingtype.md
   - docs/models/role.md
   - docs/models/safesearch.md
   - docs/models/searcheffort.md
   - docs/models/security.md
-  - docs/models/sourcetype.md
   - docs/models/tool.md
-  - docs/models/typemessageanswer.md
-  - docs/models/typewebsearchresults.md
+  - docs/models/type.md
   - docs/models/verbosity.md
   - docs/models/workflowconfig.md
   - docs/sdks/you/README.md
@@ -398,7 +383,7 @@ examples:
           application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
     advanced_stream:
       requestBody:
-        application/json: {"agent": "advanced", "input": "Analyze the economic impact of renewable energy adoption", "stream": true, "tools": [{"type": "compute"}]}
+        application/json: {"agent": "express", "input": "Analyze the economic impact of renewable energy adoption", "stream": true, "tools": [{"type": "web_search"}]}
       responses:
         "200":
           application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}

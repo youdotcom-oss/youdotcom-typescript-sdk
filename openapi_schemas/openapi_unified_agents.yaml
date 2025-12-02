@@ -141,8 +141,7 @@ components:
       properties:
         agent:
           type: string
-          enum:
-            - express
+          const: express
           description: >-
             Setting this value to "express" is mandatory to use the express agent.
           example: express
@@ -165,8 +164,7 @@ components:
             properties:
               type:
                 type: string
-                enum:
-                  - web_search
+                const: web_search
                 description: Setting this value to "web_search" is mandatory to use the web_search tool.
 
     AdvancedAgentRunsRequest:
@@ -177,8 +175,7 @@ components:
       properties:
         agent:
           type: string
-          enum:
-            - advanced
+          const: advanced
           description: >-
             Setting this value to "advanced" is mandatory to use the advanced agent.
           example: advanced
@@ -251,8 +248,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - compute
+          const: compute
           description: Setting this value to "compute" is mandatory to use the compute agent.
 
     ResearchTool:
@@ -264,8 +260,7 @@ components:
       properties:
         type:
           type: string
-          enum:
-            - research
+          const: research
           description: Setting this value to "research" is mandatory to use the research agent.
         search_effort:
           $ref: "#/components/schemas/SearchEffort"
@@ -391,8 +386,7 @@ components:
           type: string
           description: The type of content the agent can return outside a text response
           example: web_search
-          enum:
-            - web_search
+          const: web_search
         citation_uri:
           type: string
           description: The web search result the agent returned along in its response
@@ -463,7 +457,7 @@ components:
           example: 0
         type:
           type: string
-          enum: [response.created]
+          const: response.created
           example: response.created
 
     response.starting:
@@ -478,7 +472,7 @@ components:
           example: 1
         type:
           type: string
-          enum: [response.starting]
+          const: response.starting
           example: response.starting
 
     response.output_item.added:
@@ -494,7 +488,7 @@ components:
           example: 2
         type:
           type: string
-          enum: [response.output_item.added]
+          const: response.output_item.added
           example: response.output_item.added
         response:
           type: object
@@ -518,7 +512,7 @@ components:
           example: 3
         type:
           type: string
-          enum: [response.output_content.full]
+          const: response.output_content.full
           example: response.output_content.full
         response:
           type: object
@@ -532,7 +526,7 @@ components:
               example: 0
             type:
               type: string
-              enum: [web_search.results]
+              const: web_search.results
               example: web_search.results
             full:
               type: array
@@ -552,7 +546,7 @@ components:
           example: 4
         type:
           type: string
-          enum: [response.output_item.done]
+          const: response.output_item.done
           example: response.output_item.done
         response:
           type: object
@@ -575,7 +569,7 @@ components:
           example: 6
         type:
           type: string
-          enum: [response.output_text.delta]
+          const: response.output_text.delta
           example: response.output_text.delta
         response:
           type: object
@@ -589,7 +583,7 @@ components:
               example: 1
             type:
               type: string
-              enum: [message.answer]
+              const: message.answer
               example: message.answer
             delta:
               type: string
@@ -608,7 +602,7 @@ components:
           example: 249
         type:
           type: string
-          enum: [response.done]
+          const: response.done
           example: response.done
         response:
           type: object

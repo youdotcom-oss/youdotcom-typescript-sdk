@@ -34,13 +34,13 @@ import {
 } from "./responsestarting.js";
 
 export type Data =
-  | (ResponseOutputItemAdded & { type: "response.output_item.added" })
-  | (ResponseOutputContentFull & { type: "response.output_content.full" })
-  | (ResponseOutputItemDone & { type: "response.output_item.done" })
-  | (ResponseOutputTextDelta & { type: "response.output_text.delta" })
-  | (ResponseDone & { type: "response.done" })
-  | (ResponseCreated & { type: "response.created" })
-  | (ResponseStarting & { type: "response.starting" });
+  | ResponseCreated
+  | ResponseStarting
+  | ResponseOutputItemAdded
+  | ResponseOutputContentFull
+  | ResponseOutputItemDone
+  | ResponseOutputTextDelta
+  | ResponseDone;
 
 /**
  * A server-sent event containing stock market update content
@@ -55,45 +55,24 @@ export type AgentRunsStreamingResponse = {
    */
   event: string;
   data:
-    | (ResponseOutputItemAdded & { type: "response.output_item.added" })
-    | (ResponseOutputContentFull & { type: "response.output_content.full" })
-    | (ResponseOutputItemDone & { type: "response.output_item.done" })
-    | (ResponseOutputTextDelta & { type: "response.output_text.delta" })
-    | (ResponseDone & { type: "response.done" })
-    | (ResponseCreated & { type: "response.created" })
-    | (ResponseStarting & { type: "response.starting" });
+    | ResponseCreated
+    | ResponseStarting
+    | ResponseOutputItemAdded
+    | ResponseOutputContentFull
+    | ResponseOutputItemDone
+    | ResponseOutputTextDelta
+    | ResponseDone;
 };
 
 /** @internal */
 export const Data$inboundSchema: z.ZodMiniType<Data, unknown> = z.union([
-  z.intersection(
-    ResponseOutputItemAdded$inboundSchema,
-    z.object({ type: z.literal("response.output_item.added") }),
-  ),
-  z.intersection(
-    ResponseOutputContentFull$inboundSchema,
-    z.object({ type: z.literal("response.output_content.full") }),
-  ),
-  z.intersection(
-    ResponseOutputItemDone$inboundSchema,
-    z.object({ type: z.literal("response.output_item.done") }),
-  ),
-  z.intersection(
-    ResponseOutputTextDelta$inboundSchema,
-    z.object({ type: z.literal("response.output_text.delta") }),
-  ),
-  z.intersection(
-    ResponseDone$inboundSchema,
-    z.object({ type: z.literal("response.done") }),
-  ),
-  z.intersection(
-    ResponseCreated$inboundSchema,
-    z.object({ type: z.literal("response.created") }),
-  ),
-  z.intersection(
-    ResponseStarting$inboundSchema,
-    z.object({ type: z.literal("response.starting") }),
-  ),
+  ResponseCreated$inboundSchema,
+  ResponseStarting$inboundSchema,
+  ResponseOutputItemAdded$inboundSchema,
+  ResponseOutputContentFull$inboundSchema,
+  ResponseOutputItemDone$inboundSchema,
+  ResponseOutputTextDelta$inboundSchema,
+  ResponseDone$inboundSchema,
 ]);
 
 export function dataFromJSON(
@@ -130,34 +109,13 @@ export const AgentRunsStreamingResponse$inboundSchema: z.ZodMiniType<
       }),
     ),
     z.union([
-      z.intersection(
-        ResponseOutputItemAdded$inboundSchema,
-        z.object({ type: z.literal("response.output_item.added") }),
-      ),
-      z.intersection(
-        ResponseOutputContentFull$inboundSchema,
-        z.object({ type: z.literal("response.output_content.full") }),
-      ),
-      z.intersection(
-        ResponseOutputItemDone$inboundSchema,
-        z.object({ type: z.literal("response.output_item.done") }),
-      ),
-      z.intersection(
-        ResponseOutputTextDelta$inboundSchema,
-        z.object({ type: z.literal("response.output_text.delta") }),
-      ),
-      z.intersection(
-        ResponseDone$inboundSchema,
-        z.object({ type: z.literal("response.done") }),
-      ),
-      z.intersection(
-        ResponseCreated$inboundSchema,
-        z.object({ type: z.literal("response.created") }),
-      ),
-      z.intersection(
-        ResponseStarting$inboundSchema,
-        z.object({ type: z.literal("response.starting") }),
-      ),
+      ResponseCreated$inboundSchema,
+      ResponseStarting$inboundSchema,
+      ResponseOutputItemAdded$inboundSchema,
+      ResponseOutputContentFull$inboundSchema,
+      ResponseOutputItemDone$inboundSchema,
+      ResponseOutputTextDelta$inboundSchema,
+      ResponseDone$inboundSchema,
     ]),
   ),
 });

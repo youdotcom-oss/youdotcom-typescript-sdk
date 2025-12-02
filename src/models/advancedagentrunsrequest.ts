@@ -4,7 +4,6 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
-import { ClosedEnum } from "../types/enums.js";
 import {
   ComputeTool,
   ComputeTool$Outbound,
@@ -17,22 +16,7 @@ import {
 } from "./researchtool.js";
 import { Verbosity, Verbosity$outboundSchema } from "./verbosity.js";
 
-/**
- * Setting this value to "advanced" is mandatory to use the advanced agent.
- */
-export const AdvancedAgentRunsRequestAgent = {
-  Advanced: "advanced",
-} as const;
-/**
- * Setting this value to "advanced" is mandatory to use the advanced agent.
- */
-export type AdvancedAgentRunsRequestAgent = ClosedEnum<
-  typeof AdvancedAgentRunsRequestAgent
->;
-
-export type Tool =
-  | (ResearchTool & { type: "research" })
-  | (ComputeTool & { type: "compute" });
+export type Tool = ComputeTool | ResearchTool;
 
 /**
  * Defines the maximum number of steps the agent uses in its workflow plan to answer your query. Higher values allow for more tool calls, but it takes longer for the agent to provide the response. For instance, setting max_workflow_steps=5 could allow the agent to call the research tool 3 times and the compute tool 2 times.
@@ -45,7 +29,7 @@ export type AdvancedAgentRunsRequest = {
   /**
    * Setting this value to "advanced" is mandatory to use the advanced agent.
    */
-  agent: AdvancedAgentRunsRequestAgent;
+  agent: "advanced";
   /**
    * The question you'd like to ask the agent
    */
@@ -57,12 +41,7 @@ export type AdvancedAgentRunsRequest = {
   /**
    * The advanced agent accepts either `compute` or `research` tools <Note> Compute allows your agent to use a Python code interpreter for tasks such as data analysis, mathematical calculations, and plot generation.<br><br>   Research iteratively searches the web, analyzes the results, and stops when finished. It then provides a comprehensive report to your agent with current, cited information.</Note>
    */
-  tools?:
-    | Array<
-      | (ResearchTool & { type: "research" })
-      | (ComputeTool & { type: "compute" })
-    >
-    | undefined;
+  tools?: Array<ComputeTool | ResearchTool> | undefined;
   /**
    * Controls the level of detail provided by the agent's response. Choosing high maps to a long-form report while medium maps to a medium verbosity report that captures most details but is less comprehensive.
    */
@@ -74,25 +53,12 @@ export type AdvancedAgentRunsRequest = {
 };
 
 /** @internal */
-export const AdvancedAgentRunsRequestAgent$outboundSchema: z.ZodMiniEnum<
-  typeof AdvancedAgentRunsRequestAgent
-> = z.enum(AdvancedAgentRunsRequestAgent);
-
-/** @internal */
-export type Tool$Outbound =
-  | (ResearchTool$Outbound & { type: "research" })
-  | (ComputeTool$Outbound & { type: "compute" });
+export type Tool$Outbound = ComputeTool$Outbound | ResearchTool$Outbound;
 
 /** @internal */
 export const Tool$outboundSchema: z.ZodMiniType<Tool$Outbound, Tool> = z.union([
-  z.intersection(
-    ResearchTool$outboundSchema,
-    z.object({ type: z.literal("research") }),
-  ),
-  z.intersection(
-    ComputeTool$outboundSchema,
-    z.object({ type: z.literal("compute") }),
-  ),
+  ComputeTool$outboundSchema,
+  ResearchTool$outboundSchema,
 ]);
 
 export function toolToJSON(tool: Tool): string {
@@ -125,15 +91,10 @@ export function workflowConfigToJSON(workflowConfig: WorkflowConfig): string {
 
 /** @internal */
 export type AdvancedAgentRunsRequest$Outbound = {
-  agent: string;
+  agent: "advanced";
   input: string;
   stream: boolean;
-  tools?:
-    | Array<
-      | (ResearchTool$Outbound & { type: "research" })
-      | (ComputeTool$Outbound & { type: "compute" })
-    >
-    | undefined;
+  tools?: Array<ComputeTool$Outbound | ResearchTool$Outbound> | undefined;
   verbosity?: string | undefined;
   workflow_config?: WorkflowConfig$Outbound | undefined;
 };
@@ -144,21 +105,12 @@ export const AdvancedAgentRunsRequest$outboundSchema: z.ZodMiniType<
   AdvancedAgentRunsRequest
 > = z.pipe(
   z.object({
-    agent: AdvancedAgentRunsRequestAgent$outboundSchema,
+    agent: z.literal("advanced"),
     input: z.string(),
     stream: z._default(z.boolean(), false),
     tools: z.optional(
       z.array(
-        z.union([
-          z.intersection(
-            ResearchTool$outboundSchema,
-            z.object({ type: z.literal("research") }),
-          ),
-          z.intersection(
-            ComputeTool$outboundSchema,
-            z.object({ type: z.literal("compute") }),
-          ),
-        ]),
+        z.union([ComputeTool$outboundSchema, ResearchTool$outboundSchema]),
       ),
     ),
     verbosity: z.optional(Verbosity$outboundSchema),

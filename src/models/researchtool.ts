@@ -4,29 +4,17 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
-import { ClosedEnum } from "../types/enums.js";
 import {
   ReportVerbosity,
   ReportVerbosity$outboundSchema,
 } from "./reportverbosity.js";
 import { SearchEffort, SearchEffort$outboundSchema } from "./searcheffort.js";
 
-/**
- * Setting this value to "research" is mandatory to use the research agent.
- */
-export const ResearchToolType = {
-  Research: "research",
-} as const;
-/**
- * Setting this value to "research" is mandatory to use the research agent.
- */
-export type ResearchToolType = ClosedEnum<typeof ResearchToolType>;
-
 export type ResearchTool = {
   /**
    * Setting this value to "research" is mandatory to use the research agent.
    */
-  type: ResearchToolType;
+  type: "research";
   /**
    * This parameter maps to different configurations regarding the depth of research the tool can perform. Its values range from `low`, `medium` to `high`.
    *
@@ -42,13 +30,8 @@ export type ResearchTool = {
 };
 
 /** @internal */
-export const ResearchToolType$outboundSchema: z.ZodMiniEnum<
-  typeof ResearchToolType
-> = z.enum(ResearchToolType);
-
-/** @internal */
 export type ResearchTool$Outbound = {
-  type: string;
+  type: "research";
   search_effort: string;
   report_verbosity: string;
 };
@@ -59,7 +42,7 @@ export const ResearchTool$outboundSchema: z.ZodMiniType<
   ResearchTool
 > = z.pipe(
   z.object({
-    type: ResearchToolType$outboundSchema,
+    type: z.literal("research"),
     searchEffort: SearchEffort$outboundSchema,
     reportVerbosity: ReportVerbosity$outboundSchema,
   }),

@@ -5,15 +5,9 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
-
-export const ResponseDoneType = {
-  ResponseDone: "response.done",
-} as const;
-export type ResponseDoneType = ClosedEnum<typeof ResponseDoneType>;
 
 export type ResponseDoneResponse = {
   /**
@@ -28,14 +22,9 @@ export type ResponseDoneResponse = {
 
 export type ResponseDone = {
   seqId: number;
-  type: ResponseDoneType;
+  type: "response.done";
   response: ResponseDoneResponse;
 };
-
-/** @internal */
-export const ResponseDoneType$inboundSchema: z.ZodMiniEnum<
-  typeof ResponseDoneType
-> = z.enum(ResponseDoneType);
 
 /** @internal */
 export const ResponseDoneResponse$inboundSchema: z.ZodMiniType<
@@ -68,7 +57,7 @@ export const ResponseDone$inboundSchema: z.ZodMiniType<ResponseDone, unknown> =
   z.pipe(
     z.object({
       seq_id: types.number(),
-      type: ResponseDoneType$inboundSchema,
+      type: types.literal("response.done"),
       response: z.lazy(() => ResponseDoneResponse$inboundSchema),
     }),
     z.transform((v) => {

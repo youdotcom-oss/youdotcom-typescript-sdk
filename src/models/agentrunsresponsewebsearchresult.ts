@@ -5,21 +5,9 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
-
-/**
- * The type of content the agent can return outside a text response
- */
-export const SourceType = {
-  WebSearch: "web_search",
-} as const;
-/**
- * The type of content the agent can return outside a text response
- */
-export type SourceType = ClosedEnum<typeof SourceType>;
 
 /**
  * The text response of the agent. This field only returns when the type is `web_search.results`
@@ -28,7 +16,7 @@ export type AgentRunsResponseWebSearchResult = {
   /**
    * The type of content the agent can return outside a text response
    */
-  sourceType: SourceType;
+  sourceType: "web_search";
   /**
    * The web search result the agent returned along in its response
    */
@@ -56,16 +44,12 @@ export type AgentRunsResponseWebSearchResult = {
 };
 
 /** @internal */
-export const SourceType$inboundSchema: z.ZodMiniEnum<typeof SourceType> = z
-  .enum(SourceType);
-
-/** @internal */
 export const AgentRunsResponseWebSearchResult$inboundSchema: z.ZodMiniType<
   AgentRunsResponseWebSearchResult,
   unknown
 > = z.pipe(
   z.object({
-    source_type: SourceType$inboundSchema,
+    source_type: types.literal("web_search"),
     citation_uri: types.string(),
     provider: types.optional(types.string()),
     title: types.string(),

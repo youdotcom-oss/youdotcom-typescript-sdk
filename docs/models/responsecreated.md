@@ -15,7 +15,7 @@ let value: ResponseCreated = {
 
 ## Fields
 
-| Field                                                          | Type                                                           | Required                                                       | Description                                                    | Example                                                        |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| `seqId`                                                        | *number*                                                       | :heavy_check_mark:                                             | N/A                                                            | 0                                                              |
-| `type`                                                         | [models.ResponseCreatedType](../models/responsecreatedtype.md) | :heavy_check_mark:                                             | N/A                                                            | response.created                                               |
+| Field                | Type                 | Required             | Description          | Example              |
+| -------------------- | -------------------- | -------------------- | -------------------- | -------------------- |
+| `seqId`              | *number*             | :heavy_check_mark:   | N/A                  | 0                    |
+| `type`               | *"response.created"* | :heavy_check_mark:   | N/A                  | response.created     |

@@ -15,7 +15,7 @@ let value: ResponseStarting = {
 
 ## Fields
 
-| Field                                                            | Type                                                             | Required                                                         | Description                                                      | Example                                                          |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `seqId`                                                          | *number*                                                         | :heavy_check_mark:                                               | N/A                                                              | 1                                                                |
-| `type`                                                           | [models.ResponseStartingType](../models/responsestartingtype.md) | :heavy_check_mark:                                               | N/A                                                              | response.starting                                                |
+| Field                 | Type                  | Required              | Description           | Example               |
+| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| `seqId`               | *number*              | :heavy_check_mark:    | N/A                   | 1                     |
+| `type`                | *"response.starting"* | :heavy_check_mark:    | N/A                   | response.starting     |

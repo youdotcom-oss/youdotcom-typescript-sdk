@@ -5,28 +5,17 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
-
-export const ResponseCreatedType = {
-  ResponseCreated: "response.created",
-} as const;
-export type ResponseCreatedType = ClosedEnum<typeof ResponseCreatedType>;
 
 /**
  * SSE event signifying the response stream has been created
  */
 export type ResponseCreated = {
   seqId: number;
-  type: ResponseCreatedType;
+  type: "response.created";
 };
-
-/** @internal */
-export const ResponseCreatedType$inboundSchema: z.ZodMiniEnum<
-  typeof ResponseCreatedType
-> = z.enum(ResponseCreatedType);
 
 /** @internal */
 export const ResponseCreated$inboundSchema: z.ZodMiniType<
@@ -35,7 +24,7 @@ export const ResponseCreated$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     seq_id: types.number(),
-    type: ResponseCreatedType$inboundSchema,
+    type: types.literal("response.created"),
   }),
   z.transform((v) => {
     return remap$(v, {
