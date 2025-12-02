@@ -190,28 +190,80 @@ underlying connection.
 
 ```typescript
 import { You } from "youdotcom";
+import { 
+  type ExpressAgentRunsRequest,
+  type AgentRunsStreamingResponse,
+} from "youdotcom/models"
+import { EventStream } from "youdotcom/lib/event-streams.js";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
 });
-
+  
+const request: ExpressAgentRunsRequest = {
+  agent: "express",
+  stream: true,
+  input: "Restaurants in San Francisco",
+  tools: [{  
+    type: "web_search"  
+  }]  
+};
+ 
 async function run() {
-  const result = await you.agentsRuns({
-    agent: "express",
-    input: "What is the capital of France?",
-    stream: false,
-  });
+  const result = await you.agentsRuns(request) as EventStream<AgentRunsStreamingResponse>;
 
-  console.log(result);
+  // Iterate over the streaming response and print tokens as they arrive  
+  for await (const chunk of result) {
+    switch(chunk.data.type) { 
+      case "response.created": { 
+        console.log("Response created, seqId:", chunk.data.seqId); 
+        break; 
+      } 
+      case "response.starting": { 
+        console.log("Response starting, seqId:", chunk.data.seqId); 
+        break; 
+      } 
+      case "response.output_item.added": { 
+        console.log("Output item added:", chunk.data); 
+        break; 
+      } 
+      case "response.output_content.full": { 
+        console.log("\nWeb Search Results:");
+        let urls = chunk.data.response.full.map((result) => {
+          return result.url
+        })
+        console.log(urls);
+        break; 
+      } 
+      case "response.output_text.delta": { 
+        // This contains the incremental response from the agent
+        process.stdout.write(chunk.data.response.delta)
+        break; 
+      } 
+      case "response.output_item.done": { 
+        console.log("\nOutput item done:", chunk.data); 
+        break; 
+      } 
+      case "response.done": { 
+        console.log("\nResponse completed!");
+        console.log("Runtime:", chunk.data.response.runTimeMs, "ms");
+        console.log("Finished:", chunk.data.response.finished); 
+        break; 
+      } 
+      default: { 
+        console.log("Unknown event type:", chunk.data); 
+        break; 
+      } 
+    } 
+  }  
 }
 
 run();
-
 ```
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
-<!-- End Server-sent event streaming [eventstream] -->
+<!-- No Server-sent event streaming [eventstream] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
