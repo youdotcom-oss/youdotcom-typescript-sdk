@@ -1,4 +1,4 @@
-# AgentRunsResponseOutputType
+# Type
 
 The type of output. This can either be:
 * `message.answer` for text responses
@@ -7,9 +7,9 @@ The type of output. This can either be:
 ## Example Usage
 
 ```typescript
-import { AgentRunsResponseOutputType } from "youdotcom/models";
+import { Type } from "youdotcom/models";
 
-let value: AgentRunsResponseOutputType = "web_search.results";
+let value: Type = "web_search.results";
 ```
 
 ## Values

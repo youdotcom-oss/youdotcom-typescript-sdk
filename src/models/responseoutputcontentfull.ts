@@ -5,7 +5,6 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import {
@@ -14,21 +13,9 @@ import {
 } from "./agentrunsresponsewebsearchresult.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export const ResponseOutputContentFullType = {
-  ResponseOutputContentFull: "response.output_content.full",
-} as const;
-export type ResponseOutputContentFullType = ClosedEnum<
-  typeof ResponseOutputContentFullType
->;
-
-export const TypeWebSearchResults = {
-  WebSearchResults: "web_search.results",
-} as const;
-export type TypeWebSearchResults = ClosedEnum<typeof TypeWebSearchResults>;
-
 export type ResponseOutputContentFullResponse = {
   outputIndex: number;
-  type: TypeWebSearchResults;
+  type: "web_search.results";
   /**
    * Complete web search results
    */
@@ -37,19 +24,9 @@ export type ResponseOutputContentFullResponse = {
 
 export type ResponseOutputContentFull = {
   seqId: number;
-  type: ResponseOutputContentFullType;
+  type: "response.output_content.full";
   response: ResponseOutputContentFullResponse;
 };
-
-/** @internal */
-export const ResponseOutputContentFullType$inboundSchema: z.ZodMiniEnum<
-  typeof ResponseOutputContentFullType
-> = z.enum(ResponseOutputContentFullType);
-
-/** @internal */
-export const TypeWebSearchResults$inboundSchema: z.ZodMiniEnum<
-  typeof TypeWebSearchResults
-> = z.enum(TypeWebSearchResults);
 
 /** @internal */
 export const ResponseOutputContentFullResponse$inboundSchema: z.ZodMiniType<
@@ -58,7 +35,7 @@ export const ResponseOutputContentFullResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     output_index: types.number(),
-    type: TypeWebSearchResults$inboundSchema,
+    type: types.literal("web_search.results"),
     full: z.array(AgentRunsResponseWebSearchResult$inboundSchema),
   }),
   z.transform((v) => {
@@ -85,7 +62,7 @@ export const ResponseOutputContentFull$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     seq_id: types.number(),
-    type: ResponseOutputContentFullType$inboundSchema,
+    type: types.literal("response.output_content.full"),
     response: z.lazy(() => ResponseOutputContentFullResponse$inboundSchema),
   }),
   z.transform((v) => {

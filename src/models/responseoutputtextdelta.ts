@@ -5,26 +5,13 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import * as types from "../types/primitives.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export const ResponseOutputTextDeltaType = {
-  ResponseOutputTextDelta: "response.output_text.delta",
-} as const;
-export type ResponseOutputTextDeltaType = ClosedEnum<
-  typeof ResponseOutputTextDeltaType
->;
-
-export const TypeMessageAnswer = {
-  MessageAnswer: "message.answer",
-} as const;
-export type TypeMessageAnswer = ClosedEnum<typeof TypeMessageAnswer>;
-
 export type ResponseOutputTextDeltaResponse = {
   outputIndex: number;
-  type: TypeMessageAnswer;
+  type: "message.answer";
   /**
    * Incremental text content
    */
@@ -33,19 +20,9 @@ export type ResponseOutputTextDeltaResponse = {
 
 export type ResponseOutputTextDelta = {
   seqId: number;
-  type: ResponseOutputTextDeltaType;
+  type: "response.output_text.delta";
   response: ResponseOutputTextDeltaResponse;
 };
-
-/** @internal */
-export const ResponseOutputTextDeltaType$inboundSchema: z.ZodMiniEnum<
-  typeof ResponseOutputTextDeltaType
-> = z.enum(ResponseOutputTextDeltaType);
-
-/** @internal */
-export const TypeMessageAnswer$inboundSchema: z.ZodMiniEnum<
-  typeof TypeMessageAnswer
-> = z.enum(TypeMessageAnswer);
 
 /** @internal */
 export const ResponseOutputTextDeltaResponse$inboundSchema: z.ZodMiniType<
@@ -54,7 +31,7 @@ export const ResponseOutputTextDeltaResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     output_index: types.number(),
-    type: TypeMessageAnswer$inboundSchema,
+    type: types.literal("message.answer"),
     delta: types.string(),
   }),
   z.transform((v) => {
@@ -81,7 +58,7 @@ export const ResponseOutputTextDelta$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     seq_id: types.number(),
-    type: ResponseOutputTextDeltaType$inboundSchema,
+    type: types.literal("response.output_text.delta"),
     response: z.lazy(() => ResponseOutputTextDeltaResponse$inboundSchema),
   }),
   z.transform((v) => {

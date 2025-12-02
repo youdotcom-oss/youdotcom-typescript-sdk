@@ -33,16 +33,21 @@ export function smartUnion<
       const candidates: Candidate[] = [];
       const errors: z.core.$ZodIssue[][] = options.map(() => []);
 
+      const parentUnrecognizedCtr = startCountingUnrecognized();
+      const parentZeroDefaultCtr = startCountingDefaultToZeroValue();
+
       // Filter out invalid options
       for (const [i, option] of options.entries()) {
         const unrecognizedCtr = startCountingUnrecognized();
         const zeroDefaultCtr = startCountingDefaultToZeroValue();
         const result = option.safeParse(input);
+        const inexactCount = unrecognizedCtr.end();
+        const zeroDefaultCount = zeroDefaultCtr.end();
         if (result.success) {
           candidates.push({
             data: result.data,
-            inexactCount: unrecognizedCtr.end(),
-            zeroDefaultCount: zeroDefaultCtr.end(),
+            inexactCount,
+            zeroDefaultCount,
             fieldCount: -1, // We'll count this later if needed
           });
           continue;
@@ -52,6 +57,8 @@ export function smartUnion<
 
       // No valid options
       if (candidates.length === 0) {
+        parentUnrecognizedCtr.end(0);
+        parentZeroDefaultCtr.end(0);
         ctx.issues.push({
           input: input,
           code: "invalid_union",
@@ -62,14 +69,18 @@ export function smartUnion<
 
       let best = candidates[0]!;
 
-      // Just one valid option - short circuit
-      if (candidates.length === 1) return best.data;
-
       // Find the best option
       for (const candidate of candidates) {
-        candidate.fieldCount = countFieldsRecursive(candidate.data);
+        // Minor optimization to avoid counting fields if there's only one candidate
+        if (candidates.length > 1) {
+          candidate.fieldCount = countFieldsRecursive(candidate.data);
+        }
         best = better(candidate, best);
       }
+
+      // The cost of this union should be the cost of the best candidate not all the candidates
+      parentUnrecognizedCtr.end(best.inexactCount);
+      parentZeroDefaultCtr.end(best.zeroDefaultCount);
 
       return best.data;
     }),

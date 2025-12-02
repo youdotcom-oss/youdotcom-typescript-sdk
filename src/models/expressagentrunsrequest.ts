@@ -3,46 +3,19 @@
  */
 
 import * as z from "zod/v4-mini";
-import { ClosedEnum } from "../types/enums.js";
-
-/**
- * Setting this value to "express" is mandatory to use the express agent.
- */
-export const ExpressAgentRunsRequestAgent = {
-  Express: "express",
-} as const;
-/**
- * Setting this value to "express" is mandatory to use the express agent.
- */
-export type ExpressAgentRunsRequestAgent = ClosedEnum<
-  typeof ExpressAgentRunsRequestAgent
->;
-
-/**
- * Setting this value to "web_search" is mandatory to use the web_search tool.
- */
-export const ExpressAgentRunsRequestType = {
-  WebSearch: "web_search",
-} as const;
-/**
- * Setting this value to "web_search" is mandatory to use the web_search tool.
- */
-export type ExpressAgentRunsRequestType = ClosedEnum<
-  typeof ExpressAgentRunsRequestType
->;
 
 export type ExpressAgentRunsRequestTool = {
   /**
    * Setting this value to "web_search" is mandatory to use the web_search tool.
    */
-  type: ExpressAgentRunsRequestType;
+  type: "web_search";
 };
 
 export type ExpressAgentRunsRequest = {
   /**
    * Setting this value to "express" is mandatory to use the express agent.
    */
-  agent: ExpressAgentRunsRequestAgent;
+  agent: "express";
   /**
    * The question you'd like to ask the agent
    */
@@ -58,18 +31,8 @@ export type ExpressAgentRunsRequest = {
 };
 
 /** @internal */
-export const ExpressAgentRunsRequestAgent$outboundSchema: z.ZodMiniEnum<
-  typeof ExpressAgentRunsRequestAgent
-> = z.enum(ExpressAgentRunsRequestAgent);
-
-/** @internal */
-export const ExpressAgentRunsRequestType$outboundSchema: z.ZodMiniEnum<
-  typeof ExpressAgentRunsRequestType
-> = z.enum(ExpressAgentRunsRequestType);
-
-/** @internal */
 export type ExpressAgentRunsRequestTool$Outbound = {
-  type: string;
+  type: "web_search";
 };
 
 /** @internal */
@@ -77,7 +40,7 @@ export const ExpressAgentRunsRequestTool$outboundSchema: z.ZodMiniType<
   ExpressAgentRunsRequestTool$Outbound,
   ExpressAgentRunsRequestTool
 > = z.object({
-  type: ExpressAgentRunsRequestType$outboundSchema,
+  type: z.literal("web_search"),
 });
 
 export function expressAgentRunsRequestToolToJSON(
@@ -92,7 +55,7 @@ export function expressAgentRunsRequestToolToJSON(
 
 /** @internal */
 export type ExpressAgentRunsRequest$Outbound = {
-  agent: string;
+  agent: "express";
   input: string;
   stream: boolean;
   tools?: Array<ExpressAgentRunsRequestTool$Outbound> | undefined;
@@ -103,7 +66,7 @@ export const ExpressAgentRunsRequest$outboundSchema: z.ZodMiniType<
   ExpressAgentRunsRequest$Outbound,
   ExpressAgentRunsRequest
 > = z.object({
-  agent: ExpressAgentRunsRequestAgent$outboundSchema,
+  agent: z.literal("express"),
   input: z.string(),
   stream: z._default(z.boolean(), false),
   tools: z.optional(

@@ -3,34 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
-import { ClosedEnum } from "../types/enums.js";
-
-/**
- * Setting this value to "compute" is mandatory to use the compute agent.
- */
-export const ComputeToolType = {
-  Compute: "compute",
-} as const;
-/**
- * Setting this value to "compute" is mandatory to use the compute agent.
- */
-export type ComputeToolType = ClosedEnum<typeof ComputeToolType>;
 
 export type ComputeTool = {
   /**
    * Setting this value to "compute" is mandatory to use the compute agent.
    */
-  type: ComputeToolType;
+  type: "compute";
 };
 
 /** @internal */
-export const ComputeToolType$outboundSchema: z.ZodMiniEnum<
-  typeof ComputeToolType
-> = z.enum(ComputeToolType);
-
-/** @internal */
 export type ComputeTool$Outbound = {
-  type: string;
+  type: "compute";
 };
 
 /** @internal */
@@ -38,7 +21,7 @@ export const ComputeTool$outboundSchema: z.ZodMiniType<
   ComputeTool$Outbound,
   ComputeTool
 > = z.object({
-  type: ComputeToolType$outboundSchema,
+  type: z.literal("compute"),
 });
 
 export function computeToolToJSON(computeTool: ComputeTool): string {
