@@ -194,7 +194,7 @@ import {
   type ExpressAgentRunsRequest,
   type AgentRunsStreamingResponse,
 } from "youdotcom/models"
-import { EventStream } from "youdotcom/lib/event-streams.js";
+import { type EventStream } from "youdotcom/lib/event-streams.js";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
