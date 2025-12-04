@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ExpressAgentRunsRequestTool } from "youdotcom/models";
+import { ExpressAgentRunsRequestTool } from "@youdotcom-oss/sdk/models";
 
 let value: ExpressAgentRunsRequestTool = {
   type: "web_search",

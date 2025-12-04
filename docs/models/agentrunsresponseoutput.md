@@ -5,7 +5,7 @@ The response populated by the agent.
 ## Example Usage
 
 ```typescript
-import { AgentRunsResponseOutput } from "youdotcom/models";
+import { AgentRunsResponseOutput } from "@youdotcom-oss/sdk/models";
 
 let value: AgentRunsResponseOutput = {
   text: "#### Capital of France\n"

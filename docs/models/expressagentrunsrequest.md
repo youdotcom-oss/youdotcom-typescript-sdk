@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ExpressAgentRunsRequest } from "youdotcom/models";
+import { ExpressAgentRunsRequest } from "@youdotcom-oss/sdk/models";
 
 let value: ExpressAgentRunsRequest = {
   agent: "express",

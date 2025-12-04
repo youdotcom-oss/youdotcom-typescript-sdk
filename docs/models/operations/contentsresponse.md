@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ContentsResponse } from "youdotcom/models/operations";
+import { ContentsResponse } from "@youdotcom-oss/sdk/models/operations";
 
 let value: ContentsResponse = {
   url: "https://www.you.com",

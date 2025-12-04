@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { SearchRequest } from "youdotcom/models/operations";
+import { SearchRequest } from "@youdotcom-oss/sdk/models/operations";
 
 let value: SearchRequest = {};
 ```

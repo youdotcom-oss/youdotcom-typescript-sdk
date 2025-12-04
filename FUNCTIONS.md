@@ -19,8 +19,8 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { YouCore } from "youdotcom/core.js";
-import { agentsRuns } from "youdotcom/funcs/agentsRuns.js";
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
 
 // Use `YouCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

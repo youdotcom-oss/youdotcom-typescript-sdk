@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { News } from "youdotcom/models/operations";
+import { News } from "@youdotcom-oss/sdk/models/operations";
 
 let value: News = {
   title: "Exclusive | You.com becomes the backbone of the EU's AI strategy",

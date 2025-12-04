@@ -5,7 +5,7 @@ Controls the level of detail provided by the agent's response. Choosing high map
 ## Example Usage
 
 ```typescript
-import { Verbosity } from "youdotcom/models";
+import { Verbosity } from "@youdotcom-oss/sdk/models";
 
 let value: Verbosity = "medium";
 ```

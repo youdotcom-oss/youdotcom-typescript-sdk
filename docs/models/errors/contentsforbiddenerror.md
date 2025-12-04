@@ -5,7 +5,7 @@ Forbidden
 ## Example Usage
 
 ```typescript
-import { ContentsForbiddenError } from "youdotcom/models/errors";
+import { ContentsForbiddenError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

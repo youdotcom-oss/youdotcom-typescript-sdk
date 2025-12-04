@@ -5,7 +5,7 @@ Internal Server Error during authentication/authorization middleware.
 ## Example Usage
 
 ```typescript
-import { SearchInternalServerError } from "youdotcom/models/errors";
+import { SearchInternalServerError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

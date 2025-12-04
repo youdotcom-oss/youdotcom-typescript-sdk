@@ -1,11 +1,11 @@
 {
-  "name": "youdotcom",
-  "version": "0.10.7",
+  "name": "@youdotcom-oss/sdk",
+  "version": "0.10.13",
   "author": "Speakeasy",
   "type": "module",
   "tshy": {
     "sourceDialects": [
-      "youdotcom/source"
+      "@youdotcom-oss/sdk/source"
     ],
     "exports": {
       ".": "./src/index.ts",
@@ -39,7 +39,7 @@
   "exports": {
     ".": {
       "import": {
-        "youdotcom/source": "./src/index.ts",
+        "@youdotcom-oss/sdk/source": "./src/index.ts",
         "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       },
@@ -51,7 +51,7 @@
     "./package.json": "./package.json",
     "./types": {
       "import": {
-        "youdotcom/source": "./src/types/index.ts",
+        "@youdotcom-oss/sdk/source": "./src/types/index.ts",
         "types": "./dist/esm/types/index.d.ts",
         "default": "./dist/esm/types/index.js"
       },
@@ -62,7 +62,7 @@
     },
     "./models/errors": {
       "import": {
-        "youdotcom/source": "./src/models/errors/index.ts",
+        "@youdotcom-oss/sdk/source": "./src/models/errors/index.ts",
         "types": "./dist/esm/models/errors/index.d.ts",
         "default": "./dist/esm/models/errors/index.js"
       },
@@ -73,7 +73,7 @@
     },
     "./models": {
       "import": {
-        "youdotcom/source": "./src/models/index.ts",
+        "@youdotcom-oss/sdk/source": "./src/models/index.ts",
         "types": "./dist/esm/models/index.d.ts",
         "default": "./dist/esm/models/index.js"
       },
@@ -84,7 +84,7 @@
     },
     "./models/operations": {
       "import": {
-        "youdotcom/source": "./src/models/operations/index.ts",
+        "@youdotcom-oss/sdk/source": "./src/models/operations/index.ts",
         "types": "./dist/esm/models/operations/index.d.ts",
         "default": "./dist/esm/models/operations/index.js"
       },
@@ -95,7 +95,7 @@
     },
     "./*.js": {
       "import": {
-        "youdotcom/source": "./src/*.ts",
+        "@youdotcom-oss/sdk/source": "./src/*.ts",
         "types": "./dist/esm/*.d.ts",
         "default": "./dist/esm/*.js"
       },
@@ -106,7 +106,7 @@
     },
     "./*": {
       "import": {
-        "youdotcom/source": "./src/*.ts",
+        "@youdotcom-oss/sdk/source": "./src/*.ts",
         "types": "./dist/esm/*.d.ts",
         "default": "./dist/esm/*.js"
       },

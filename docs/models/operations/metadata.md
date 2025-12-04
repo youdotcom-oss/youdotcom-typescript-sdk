@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Metadata } from "youdotcom/models/operations";
+import { Metadata } from "@youdotcom-oss/sdk/models/operations";
 
 let value: Metadata = {
   requestUuid: "942ccbdd-7705-4d9c-9d37-4ef386658e90",

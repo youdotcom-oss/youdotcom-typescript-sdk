@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Input } from "youdotcom/models";
+import { Input } from "@youdotcom-oss/sdk/models";
 
 let value: Input = {
   role: "user",

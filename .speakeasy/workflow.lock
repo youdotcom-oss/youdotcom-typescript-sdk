@@ -1,4 +1,4 @@
-speakeasyVersion: 1.666.2
+speakeasyVersion: 1.668.0
 sources:
     You.com Agents API:
         sourceNamespace: you-com-agents-api
@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:df22690c91a276c410a79525109ce8279dd2993e6b03dc0a102864370b59f67e
         sourceBlobDigest: sha256:275c91b34bd39494bf41e4732f332fd01faf4ab2e35446890581704a6f142e13
         codeSamplesNamespace: you-com-agents-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:5b25456f0b4352f1d62965d7e846c027039a73b16b115dd39aae3dd25f242f27
+        codeSamplesRevisionDigest: sha256:5852dc10078fa56af31ee20c0764091ff9676a86d7f7f9c4ac7b064a7b93820a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,6 +31,9 @@ workflow:
         you:
             target: typescript
             source: You.com Agents API
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/youcom/documentation/you-com-agents-api-typescript-code-samples

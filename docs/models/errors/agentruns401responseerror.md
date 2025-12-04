@@ -5,7 +5,7 @@ The message returned by the error
 ## Example Usage
 
 ```typescript
-import { AgentRuns401ResponseError } from "youdotcom/models/errors";
+import { AgentRuns401ResponseError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

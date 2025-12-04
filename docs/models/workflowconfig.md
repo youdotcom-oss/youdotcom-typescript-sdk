@@ -5,7 +5,7 @@ Defines the maximum number of steps the agent uses in its workflow plan to answe
 ## Example Usage
 
 ```typescript
-import { WorkflowConfig } from "youdotcom/models";
+import { WorkflowConfig } from "@youdotcom-oss/sdk/models";
 
 let value: WorkflowConfig = {};
 ```

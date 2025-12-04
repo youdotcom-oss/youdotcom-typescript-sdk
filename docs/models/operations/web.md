@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Web } from "youdotcom/models/operations";
+import { Web } from "@youdotcom-oss/sdk/models/operations";
 
 let value: Web = {
   url: "https://you.com",

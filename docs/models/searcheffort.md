@@ -7,7 +7,7 @@ Alternatively, use `auto` mode for a more dynamic search approach, allowing the 
 ## Example Usage
 
 ```typescript
-import { SearchEffort } from "youdotcom/models";
+import { SearchEffort } from "@youdotcom-oss/sdk/models";
 
 let value: SearchEffort = "auto";
 ```

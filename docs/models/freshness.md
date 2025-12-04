@@ -5,7 +5,7 @@ Specifies the freshness of the results to return.
 ## Example Usage
 
 ```typescript
-import { Freshness } from "youdotcom/models";
+import { Freshness } from "@youdotcom-oss/sdk/models";
 
 let value: Freshness = "week";
 ```

@@ -1,6 +1,6 @@
-# youdotcom Examples
+# @youdotcom-oss/sdk Examples
 
-This directory contains example scripts demonstrating how to use the youdotcom SDK.
+This directory contains example scripts demonstrating how to use the @youdotcom-oss/sdk SDK.
 
 ## Prerequisites
 

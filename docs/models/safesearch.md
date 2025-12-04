@@ -5,7 +5,7 @@ Configures the safesearch filter for content moderation. This allows you to deci
 ## Example Usage
 
 ```typescript
-import { SafeSearch } from "youdotcom/models";
+import { SafeSearch } from "@youdotcom-oss/sdk/models";
 
 let value: SafeSearch = "off";
 ```

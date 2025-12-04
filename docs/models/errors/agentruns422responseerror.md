@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { AgentRuns422ResponseError } from "youdotcom/models/errors";
+import { AgentRuns422ResponseError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

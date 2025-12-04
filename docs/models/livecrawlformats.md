@@ -5,7 +5,7 @@ Indicates the format of the livecrawled content.
 ## Example Usage
 
 ```typescript
-import { LiveCrawlFormats } from "youdotcom/models";
+import { LiveCrawlFormats } from "@youdotcom-oss/sdk/models";
 
 let value: LiveCrawlFormats = "markdown";
 ```

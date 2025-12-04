@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { AdvancedAgentRunsRequest } from "youdotcom/models";
+import { AdvancedAgentRunsRequest } from "@youdotcom-oss/sdk/models";
 
 let value: AdvancedAgentRunsRequest = {
   agent: "advanced",

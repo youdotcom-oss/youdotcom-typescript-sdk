@@ -5,7 +5,7 @@ A JSON object containing unified search results from web and news sources
 ## Example Usage
 
 ```typescript
-import { SearchResponse } from "youdotcom/models/operations";
+import { SearchResponse } from "@youdotcom-oss/sdk/models/operations";
 
 let value: SearchResponse = {
   results: {
