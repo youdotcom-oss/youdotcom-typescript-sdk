@@ -7,7 +7,7 @@ The type of output. This can either be:
 ## Example Usage
 
 ```typescript
-import { Type } from "youdotcom/models";
+import { Type } from "@youdotcom-oss/sdk/models";
 
 let value: Type = "web_search.results";
 ```

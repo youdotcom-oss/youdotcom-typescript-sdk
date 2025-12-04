@@ -25,7 +25,7 @@ The response format depends on the `stream` parameter - either a complete JSON p
 
 <!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" -->
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -49,8 +49,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { YouCore } from "youdotcom/core.js";
-import { agentsRuns } from "youdotcom/funcs/agentsRuns.js";
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
 
 // Use `YouCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -106,7 +106,7 @@ Returns a list of unified search results from web and news sources
 
 <!-- UsageSnippet language="typescript" operationID="search" method="get" path="/v1/search" -->
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -126,8 +126,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { YouCore } from "youdotcom/core.js";
-import { search } from "youdotcom/funcs/search.js";
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { search } from "@youdotcom-oss/sdk/funcs/search.js";
 
 // Use `YouCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -179,7 +179,7 @@ Returns the content of the web pages
 
 <!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" -->
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -204,8 +204,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { YouCore } from "youdotcom/core.js";
-import { contents } from "youdotcom/funcs/contents.js";
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { contents } from "@youdotcom-oss/sdk/funcs/contents.js";
 
 // Use `YouCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

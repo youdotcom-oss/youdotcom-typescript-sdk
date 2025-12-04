@@ -5,7 +5,7 @@ The country code that determines the geographical focus of the web results.
 ## Example Usage
 
 ```typescript
-import { Country } from "youdotcom/models";
+import { Country } from "@youdotcom-oss/sdk/models";
 
 let value: Country = "PT";
 ```

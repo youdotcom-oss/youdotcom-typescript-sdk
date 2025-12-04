@@ -5,7 +5,7 @@ Unauthorized
 ## Example Usage
 
 ```typescript
-import { ContentsUnauthorizedError } from "youdotcom/models/errors";
+import { ContentsUnauthorizedError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

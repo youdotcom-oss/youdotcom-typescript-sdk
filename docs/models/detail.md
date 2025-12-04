@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Detail } from "youdotcom/models";
+import { Detail } from "@youdotcom-oss/sdk/models";
 
 let value: Detail = {
   type: "model_attributes_type",

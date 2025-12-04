@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ResponseOutputTextDelta } from "youdotcom/models";
+import { ResponseOutputTextDelta } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseOutputTextDelta = {
   seqId: 6,

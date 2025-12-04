@@ -13,6 +13,9 @@ targets:
     you:
         target: typescript
         source: You.com Agents API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/youcom/documentation/you-com-agents-api-typescript-code-samples

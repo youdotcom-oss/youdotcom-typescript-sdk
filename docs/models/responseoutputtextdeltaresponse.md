@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ResponseOutputTextDeltaResponse } from "youdotcom/models";
+import { ResponseOutputTextDeltaResponse } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseOutputTextDeltaResponse = {
   outputIndex: 1,

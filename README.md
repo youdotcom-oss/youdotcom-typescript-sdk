@@ -41,34 +41,30 @@ You.com Contents API: Get the best search results from web and news sources
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add @youdotcom-oss/sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add @youdotcom-oss/sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add @youdotcom-oss/sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET>
+yarn add @youdotcom-oss/sdk
 ```
 
 > [!NOTE]
@@ -87,7 +83,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ### Example
 
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -121,7 +117,7 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `apiKeyAuth` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -272,7 +268,7 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -305,7 +301,7 @@ run();
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   retryConfig: {
@@ -352,8 +348,8 @@ run();
 
 ### Example
 ```typescript
-import { You } from "youdotcom";
-import * as errors from "youdotcom/models/errors";
+import { You } from "@youdotcom-oss/sdk";
+import * as errors from "@youdotcom-oss/sdk/models/errors";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -428,7 +424,7 @@ run();
 
 The default server can be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   serverURL: "https://ydc-index.io",
@@ -453,7 +449,7 @@ run();
 
 The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
@@ -494,8 +490,8 @@ custom header and a timeout to requests and how to use the `"requestError"` hook
 to log errors:
 
 ```typescript
-import { You } from "youdotcom";
-import { HTTPClient } from "youdotcom/lib/http";
+import { You } from "@youdotcom-oss/sdk";
+import { HTTPClient } from "@youdotcom-oss/sdk/lib/http";
 
 const httpClient = new HTTPClient({
   // fetcher takes a function that has the same signature as native `fetch`.
@@ -536,7 +532,7 @@ You can pass a logger that matches `console`'s interface as an SDK option.
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
 
 ```typescript
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const sdk = new You({ debugLogger: console });
 ```

@@ -5,7 +5,7 @@ Unauthorized. Problems with API key.
 ## Example Usage
 
 ```typescript
-import { SearchUnauthorizedError } from "youdotcom/models/errors";
+import { SearchUnauthorizedError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

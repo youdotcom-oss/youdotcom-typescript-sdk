@@ -5,13 +5,13 @@
 import dotenv from "dotenv";
 dotenv.config();
 /**
- * Example usage of the youdotcom SDK
+ * Example usage of the @youdotcom-oss/sdk SDK
  *
  * To run this example from the examples directory:
  * npm run build && npx tsx agentsRuns.example.ts
  */
 
-import { You } from "youdotcom";
+import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",

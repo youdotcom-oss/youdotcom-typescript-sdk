@@ -5,7 +5,7 @@ The text response of the agent. This field only returns when the type is `web_se
 ## Example Usage
 
 ```typescript
-import { AgentRunsResponseWebSearchResult } from "youdotcom/models";
+import { AgentRunsResponseWebSearchResult } from "@youdotcom-oss/sdk/models";
 
 let value: AgentRunsResponseWebSearchResult = {
   sourceType: "web_search",

@@ -5,7 +5,7 @@ SSE event signifying the response stream has been created
 ## Example Usage
 
 ```typescript
-import { ResponseCreated } from "youdotcom/models";
+import { ResponseCreated } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseCreated = {
   seqId: 0,

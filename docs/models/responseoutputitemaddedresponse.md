@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ResponseOutputItemAddedResponse } from "youdotcom/models";
+import { ResponseOutputItemAddedResponse } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseOutputItemAddedResponse = {
   outputIndex: 0,

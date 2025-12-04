@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ResponseDoneResponse } from "youdotcom/models";
+import { ResponseDoneResponse } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseDoneResponse = {
   runTimeMs: "8.029",

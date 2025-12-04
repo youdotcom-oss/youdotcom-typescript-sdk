@@ -5,7 +5,7 @@ SSE event signifying the response is starting
 ## Example Usage
 
 ```typescript
-import { ResponseStarting } from "youdotcom/models";
+import { ResponseStarting } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseStarting = {
   seqId: 1,

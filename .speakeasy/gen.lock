@@ -3,10 +3,11 @@ id: 8f64bc72-2c6f-46dd-98c7-06d8491c2a24
 management:
   docChecksum: 7b31d1e817d9f423b48e485f32956356
   docVersion: 0.0.1
-  speakeasyVersion: 1.666.2
-  generationVersion: 2.768.1
-  releaseVersion: 0.10.7
-  configChecksum: 42dae701ac385597468ec2fa7230b4d9
+  speakeasyVersion: 1.668.0
+  generationVersion: 2.770.0
+  releaseVersion: 0.10.13
+  configChecksum: f09a7efddf9b78695597b780bfa9ac3f
+  published: true
 features:
   typescript:
     acceptHeaders: 2.81.2

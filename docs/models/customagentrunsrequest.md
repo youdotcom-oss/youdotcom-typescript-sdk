@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { CustomAgentRunsRequest } from "youdotcom/models";
+import { CustomAgentRunsRequest } from "@youdotcom-oss/sdk/models";
 
 let value: CustomAgentRunsRequest = {
   agent: "63773261-b4de-4d8f-9dfd-cff206a5cb51",

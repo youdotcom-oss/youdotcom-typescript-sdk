@@ -5,7 +5,7 @@ SSE event signifying an output item has been added
 ## Example Usage
 
 ```typescript
-import { ResponseOutputItemAdded } from "youdotcom/models";
+import { ResponseOutputItemAdded } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseOutputItemAdded = {
   seqId: 2,

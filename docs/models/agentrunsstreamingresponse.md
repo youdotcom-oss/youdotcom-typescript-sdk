@@ -5,7 +5,7 @@ A server-sent event containing stock market update content
 ## Example Usage
 
 ```typescript
-import { AgentRunsStreamingResponse } from "youdotcom/models";
+import { AgentRunsStreamingResponse } from "@youdotcom-oss/sdk/models";
 
 let value: AgentRunsStreamingResponse = {
   id: "<id>",

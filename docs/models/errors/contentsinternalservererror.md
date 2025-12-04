@@ -5,7 +5,7 @@ Internal Server Error
 ## Example Usage
 
 ```typescript
-import { ContentsInternalServerError } from "youdotcom/models/errors";
+import { ContentsInternalServerError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

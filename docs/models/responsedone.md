@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ResponseDone } from "youdotcom/models";
+import { ResponseDone } from "@youdotcom-oss/sdk/models";
 
 let value: ResponseDone = {
   seqId: 249,
