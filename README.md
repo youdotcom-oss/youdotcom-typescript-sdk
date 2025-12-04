@@ -82,27 +82,23 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 
 ### Example
 
-```typescript
-import { You } from "@youdotcom-oss/sdk";
+We provide a comprehensive example file with interactive demos for all API endpoints. You can find it at [`examples/api-example-calls.ts`](examples/api-example-calls.ts).
 
-const you = new You({
-  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
-});
+To run the examples:
 
-async function run() {
-  const result = await you.agentsRuns({
-    agent: "express",
-    input: "What is the capital of France?",
-    stream: false,
-  });
-
-  console.log(result);
-}
-
-run();
-
+```bash
+cd examples
+npm install
+npx tsx api-example-calls.ts
 ```
-<!-- End SDK Example Usage [usage] -->
+
+The example file includes:
+- **Express Agent** - Batch and streaming requests
+- **Advanced Agent** - Research-powered requests
+- **Custom Agent** - Using your own agent configurations
+- **Search API** - Web search queries
+- **Contents API** - URL content extraction
+<!-- No SDK Example Usage [usage] -->
 
 <!-- Start Authentication [security] -->
 ## Authentication
