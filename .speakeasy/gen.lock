@@ -5,13 +5,13 @@ management:
   docVersion: 0.0.1
   speakeasyVersion: 1.671.0
   generationVersion: 2.774.0
-  releaseVersion: 0.10.15
-  configChecksum: 5d2a9ee322ce0d09e169f3372fc3c194
+  releaseVersion: 0.10.16
+  configChecksum: de88f60234abc75f18a3d1e209091640
   published: true
 persistentEdits:
-  generation_id: 6429f84f-74e6-43d0-8cb5-9c51bf039a01
-  pristine_commit_hash: 88c629d66967d149f05427f58342127296f86c4b
-  pristine_tree_hash: 01a397c43a188ead103bd2810453d5b2b643937d
+  generation_id: 445ebb9f-ff9d-4fa1-ae89-5593af8d1727
+  pristine_commit_hash: 6aa21155aea4eebf159d431e733ae74f46f511c7
+  pristine_tree_hash: 8130c4e9a805811f8ba5da10fa92580703c11d40
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -373,12 +373,12 @@ trackedFiles:
     pristine_git_object: 5a65028d9faaac429ac8a63dadea8b91e9b682db
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:109bc89be4ae8cee04396f2aebe686fb487a8443
-    pristine_git_object: 3a150f9a94029b697679fe4bf0400f0b5450092a
+    last_write_checksum: sha1:0d7fac89f5887ac5d31f46f9f142f829a470bfdb
+    pristine_git_object: b3ce32fc453b11eb0d92d8f8b322f6125338e193
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:85d7797791424e8e02e1fa624b531f43d592c988
-    pristine_git_object: 202d9f235501b51bcc9b2b5ce4943cde110acc53
+    last_write_checksum: sha1:b84e384a740c2807acaca00771bc0ed320a311d0
+    pristine_git_object: b59af586a9f85b855b38dc24a139bb5480d441ba
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:0fd3e9acbb4f1c941616b608c91cdef843582df2
@@ -417,8 +417,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:34dd3c5346a2459e8b839ecd166bf74558f835ec
-    pristine_git_object: 6bcffcf4abf20b3ad48122bcda71d9a9f97195f2
+    last_write_checksum: sha1:cb211f804432dd04f9a8d17776818f2797f62743
+    pristine_git_object: 2d3a9c631fac639921f6fe3f9d39e730d423d177
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250

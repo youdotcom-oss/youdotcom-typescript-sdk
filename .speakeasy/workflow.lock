@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:010b7cc706ade463a6dfc5fc3f4f5725e03d59e6897af08ab70fcfb56b355cd2
         sourceBlobDigest: sha256:b8163188981c3792ed1e91f8bc4aa1d994b2febde9e8fd8afc8c4e623739559d
         codeSamplesNamespace: you-com-agents-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:c4badbb54135829941185f22f7800ab622e5e40711e12829eeb8d144104eb721
+        codeSamplesRevisionDigest: sha256:be03fbe52209aa3b957fe191da83753f92ee8eac6ec97557eafd59e3f0bb1992
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
