@@ -24,7 +24,7 @@ paths:
           schema:
             type: string
             default: "Your query"
-        - name: count 
+        - name: count
           in: query
           required: false
           description: Specifies the maximum number of search results to return per section (the sections are `web` and `news`. See the JSON response to visualize them).
@@ -54,6 +54,12 @@ paths:
             oneOf:
               - $ref: '#/components/schemas/Country'
               - type: string
+        - name: language
+          in: query
+          required: false
+          description: The language of the web results that will be returned (BCP 47 format).
+          schema:
+            $ref: "#/components/schemas/Language"
         - name: safesearch
           in: query
           required: false
@@ -131,7 +137,7 @@ paths:
                               type: string
                               description: The URL of the favicon of the search result's domain.
                               example: "https://someurl.com/favicon"
-                            
+
                       news:
                         type: array
                         items:
@@ -158,7 +164,7 @@ paths:
                               type: string
                               description: The URL of the news result.
                               example: "https://www.you.com/news/eu-ai-strategy-youcom"
-                           
+
                   metadata:
                     type: object
                     properties:
@@ -289,6 +295,11 @@ components:
         - TR
         - GB
         - US
+
+    Language:
+      type: string
+      default: 'EN'
+      enum: ['AR', 'EU', 'BN', 'BG', 'CA', 'ZH-HANS', 'ZH-HANT', 'HR', 'CS', 'DA', 'NL', 'EN', 'EN-GB', 'ET', 'FI', 'FR', 'GL', 'DE', 'EL', 'GU', 'HE', 'HI', 'HU', 'IS', 'IT', 'JP', 'KN', 'KO', 'LV', 'LT', 'MS', 'ML', 'MR', 'NB', 'PL', 'PT-BR', 'PT-PT', 'PA', 'RO', 'RU', 'SR', 'SK', 'SL', 'ES', 'SV', 'TA', 'TE', 'TH', 'TR', 'UK', 'VI']
 
     SafeSearch:
       type: string

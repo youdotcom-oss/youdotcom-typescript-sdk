@@ -1,6 +1,6 @@
 {
   "name": "@youdotcom-oss/sdk",
-  "version": "0.10.13",
+  "version": "0.10.15",
   "author": "Speakeasy",
   "type": "module",
   "tshy": {
@@ -22,17 +22,14 @@
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
     "build": "tshy",
-    "prepublishOnly": "npm run build",
-    "test:integration": "node --import tsx --test tests/*.test.ts"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@types/node": "^22.0.0",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
     "tshy": "^2.0.0",
-    "tsx": "^4.19.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.26.0"
   },
