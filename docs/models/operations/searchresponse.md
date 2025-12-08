@@ -47,7 +47,7 @@ let value: SearchResponse = {
 
 ## Fields
 
-| Field                                                      | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `results`                                                  | [operations.Results](../../models/operations/results.md)   | :heavy_minus_sign:                                         | N/A                                                        |
-| `metadata`                                                 | [operations.Metadata](../../models/operations/metadata.md) | :heavy_minus_sign:                                         | N/A                                                        |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `results`                                                              | [operations.Results](../../models/operations/results.md)               | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `metadata`                                                             | [operations.SearchMetadata](../../models/operations/searchmetadata.md) | :heavy_minus_sign:                                                     | N/A                                                                    |

@@ -1,8 +1,13 @@
-// We've included code to run and parse our API offerings. 
+// We've included code to run and parse our API offerings.
 // To run this example from the examples directory: npx tsx api-example-calls.ts
 
 import { You } from "@youdotcom-oss/sdk";
-import type { ExpressAgentRunsRequest, AdvancedAgentRunsRequest, CustomAgentRunsRequest, AgentRunsStreamingResponse } from "@youdotcom-oss/sdk/models";
+import {
+  type ExpressAgentRunsRequest,
+  type AdvancedAgentRunsRequest,
+  type CustomAgentRunsRequest,
+  type AgentRunsStreamingResponse,
+  Language } from "@youdotcom-oss/sdk/models";
 
 import { type EventStream } from "@youdotcom-oss/sdk/lib/event-streams.js";
 import type { SearchRequest, ContentsRequest } from "@youdotcom-oss/sdk/models/operations";
@@ -15,8 +20,8 @@ async function expressBatchRequest() {
     agent: "express",
     stream: false,
     input: "What is the capital of France?",
-    tools: [{  
-      type: "web_search"  
+    tools: [{
+      type: "web_search"
     }]
   };
   const result = await you.agentsRuns(request);
@@ -28,55 +33,55 @@ async function expressStreamingRequest() {
     agent: "express",
     stream: true,
     input: "Restaurants in San Francisco",
-    tools: [{  
-      type: "web_search"  
+    tools: [{
+      type: "web_search"
     }]
   };
   const result = await you.agentsRuns(request) as EventStream<AgentRunsStreamingResponse>;
-  
+
   // Iterate over the streaming response and print tokens as they arrive
   for await (const chunk of result) {
-    switch(chunk.data.type) { 
-      case "response.created": { 
-        console.log("Response created, seqId:", chunk.data.seqId); 
-        break; 
-      } 
-      case "response.starting": { 
-        console.log("Response starting, seqId:", chunk.data.seqId); 
-        break; 
-      } 
-      case "response.output_item.added": { 
-        console.log("Output item added:", chunk.data); 
-        break; 
-      } 
-      case "response.output_content.full": { 
+    switch(chunk.data.type) {
+      case "response.created": {
+        console.log("Response created, seqId:", chunk.data.seqId);
+        break;
+      }
+      case "response.starting": {
+        console.log("Response starting, seqId:", chunk.data.seqId);
+        break;
+      }
+      case "response.output_item.added": {
+        console.log("Output item added:", chunk.data);
+        break;
+      }
+      case "response.output_content.full": {
         console.log("\nWeb Search Results:");
         let urls = chunk.data.response.full.map((result) => {
           return result.url
         })
         console.log(urls);
-        break; 
-      } 
-      case "response.output_text.delta": { 
+        break;
+      }
+      case "response.output_text.delta": {
         // This contains incremental text content
         process.stdout.write(chunk.data.response.delta)
-        break; 
-      } 
-      case "response.output_item.done": { 
-        console.log("\nOutput item done:", chunk.data); 
-        break; 
-      } 
-      case "response.done": { 
+        break;
+      }
+      case "response.output_item.done": {
+        console.log("\nOutput item done:", chunk.data);
+        break;
+      }
+      case "response.done": {
         console.log("\nResponse completed!");
         console.log("Runtime:", chunk.data.response.runTimeMs, "ms");
-        console.log("Finished:", chunk.data.response.finished); 
-        break; 
-      } 
-      default: { 
-        console.log("Unknown event type:", chunk.data); 
-        break; 
-      } 
-    } 
+        console.log("Finished:", chunk.data.response.finished);
+        break;
+      }
+      default: {
+        console.log("Unknown event type:", chunk.data);
+        break;
+      }
+    }
   }
 }
 
@@ -108,6 +113,7 @@ async function customBatchRequest() {
 async function searchRequest() {
   const request: SearchRequest = {
     query: "Recipe sites",
+    language: Language.Fr,
   };
   const result = await you.search(request);
   console.log("Metadata:");
@@ -121,7 +127,7 @@ async function searchRequest() {
 
 async function contentRequest() {
   const request: ContentsRequest = {
-    urls: ["https://www.apple.com/"],
+    urls: ["https://you.com"],
     format: "markdown",
   };
   const result = await you.contents(request);

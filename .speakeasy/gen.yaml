@@ -25,19 +25,23 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: body
+  persistentEdits: {}
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.10.13
+  version: 0.10.16
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
-    devDependencies: {}
+    devDependencies:
+      '@types/node': ^22.0.0
+      tsx: ^4.19.0
     peerDependencies: {}
   additionalPackageJSON: {}
-  additionalScripts: {}
+  additionalScripts:
+    test:integration: node --import tsx --test tests/*.test.ts
   alwaysIncludeInboundAndOutbound: false
   author: Speakeasy
   baseErrorName: YouError

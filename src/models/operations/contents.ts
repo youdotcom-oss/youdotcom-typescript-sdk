@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -44,6 +45,17 @@ export type ContentsRequest = {
   format?: FormatEnum1 | FormatEnum2 | undefined;
 };
 
+export type ContentsMetadata = {
+  /**
+   * The OpenGraph site name of the web page.
+   */
+  siteName?: string | undefined;
+  /**
+   * The URL of the favicon of the web page's domain.
+   */
+  faviconUrl?: string | undefined;
+};
+
 export type ContentsResponse = {
   /**
    * The webpage URL whose content has been fetched.
@@ -61,6 +73,7 @@ export type ContentsResponse = {
    * The retrieved Markdown content of the web page.
    */
   markdown?: string | null | undefined;
+  metadata?: ContentsMetadata | undefined;
 };
 
 /** @internal */
@@ -106,6 +119,33 @@ export function contentsRequestToJSON(
 }
 
 /** @internal */
+export const ContentsMetadata$inboundSchema: z.ZodMiniType<
+  ContentsMetadata,
+  unknown
+> = z.pipe(
+  z.object({
+    site_name: types.optional(types.string()),
+    favicon_url: types.optional(types.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "site_name": "siteName",
+      "favicon_url": "faviconUrl",
+    });
+  }),
+);
+
+export function contentsMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<ContentsMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ContentsMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContentsMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const ContentsResponse$inboundSchema: z.ZodMiniType<
   ContentsResponse,
   unknown
@@ -114,6 +154,7 @@ export const ContentsResponse$inboundSchema: z.ZodMiniType<
   title: types.optional(types.string()),
   html: z.optional(z.nullable(types.string())),
   markdown: z.optional(z.nullable(types.string())),
+  metadata: types.optional(z.lazy(() => ContentsMetadata$inboundSchema)),
 });
 
 export function contentsResponseFromJSON(

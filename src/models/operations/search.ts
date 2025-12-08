@@ -62,6 +62,10 @@ export type SearchRequest = {
    */
   country?: models.Country | string | undefined;
   /**
+   * The language of the web results that will be returned (BCP 47 format).
+   */
+  language?: models.Language | undefined;
+  /**
    * Configures the safesearch filter for content moderation. This allows you to decide whether to return NSFW content or not.
    */
   safesearch?: models.SafeSearch | string | undefined;
@@ -138,7 +142,7 @@ export type Results = {
   news?: Array<News> | undefined;
 };
 
-export type Metadata = {
+export type SearchMetadata = {
   requestUuid?: string | undefined;
   /**
    * Returns the search query used to retrieve the results.
@@ -152,7 +156,7 @@ export type Metadata = {
  */
 export type SearchResponse = {
   results?: Results | undefined;
-  metadata?: Metadata | undefined;
+  metadata?: SearchMetadata | undefined;
 };
 
 /** @internal */
@@ -229,6 +233,7 @@ export type SearchRequest$Outbound = {
   freshness?: string | string | undefined;
   offset?: number | undefined;
   country?: string | string | undefined;
+  language: string;
   safesearch?: string | string | undefined;
   livecrawl?: string | string | undefined;
   livecrawl_formats?: string | string | undefined;
@@ -249,6 +254,7 @@ export const SearchRequest$outboundSchema: z.ZodMiniType<
     country: z.optional(
       smartUnion([models.Country$outboundSchema, z.string()]),
     ),
+    language: z._default(models.Language$outboundSchema, "EN"),
     safesearch: z.optional(
       smartUnion([models.SafeSearch$outboundSchema, z.string()]),
     ),
@@ -345,7 +351,10 @@ export function resultsFromJSON(
 }
 
 /** @internal */
-export const Metadata$inboundSchema: z.ZodMiniType<Metadata, unknown> = z.pipe(
+export const SearchMetadata$inboundSchema: z.ZodMiniType<
+  SearchMetadata,
+  unknown
+> = z.pipe(
   z.object({
     request_uuid: types.optional(types.string()),
     query: types.optional(types.string()),
@@ -358,13 +367,13 @@ export const Metadata$inboundSchema: z.ZodMiniType<Metadata, unknown> = z.pipe(
   }),
 );
 
-export function metadataFromJSON(
+export function searchMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
+): SafeParseResult<SearchMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
+    (x) => SearchMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchMetadata' from JSON`,
   );
 }
 
@@ -374,7 +383,7 @@ export const SearchResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   results: types.optional(z.lazy(() => Results$inboundSchema)),
-  metadata: types.optional(z.lazy(() => Metadata$inboundSchema)),
+  metadata: types.optional(z.lazy(() => SearchMetadata$inboundSchema)),
 });
 
 export function searchResponseFromJSON(

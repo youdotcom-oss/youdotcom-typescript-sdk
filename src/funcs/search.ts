@@ -100,6 +100,7 @@ async function $do(
     "count": payload.count,
     "country": payload.country,
     "freshness": payload.freshness,
+    "language": payload.language,
     "livecrawl": payload.livecrawl,
     "livecrawl_formats": payload.livecrawl_formats,
     "offset": payload.offset,
