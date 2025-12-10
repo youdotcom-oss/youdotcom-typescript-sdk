@@ -5,11 +5,6 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 [![Built by Speakeasy](https://img.shields.io/badge/Built_by-SPEAKEASY-374151?style=for-the-badge&labelColor=f3f4f6)](https://www.speakeasy.com/?utm_source=youdotcom&utm_campaign=typescript)
 [![License: MIT](https://img.shields.io/badge/LICENSE_//_MIT-3b5bdb?style=for-the-badge&labelColor=eff6ff)](https://opensource.org/licenses/MIT)
 
-
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/youcom/documentation). Delete this section before > publishing to a package manager.
-
 <!-- Start Summary [summary] -->
 ## Summary
 
@@ -182,7 +177,7 @@ underlying connection.
 
 ```typescript
 import { You } from "youdotcom";
-import { 
+import {
   type ExpressAgentRunsRequest,
   type AgentRunsStreamingResponse,
 } from "youdotcom/models"
@@ -191,63 +186,63 @@ import { type EventStream } from "youdotcom/lib/event-streams.js";
 const you = new You({
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
 });
-  
+
 const request: ExpressAgentRunsRequest = {
   agent: "express",
   stream: true,
   input: "Restaurants in San Francisco",
-  tools: [{  
-    type: "web_search"  
-  }]  
+  tools: [{
+    type: "web_search"
+  }]
 };
- 
+
 async function run() {
   const result = await you.agentsRuns(request) as EventStream<AgentRunsStreamingResponse>;
 
-  // Iterate over the streaming response and print tokens as they arrive  
+  // Iterate over the streaming response and print tokens as they arrive
   for await (const chunk of result) {
-    switch(chunk.data.type) { 
-      case "response.created": { 
-        console.log("Response created, seqId:", chunk.data.seqId); 
-        break; 
-      } 
-      case "response.starting": { 
-        console.log("Response starting, seqId:", chunk.data.seqId); 
-        break; 
-      } 
-      case "response.output_item.added": { 
-        console.log("Output item added:", chunk.data); 
-        break; 
-      } 
-      case "response.output_content.full": { 
+    switch(chunk.data.type) {
+      case "response.created": {
+        console.log("Response created, seqId:", chunk.data.seqId);
+        break;
+      }
+      case "response.starting": {
+        console.log("Response starting, seqId:", chunk.data.seqId);
+        break;
+      }
+      case "response.output_item.added": {
+        console.log("Output item added:", chunk.data);
+        break;
+      }
+      case "response.output_content.full": {
         console.log("\nWeb Search Results:");
         let urls = chunk.data.response.full.map((result) => {
           return result.url
         })
         console.log(urls);
-        break; 
-      } 
-      case "response.output_text.delta": { 
+        break;
+      }
+      case "response.output_text.delta": {
         // This contains the incremental response from the agent
         process.stdout.write(chunk.data.response.delta)
-        break; 
-      } 
-      case "response.output_item.done": { 
-        console.log("\nOutput item done:", chunk.data); 
-        break; 
-      } 
-      case "response.done": { 
+        break;
+      }
+      case "response.output_item.done": {
+        console.log("\nOutput item done:", chunk.data);
+        break;
+      }
+      case "response.done": {
         console.log("\nResponse completed!");
         console.log("Runtime:", chunk.data.response.runTimeMs, "ms");
-        console.log("Finished:", chunk.data.response.finished); 
-        break; 
-      } 
-      default: { 
-        console.log("Unknown event type:", chunk.data); 
-        break; 
-      } 
-    } 
-  }  
+        console.log("Finished:", chunk.data.response.finished);
+        break;
+      }
+      default: {
+        console.log("Unknown event type:", chunk.data);
+        break;
+      }
+    }
+  }
 }
 
 run();
