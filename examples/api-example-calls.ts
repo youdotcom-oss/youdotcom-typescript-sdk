@@ -7,7 +7,8 @@ import {
   type AdvancedAgentRunsRequest,
   type CustomAgentRunsRequest,
   type AgentRunsStreamingResponse,
-  Language } from "@youdotcom-oss/sdk/models";
+  Language,
+  Freshness, LiveCrawl } from "@youdotcom-oss/sdk/models";
 
 import { type EventStream } from "@youdotcom-oss/sdk/lib/event-streams.js";
 import type { SearchRequest, ContentsRequest } from "@youdotcom-oss/sdk/models/operations";
@@ -113,7 +114,7 @@ async function customBatchRequest() {
 async function searchRequest() {
   const request: SearchRequest = {
     query: "Recipe sites",
-    language: Language.Fr,
+    language: Language.En
   };
   const result = await you.search(request);
   console.log("Metadata:");
@@ -123,6 +124,8 @@ async function searchRequest() {
     return result.url
   }) ?? [];
   console.log(webResults);
+  console.log("Request ID:");
+  console.log(result.metadata?.searchUuid);
 }
 
 async function contentRequest() {

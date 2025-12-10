@@ -143,7 +143,7 @@ export type Results = {
 };
 
 export type SearchMetadata = {
-  requestUuid?: string | undefined;
+  searchUuid?: string | undefined;
   /**
    * Returns the search query used to retrieve the results.
    */
@@ -356,13 +356,13 @@ export const SearchMetadata$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    request_uuid: types.optional(types.string()),
+    search_uuid: types.optional(types.string()),
     query: types.optional(types.string()),
     latency: types.optional(types.number()),
   }),
   z.transform((v) => {
     return remap$(v, {
-      "request_uuid": "requestUuid",
+      "search_uuid": "searchUuid",
     });
   }),
 );

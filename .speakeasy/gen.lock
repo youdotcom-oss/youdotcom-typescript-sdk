@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: 8f64bc72-2c6f-46dd-98c7-06d8491c2a24
 management:
-  docChecksum: 106943fc18c8bffd7bced0fd9f582a10
+  docChecksum: 71c429e6e50becfb8bc1038c09b9c0f3
   docVersion: 0.0.1
-  speakeasyVersion: 1.673.1
-  generationVersion: 2.776.3
-  releaseVersion: 0.10.18
-  configChecksum: e4c65093c78253a7ab5fdce38473203c
+  speakeasyVersion: 1.675.4
+  generationVersion: 2.779.2
+  releaseVersion: 0.10.19
+  configChecksum: e4a0e97a9884dbcbcdcc618f5db64f89
   published: true
 persistentEdits:
-  generation_id: 56be3460-9a2b-4024-ab59-acd1e7be26b0
-  pristine_commit_hash: d7598258b4c70c25d28b063077ba22e13b0fd0e0
-  pristine_tree_hash: 05a081696d2efc0c43c0119c604d9cd6206a2ae5
+  generation_id: c6602fc2-2838-425a-8d05-0257d3742ccb
+  pristine_commit_hash: 603703dde162d9174cbacce7800347cb2281ce5a
+  pristine_tree_hash: 22e67b59a9723089dec52d845c9ef1343dda9122
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -242,16 +242,16 @@ trackedFiles:
     pristine_git_object: 951f8abfe6a52ed7b740160285f61f9cc7060bf3
   docs/models/operations/searchmetadata.md:
     id: aae24e417922
-    last_write_checksum: sha1:401fded051b5c7d28b43c4fbde3a71795fa9c218
-    pristine_git_object: 8ba984298a3ff75deb7bc649df9bef81bdb20696
+    last_write_checksum: sha1:d0e1f867684fb702a1a5c83b86fe7d57f3d1d1f3
+    pristine_git_object: f828368bbcd766fa7f7eb3bc0f82ef66ee2197d7
   docs/models/operations/searchrequest.md:
     id: 4351dc03334a
     last_write_checksum: sha1:5bb03a1f00bf810f20414a2c2debd9d7e0b8199c
     pristine_git_object: 9629acb309c5141312efde09c68dd3d27436fbdd
   docs/models/operations/searchresponse.md:
     id: 72bf5f8f3bf1
-    last_write_checksum: sha1:339636069767f2f629c453f4230e96e192062a66
-    pristine_git_object: 56cf812af65e2eb2d8f07a01527a01bfdd2a128a
+    last_write_checksum: sha1:10a3dec5e5bb11a39917a1bb41958c2c3d3e7f40
+    pristine_git_object: 4f5950ffd9c4953e64283bca1a9b8d36f7384dec
   docs/models/operations/web.md:
     id: 2d553c8f9953
     last_write_checksum: sha1:3851d2e7f787d103e93c5eead812301be8876d47
@@ -370,12 +370,12 @@ trackedFiles:
     pristine_git_object: 5a65028d9faaac429ac8a63dadea8b91e9b682db
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:71f5653618e6a9e2936fbac4b004cb214f4f951d
-    pristine_git_object: 009debc664fee29f33326805a63f74b6767afbbe
+    last_write_checksum: sha1:4faa0cb4b6b3a7d689b80e50431a313d52a7b86d
+    pristine_git_object: 20d089d4ae0d7780480123afcd364052f5f09085
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:f1c982cc4070e800b06c1b45dd8fc21198b2330b
-    pristine_git_object: 2fe244dd6257b6b5f4e9185fb1b9e22e54b10894
+    last_write_checksum: sha1:08777071a6ab456a9f174009a42ae28dbd8d410c
+    pristine_git_object: 5f67d8623ec69f4689716c70a2b559e3cdd0733a
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:0fd3e9acbb4f1c941616b608c91cdef843582df2
@@ -414,8 +414,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:265a13dccdde86fd87dd449ebd0fadcb050f9d02
-    pristine_git_object: db10e3bc2936fe8966b13c1d58fafe82729e9efa
+    last_write_checksum: sha1:4bac81375cc36af708ea1e2be19a5ad03ffa4cb3
+    pristine_git_object: 2df534fee7d8c65093443982c43bba1397437a91
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -594,8 +594,8 @@ trackedFiles:
     pristine_git_object: 0c39cbf6b50fb2b859629c0df36783f575f50e1d
   src/models/operations/search.ts:
     id: 02b424e0d71b
-    last_write_checksum: sha1:86c1cd3ce55fe1b0cb7aa4e2276cb11a3b53f201
-    pristine_git_object: 5defe67ae40184ab0a6b4b88dab12db799aa161b
+    last_write_checksum: sha1:b041b1afeb63a220484b68f77050ca65fda01f9d
+    pristine_git_object: 181edf30d82163949181c6ddafa31c2b0cb9d7f5
   src/models/reportverbosity.ts:
     id: daa1ef1412a5
     last_write_checksum: sha1:f73c3541adaa42758c8ef61d8fdc95be88aa92b5
@@ -996,7 +996,7 @@ examples:
           language: "EN"
       responses:
         "200":
-          application/json: {"results": {"web": [{"url": "https://you.com", "title": "The World's Greatest Search Engine!", "description": "Search on YDC", "snippets": ["I'm an AI assistant that helps you get more done. What can I help you with?"], "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "page_age": "2025-06-25T11:41:00", "authors": ["John Doe"], "favicon_url": "https://someurl.com/favicon"}], "news": [{"title": "Exclusive | You.com becomes the backbone of the EU's AI strategy", "description": "As the EU's AI strategy is being debated, You.com becomes the backbone of the EU's AI strategy.", "page_age": "2025-06-25T11:41:00", "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "url": "https://www.you.com/news/eu-ai-strategy-youcom"}]}, "metadata": {"request_uuid": "942ccbdd-7705-4d9c-9d37-4ef386658e90", "query": "Your query", "latency": 0.123}}
+          application/json: {"results": {"web": [{"url": "https://you.com", "title": "The World's Greatest Search Engine!", "description": "Search on YDC", "snippets": ["I'm an AI assistant that helps you get more done. What can I help you with?"], "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "page_age": "2025-06-25T11:41:00", "authors": ["John Doe"], "favicon_url": "https://someurl.com/favicon"}], "news": [{"title": "Exclusive | You.com becomes the backbone of the EU's AI strategy", "description": "As the EU's AI strategy is being debated, You.com becomes the backbone of the EU's AI strategy.", "page_age": "2025-06-25T11:41:00", "thumbnail_url": "https://www.somethumbnailsite.com/thumbnail.jpg", "url": "https://www.you.com/news/eu-ai-strategy-youcom"}]}, "metadata": {"search_uuid": "942ccbdd-7705-4d9c-9d37-4ef386658e90", "query": "Your query", "latency": 0.123}}
         "401":
           application/json: {}
         "403":
