@@ -79,6 +79,20 @@ export type SearchRequest = {
   livecrawlFormats?: models.LiveCrawlFormats | string | undefined;
 };
 
+/**
+ * Contents of the page if livecrawl was enabled.
+ */
+export type Contents = {
+  /**
+   * The HTML content of the page.
+   */
+  html?: string | undefined;
+  /**
+   * The Markdown content of the page.
+   */
+  markdown?: string | undefined;
+};
+
 export type Web = {
   /**
    * The URL of the specific search result.
@@ -104,6 +118,10 @@ export type Web = {
    * The age of the search result.
    */
   pageAge?: Date | undefined;
+  /**
+   * Contents of the page if livecrawl was enabled.
+   */
+  contents?: Contents | undefined;
   /**
    * An array of authors of the search result.
    */
@@ -277,6 +295,23 @@ export function searchRequestToJSON(searchRequest: SearchRequest): string {
 }
 
 /** @internal */
+export const Contents$inboundSchema: z.ZodMiniType<Contents, unknown> = z
+  .object({
+    html: types.optional(types.string()),
+    markdown: types.optional(types.string()),
+  });
+
+export function contentsFromJSON(
+  jsonString: string,
+): SafeParseResult<Contents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Contents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Contents' from JSON`,
+  );
+}
+
+/** @internal */
 export const Web$inboundSchema: z.ZodMiniType<Web, unknown> = z.pipe(
   z.object({
     url: types.optional(types.string()),
@@ -285,6 +320,7 @@ export const Web$inboundSchema: z.ZodMiniType<Web, unknown> = z.pipe(
     snippets: types.optional(z.array(types.string())),
     thumbnail_url: types.optional(types.string()),
     page_age: types.optional(types.date()),
+    contents: types.optional(z.lazy(() => Contents$inboundSchema)),
     authors: types.optional(z.array(types.string())),
     favicon_url: types.optional(types.string()),
   }),
