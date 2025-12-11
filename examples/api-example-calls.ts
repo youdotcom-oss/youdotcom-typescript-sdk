@@ -7,7 +7,8 @@ import {
   type AdvancedAgentRunsRequest,
   type CustomAgentRunsRequest,
   type AgentRunsStreamingResponse,
-  Language } from "@youdotcom-oss/sdk/models";
+  Language,
+  Freshness, LiveCrawl, LiveCrawlFormats } from "@youdotcom-oss/sdk/models";
 
 import { type EventStream } from "@youdotcom-oss/sdk/lib/event-streams.js";
 import type { SearchRequest, ContentsRequest } from "@youdotcom-oss/sdk/models/operations";
@@ -112,8 +113,10 @@ async function customBatchRequest() {
 
 async function searchRequest() {
   const request: SearchRequest = {
-    query: "Recipe sites",
-    language: Language.Fr,
+    query: "artificial intelligence in farming",
+    count: 1,
+    livecrawl: LiveCrawl.Web,
+    livecrawlFormats: LiveCrawlFormats.Markdown,
   };
   const result = await you.search(request);
   console.log("Metadata:");

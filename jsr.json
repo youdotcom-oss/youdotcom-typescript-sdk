@@ -2,7 +2,7 @@
 
 {
   "name": "@youdotcom-oss/sdk",
-  "version": "0.10.18",
+  "version": "0.10.20",
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    

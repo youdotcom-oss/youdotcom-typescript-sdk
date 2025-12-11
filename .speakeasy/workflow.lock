@@ -1,4 +1,4 @@
-speakeasyVersion: 1.673.1
+speakeasyVersion: 1.675.4
 sources:
     You.com API:
         sourceNamespace: you-com-agents-api
@@ -16,8 +16,8 @@ sources:
             - 0.0.1
     You.com SDK:
         sourceNamespace: you-com-sdk
-        sourceRevisionDigest: sha256:010b7cc706ade463a6dfc5fc3f4f5725e03d59e6897af08ab70fcfb56b355cd2
-        sourceBlobDigest: sha256:b8163188981c3792ed1e91f8bc4aa1d994b2febde9e8fd8afc8c4e623739559d
+        sourceRevisionDigest: sha256:650405a879427f30b54ddcbadd820ac13a20990264b1c0e0de694d56639b645b
+        sourceBlobDigest: sha256:c04c3de61ad31b5bcdd88ee602f6863ce69a833eab3ad8fdf5a3e58df68d0544
         tags:
             - latest
             - 0.0.1
@@ -25,10 +25,10 @@ targets:
     you:
         source: You.com SDK
         sourceNamespace: you-com-sdk
-        sourceRevisionDigest: sha256:010b7cc706ade463a6dfc5fc3f4f5725e03d59e6897af08ab70fcfb56b355cd2
-        sourceBlobDigest: sha256:b8163188981c3792ed1e91f8bc4aa1d994b2febde9e8fd8afc8c4e623739559d
+        sourceRevisionDigest: sha256:650405a879427f30b54ddcbadd820ac13a20990264b1c0e0de694d56639b645b
+        sourceBlobDigest: sha256:c04c3de61ad31b5bcdd88ee602f6863ce69a833eab3ad8fdf5a3e58df68d0544
         codeSamplesNamespace: you-com-sdk-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:134ec007b57497f9396868972e0917dc4dc64990f37ad0e7c65b53fe3b2a6bfb
+        codeSamplesRevisionDigest: sha256:2301e84f630940e87f8052c2c022545546861eda4bf2931c3524f2539fda195d
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

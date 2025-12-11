@@ -38,7 +38,7 @@ let value: SearchResponse = {
     ],
   },
   metadata: {
-    requestUuid: "942ccbdd-7705-4d9c-9d37-4ef386658e90",
+    searchUuid: "942ccbdd-7705-4d9c-9d37-4ef386658e90",
     query: "Your query",
     latency: 0.123,
   },
