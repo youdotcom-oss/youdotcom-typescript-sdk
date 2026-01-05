@@ -1,5 +1,5 @@
 // Benchmark script comparing curl vs TypeScript SDK search performance
-// Run from the examples directory: npx tsx timed-search.ts
+// Run from the examples directory: npx tsx api-performance.ts
 
 import { You, HTTPClient } from "@youdotcom-oss/sdk";
 import type { SearchRequest } from "@youdotcom-oss/sdk/models/operations";

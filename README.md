@@ -96,10 +96,10 @@ The example file includes:
 
 ### SDK Performance
 
-The `timed-search.ts` script lets you benchmark the Search API and measure the SDK's overhead:
+The `api-performance.ts` script lets you benchmark the Search API and measure the SDK's overhead:
 
 ```bash
-npx tsx timed-search.ts
+npx tsx api-performance.ts
 ```
 
 This runs three benchmarks:
