@@ -1,13 +1,13 @@
-# FormatEnum1
+# ContentsFormat
 
 The format of the content to be returned.
 
 ## Example Usage
 
 ```typescript
-import { FormatEnum1 } from "@youdotcom-oss/sdk/models/operations";
+import { ContentsFormat } from "@youdotcom-oss/sdk/models";
 
-let value: FormatEnum1 = "html";
+let value: ContentsFormat = "html";
 ```
 
 ## Values

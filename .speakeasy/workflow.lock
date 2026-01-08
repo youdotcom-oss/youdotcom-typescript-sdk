@@ -1,4 +1,4 @@
-speakeasyVersion: 1.681.0
+speakeasyVersion: 1.683.0
 sources:
     You.com API:
         sourceNamespace: you-com-agents-api
@@ -16,8 +16,8 @@ sources:
             - 0.0.1
     You.com SDK:
         sourceNamespace: you-com-sdk
-        sourceRevisionDigest: sha256:650405a879427f30b54ddcbadd820ac13a20990264b1c0e0de694d56639b645b
-        sourceBlobDigest: sha256:c04c3de61ad31b5bcdd88ee602f6863ce69a833eab3ad8fdf5a3e58df68d0544
+        sourceRevisionDigest: sha256:231498871497a30c7705f3c2ae9dde856cb99874b38f195e59cfbf664a37bab4
+        sourceBlobDigest: sha256:ff6e4876f7c8b410ce317d0abdaa4fb6623cf74a65be8c4e7932eb3f279be86e
         tags:
             - latest
             - 0.0.1
@@ -25,17 +25,18 @@ targets:
     you:
         source: You.com SDK
         sourceNamespace: you-com-sdk
-        sourceRevisionDigest: sha256:650405a879427f30b54ddcbadd820ac13a20990264b1c0e0de694d56639b645b
-        sourceBlobDigest: sha256:c04c3de61ad31b5bcdd88ee602f6863ce69a833eab3ad8fdf5a3e58df68d0544
+        sourceRevisionDigest: sha256:231498871497a30c7705f3c2ae9dde856cb99874b38f195e59cfbf664a37bab4
+        sourceBlobDigest: sha256:ff6e4876f7c8b410ce317d0abdaa4fb6623cf74a65be8c4e7932eb3f279be86e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         You.com SDK:
             inputs:
-                - location: ./openapi_schemas/openapi_unified_agents.yaml
-                - location: ./openapi_schemas/openapi_search_v1.yaml
-                - location: ./openapi_schemas/openapi_contents.yaml
+                - location: https://youdotcom-pr-11570.vercel.app/specs/openapi_base.yaml
+                - location: https://youdotcom-pr-11570.vercel.app/specs/openapi_unified_agents.yaml
+                - location: https://youdotcom-pr-11570.vercel.app/specs/openapi_search_v1.yaml
+                - location: https://youdotcom-pr-11570.vercel.app/specs/openapi_contents.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/youcom/documentation/you-com-sdk

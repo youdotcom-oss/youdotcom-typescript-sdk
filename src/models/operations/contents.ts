@@ -5,34 +5,10 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const FormatEnum2 = {
-  Html: "html",
-  Markdown: "markdown",
-} as const;
-export type FormatEnum2 = ClosedEnum<typeof FormatEnum2>;
-
-/**
- * The format of the content to be returned.
- */
-export const FormatEnum1 = {
-  Html: "html",
-  Markdown: "markdown",
-} as const;
-/**
- * The format of the content to be returned.
- */
-export type FormatEnum1 = ClosedEnum<typeof FormatEnum1>;
-
-/**
- * The format of the content to be returned.
- */
-export type Format = FormatEnum1 | FormatEnum2;
+import * as models from "../index.js";
 
 export type ContentsRequest = {
   /**
@@ -42,7 +18,7 @@ export type ContentsRequest = {
   /**
    * The format of the content to be returned.
    */
-  format?: FormatEnum1 | FormatEnum2 | undefined;
+  format?: models.ContentsFormat | undefined;
 };
 
 export type ContentsMetadata = {
@@ -77,28 +53,9 @@ export type ContentsResponse = {
 };
 
 /** @internal */
-export const FormatEnum2$outboundSchema: z.ZodMiniEnum<typeof FormatEnum2> = z
-  .enum(FormatEnum2);
-
-/** @internal */
-export const FormatEnum1$outboundSchema: z.ZodMiniEnum<typeof FormatEnum1> = z
-  .enum(FormatEnum1);
-
-/** @internal */
-export type Format$Outbound = string | string;
-
-/** @internal */
-export const Format$outboundSchema: z.ZodMiniType<Format$Outbound, Format> =
-  smartUnion([FormatEnum1$outboundSchema, FormatEnum2$outboundSchema]);
-
-export function formatToJSON(format: Format): string {
-  return JSON.stringify(Format$outboundSchema.parse(format));
-}
-
-/** @internal */
 export type ContentsRequest$Outbound = {
   urls?: Array<string> | undefined;
-  format?: string | string | undefined;
+  format?: string | undefined;
 };
 
 /** @internal */
@@ -107,9 +64,7 @@ export const ContentsRequest$outboundSchema: z.ZodMiniType<
   ContentsRequest
 > = z.object({
   urls: z.optional(z.array(z.string())),
-  format: z.optional(
-    smartUnion([FormatEnum1$outboundSchema, FormatEnum2$outboundSchema]),
-  ),
+  format: z.optional(models.ContentsFormat$outboundSchema),
 });
 
 export function contentsRequestToJSON(

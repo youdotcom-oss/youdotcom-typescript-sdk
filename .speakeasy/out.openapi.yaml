@@ -3,8 +3,6 @@ info:
     title: You.com Contents API
     description: Get the best search results from web and news sources
     version: 0.0.1
-servers:
-    - url: https://ydc-index.io
 paths:
     /v1/agents/runs:
         post:
@@ -30,12 +28,6 @@ paths:
                                 - $ref: "#/components/schemas/ExpressAgentRunsRequest"
                                 - $ref: "#/components/schemas/AdvancedAgentRunsRequest"
                                 - $ref: "#/components/schemas/CustomAgentRunsRequest"
-                                  # discriminator:
-                                  #   propertyName: agent
-                                  #   mapping:
-                                  #     express: "#/components/schemas/ExpressAgentRunsRequest"
-                                  #     advanced: "#/components/schemas/AdvancedAgentRunsRequest"
-                                  #     custom: "#/components/schemas/CustomAgentRunsRequest"
                         examples:
                             express_batch:
                                 summary: Express Agent - Batch Response
@@ -94,7 +86,6 @@ paths:
                         text/event-stream:
                             schema:
                                 $ref: "#/components/schemas/AgentRunsStreamingResponse"
-                                # $ref: "#/components/schemas/SSEResponse"
                 "400":
                     description: The Authorization Bearer token was missing or invalid
                     content:
@@ -369,14 +360,7 @@ paths:
                                         format: uri
                                         example: "https://www.you.com"
                                 format:
-                                    description: The format of the content to be returned.
-                                    oneOf:
-                                        - $ref: '#/components/schemas/Format'
-                                        - type: string
-                                    enum:
-                                        - html
-                                        - markdown
-                                    example: "html"
+                                    $ref: "#/components/schemas/ContentsFormat"
             responses:
                 "200":
                     description: An array of JSON objects containing the page content of each web page
@@ -470,6 +454,8 @@ paths:
                                     summary: Authorization failure
                                     value:
                                         detail: "Internal authorization error"
+servers:
+    - url: https://ydc-index.io
 components:
     securitySchemes:
         ApiKeyAuth:
@@ -503,14 +489,7 @@ components:
                     type: array
                     description: You can optionally ground the express agent response using results fetched from the web (max 1 web search)
                     items:
-                        type: object
-                        required:
-                            - type
-                        properties:
-                            type:
-                                type: string
-                                const: web_search
-                                description: Setting this value to "web_search" is mandatory to use the web_search tool.
+                        $ref: "#/components/schemas/WebSearchTool"
         AdvancedAgentRunsRequest:
             type: object
             required:
@@ -535,7 +514,7 @@ components:
                 tools:
                     type: array
                     description: >-
-                        The advanced agent accepts either `compute` or `research` tools <Note> Compute allows your agent to use a Python code interpreter for tasks such as data analysis, mathematical calculations, and plot generation.<br><br>   Research iteratively searches the web, analyzes the results, and stops when finished. It then provides a comprehensive report to your agent with current, cited information.</Note>
+                        The advanced agent accepts either `compute` or `research` tools <Note> Compute allows your agent to use a Python code interpreter for tasks such as data analysis, mathematical calculations, and plot generation.<br><br> Research iteratively searches the web, analyzes the results, and stops when finished. It then provides a comprehensive report to your agent with current, cited information.</Note>
                     items:
                         oneOf:
                             - $ref: "#/components/schemas/ComputeTool"
@@ -579,6 +558,15 @@ components:
                     default: false
                     description: >-
                         Must be set to `true` when you want to stream the agent response as it's being generated, and `false` when you want the response to return after the agent has finished.
+        WebSearchTool:
+            type: object
+            required:
+                - type
+            properties:
+                type:
+                    type: string
+                    const: web_search
+                    description: Setting this value to "web_search" is mandatory to use the web_search tool.
         ComputeTool:
             type: object
             required:
@@ -610,7 +598,11 @@ components:
                 - low
                 - medium
                 - high
-            description: "This parameter maps to different configurations regarding the depth of research the tool can perform. Its values range from `low`, `medium` to `high`.  \n\nAlternatively, use `auto` mode for a more dynamic search approach, allowing the tool the freedom to adjust its subparameters."
+            description: >-
+                This parameter maps to different configurations regarding the depth of research the tool can perform. Its values range from `low`, `medium` to `high`.
+
+
+                Alternatively, use `auto` mode for a more dynamic search approach, allowing the tool the freedom to adjust its subparameters.
         ReportVerbosity:
             type: string
             enum:
@@ -978,11 +970,6 @@ components:
                 - month
                 - year
             description: "Specifies the freshness of the results to return."
-            x-speakeasy-enums:
-                - DAY
-                - WEEK
-                - MONTH
-                - YEAR
         Country:
             type: string
             enum:
@@ -1023,43 +1010,6 @@ components:
                 - 'GB'
                 - 'US'
             description: "The country code that determines the geographical focus of the web results."
-            x-speakeasy-enums:
-                - AR
-                - AU
-                - AT
-                - BE
-                - BR
-                - CA
-                - CL
-                - DK
-                - FI
-                - FR
-                - DE
-                - HK
-                - IN
-                - ID
-                - IT
-                - JP
-                - KR
-                - MY
-                - MX
-                - NL
-                - NZ
-                - NO
-                - CN
-                - PL
-                - PT
-                - PH
-                - RU
-                - SA
-                - ZA
-                - ES
-                - SE
-                - CH
-                - TW
-                - TR
-                - GB
-                - US
         Language:
             type: string
             default: 'EN'
@@ -1122,10 +1072,6 @@ components:
                 - moderate
                 - strict
             description: "Configures the safesearch filter for content moderation. This allows you to decide whether to return NSFW content or not."
-            x-speakeasy-enums:
-                - OFF
-                - MODERATE
-                - STRICT
         LiveCrawl:
             type: string
             enum:
@@ -1133,27 +1079,18 @@ components:
                 - news
                 - all
             description: "Indicates which section(s) of search results to livecrawl and return full page content."
-            x-speakeasy-enums:
-                - WEB
-                - NEWS
-                - ALL
         LiveCrawlFormats:
             type: string
             enum:
                 - html
                 - markdown
             description: "Indicates the format of the livecrawled content."
-            x-speakeasy-enums:
-                - HTML
-                - MARKDOWN
-        Format:
+        ContentsFormat:
             type: string
             enum:
                 - html
                 - markdown
             description: "The format of the content to be returned."
-            x-speakeasy-enums:
-                - HTML
-                - MARKDOWN
+            example: "html"
 security:
     - ApiKeyAuth: []
