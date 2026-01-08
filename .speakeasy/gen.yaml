@@ -26,12 +26,8 @@ generation:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: body
   persistentEdits: {}
-  tests:
-    generateTests: false
-    generateNewTests: true
-    skipResponseBodyAssertions: false
 typescript:
-  version: 0.10.20
+  version: 0.10.21
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}

@@ -93,6 +93,104 @@ The example file includes:
 - **Custom Agent** - Using your own agent configurations
 - **Search API** - Web search queries
 - **Contents API** - URL content extraction
+
+### SDK Performance
+
+The `api-performance.ts` script lets you benchmark the Search API and measure the SDK's overhead:
+
+```bash
+npx tsx api-performance.ts
+```
+
+This runs three benchmarks:
+1. **curl** — HTTP performance baseline
+2. **TypeScript SDK** — Full SDK with network requests
+3. **TypeScript SDK (Mocked)** — SDK processing only, no network latency
+
+The mocked benchmark isolates the SDK's computational overhead (validation, request building, response parsing) from network latency, giving you a pure measurement of SDK performance.
+
+The SDK typically adds less than a millisecond of overhead to API calls, demonstrating that the cost of using the SDK over raw HTTP is minimal. In fact, its comperable to using curl directly.
+
+An example call is as follows:
+
+```
+╔════════════════════════════════════════════════════╗
+║   Search API Benchmark: curl vs TypeScript SDK     ║
+╚════════════════════════════════════════════════════╝
+
+🔑 Enter your API key: ***
+
+🔄 Running 10 iterations each...
+📝 Query: "What are the latest geopolitical updates from India"
+
+🌐 Running curl benchmark...
+
+   Run 1: 404.58 ms
+   Run 2: 119.72 ms
+   Run 3: 188.51 ms
+   Run 4: 118.26 ms
+   Run 5: 120.73 ms
+   Run 6: 117.17 ms
+   Run 7: 160.49 ms
+   Run 8: 115.51 ms
+   Run 9: 112.05 ms
+   Run 10: 149.28 ms
+
+📊 curl Results:
+   Average: 160.63 ms
+   Min:     112.05 ms
+   Max:     404.58 ms
+
+📦 Running TypeScript SDK benchmark...
+
+   Run 1: 426.05 ms
+   Run 2: 119.36 ms
+   Run 3: 122.89 ms
+   Run 4: 110.39 ms
+   Run 5: 118.86 ms
+   Run 6: 127.69 ms
+   Run 7: 164.59 ms
+   Run 8: 115.04 ms
+   Run 9: 121.81 ms
+   Run 10: 106.95 ms
+
+📊 TypeScript SDK Results:
+   Average: 153.36 ms
+   Min:     106.95 ms
+   Max:     426.05 ms
+
+🧪 Running TypeScript SDK benchmark (mocked network)...
+
+   Run 1: 0.67 ms
+   Run 2: 0.25 ms
+   Run 3: 0.16 ms
+   Run 4: 0.14 ms
+   Run 5: 0.14 ms
+   Run 6: 0.48 ms
+   Run 7: 0.16 ms
+   Run 8: 0.24 ms
+   Run 9: 0.34 ms
+   Run 10: 0.16 ms
+
+📊 TypeScript SDK (Mocked) Results:
+   Average: 0.27 ms
+   Min:     0.14 ms
+   Max:     0.67 ms
+
+═══════════════════════════════════════════════════════
+📈 COMPARISON
+═══════════════════════════════════════════════════════
+
+📊 curl vs TypeScript SDK (with network):
+   TypeScript SDK is 7.27 ms faster on average
+   TypeScript SDK is 1.05x faster than curl
+
+📊 SDK Performance Breakdown:
+   SDK processing overhead:           0.27 ms
+   Total SDK time (with network):     153.36 ms
+   SDK overhead as % of total:        0.2%
+```
+
 <!-- No SDK Example Usage [usage] -->
 
 <!-- Start Authentication [security] -->

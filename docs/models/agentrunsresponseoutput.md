@@ -8,9 +8,8 @@ The response populated by the agent.
 import { AgentRunsResponseOutput } from "@youdotcom-oss/sdk/models";
 
 let value: AgentRunsResponseOutput = {
-  text: "#### Capital of France\n"
-    + "\n"
-    + "The capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).",
+  text:
+    "#### Capital of France\n\nThe capital of France is **Paris**. It is not only the capital but also the most populous city in the country. Paris is situated on the Seine River in the northern part of France, within the Île-de-France region. It serves as the main cultural, economic, and political center of France [[1]](https://www.coe.int/en/web/interculturalcities/paris)[[2]](https://en.wikipedia.org/wiki/Paris).",
   type: "web_search.results",
   content: [
     {

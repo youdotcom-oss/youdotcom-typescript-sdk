@@ -1,4 +1,4 @@
-speakeasyVersion: 1.675.4
+speakeasyVersion: 1.681.0
 sources:
     You.com API:
         sourceNamespace: you-com-agents-api
@@ -27,8 +27,6 @@ targets:
         sourceNamespace: you-com-sdk
         sourceRevisionDigest: sha256:650405a879427f30b54ddcbadd820ac13a20990264b1c0e0de694d56639b645b
         sourceBlobDigest: sha256:c04c3de61ad31b5bcdd88ee602f6863ce69a833eab3ad8fdf5a3e58df68d0544
-        codeSamplesNamespace: you-com-sdk-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:2301e84f630940e87f8052c2c022545546861eda4bf2931c3524f2539fda195d
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
