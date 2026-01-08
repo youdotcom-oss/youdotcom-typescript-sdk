@@ -39,7 +39,7 @@ export type AdvancedAgentRunsRequest = {
    */
   stream?: boolean | undefined;
   /**
-   * The advanced agent accepts either `compute` or `research` tools <Note> Compute allows your agent to use a Python code interpreter for tasks such as data analysis, mathematical calculations, and plot generation.<br><br>   Research iteratively searches the web, analyzes the results, and stops when finished. It then provides a comprehensive report to your agent with current, cited information.</Note>
+   * The advanced agent accepts either `compute` or `research` tools <Note> Compute allows your agent to use a Python code interpreter for tasks such as data analysis, mathematical calculations, and plot generation.<br><br> Research iteratively searches the web, analyzes the results, and stops when finished. It then provides a comprehensive report to your agent with current, cited information.</Note>
    */
   tools?: Array<ComputeTool | ResearchTool> | undefined;
   /**

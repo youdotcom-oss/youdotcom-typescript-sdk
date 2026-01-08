@@ -1,11 +1,11 @@
-# ExpressAgentRunsRequestTool
+# WebSearchTool
 
 ## Example Usage
 
 ```typescript
-import { ExpressAgentRunsRequestTool } from "@youdotcom-oss/sdk/models";
+import { WebSearchTool } from "@youdotcom-oss/sdk/models";
 
-let value: ExpressAgentRunsRequestTool = {
+let value: WebSearchTool = {
   type: "web_search",
 };
 ```
