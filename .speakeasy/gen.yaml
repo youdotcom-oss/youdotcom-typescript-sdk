@@ -26,8 +26,12 @@ generation:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: body
   persistentEdits: {}
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 typescript:
-  version: 0.10.21
+  version: 0.10.22
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
@@ -50,6 +54,7 @@ typescript:
   enumFormat: union
   envVarPrefix: YOU
   exportZodModelNamespace: false
+  flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   formStringArrayEncodeMode: encoded-string
@@ -76,6 +81,7 @@ typescript:
   outputModelSuffix: output
   packageName: '@youdotcom-oss/sdk'
   preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
