@@ -1,6 +1,6 @@
 {
   "name": "@youdotcom-oss/sdk",
-  "version": "0.10.21",
+  "version": "0.10.22",
   "author": "Speakeasy",
   "type": "module",
   "tshy": {
@@ -19,6 +19,10 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youdotcom-oss/youdotcom-typescript-sdk.git"
+  },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
     "build": "tshy",

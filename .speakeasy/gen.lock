@@ -3,21 +3,23 @@ id: 8f64bc72-2c6f-46dd-98c7-06d8491c2a24
 management:
   docChecksum: eb69198a5e09a7f299d638516ac57105
   docVersion: 0.0.1
-  speakeasyVersion: 1.681.0
-  generationVersion: 2.789.5
-  releaseVersion: 0.10.21
-  configChecksum: ac72786751928770d2607fc7ff1ec8a3
+  speakeasyVersion: 1.684.0
+  generationVersion: 2.793.0
+  releaseVersion: 0.10.22
+  configChecksum: eb46c6ea4ed0fd65fa4212756d0bce68
+  repoURL: https://github.com/youdotcom-oss/youdotcom-typescript-sdk.git
+  installationURL: https://github.com/youdotcom-oss/youdotcom-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 4c8a1cb6-60e4-4b3d-9dc8-8953a92dada0
-  pristine_commit_hash: 25a5b6d207f6f2fe63f285e3607029f3aa4b765a
-  pristine_tree_hash: efef53c63613be80fe04295b18f50718b55f297e
+  generation_id: c132cedf-084e-44d2-b79d-7f84b323ffc2
+  pristine_commit_hash: 5b37cc2a4c8ac4769a0fd86ac01511c6c6abf71f
+  pristine_tree_hash: fd98db47802b7e3acfe813d2673247dc41c52523
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.17
+    core: 3.26.19
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
@@ -38,8 +40,8 @@ features:
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
-    last_write_checksum: sha1:b6564d2a7c8ae764fff6d1b4666dcd787210a000
-    pristine_git_object: cdef18c30e383534a868742e1b9148f2670606f9
+    last_write_checksum: sha1:9fefd60116749a8d4fb496d3bf1d5f5f9942c37b
+    pristine_git_object: bdb88c46fec07ccd2d70536734af22940dd3533a
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
     last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
@@ -374,12 +376,12 @@ trackedFiles:
     pristine_git_object: 5a65028d9faaac429ac8a63dadea8b91e9b682db
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:da2ff173cc8304f121f68a3143c77ea4d8062d4c
-    pristine_git_object: b9082ba2172fb9208881a8499b4f98fe0f66d5e7
+    last_write_checksum: sha1:555f6f7d8697a5a1b2469055fec9fb73270ab028
+    pristine_git_object: f28c285c9fc84dd54a5559afc7ec9a7083973cef
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:801806d0aed29604bebafab5e773de739bb2c5b7
-    pristine_git_object: 7293808444425ac5a03dcf8f7e9ad9d5670f5425
+    last_write_checksum: sha1:e69abe7dbabefb38d75a4b12d360f33ba58fe81a
+    pristine_git_object: d8720adbdb4c0fd0c5428d12ef4ba81c46e8d4dd
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:0fd3e9acbb4f1c941616b608c91cdef843582df2
@@ -418,8 +420,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:ab74d6fc004c383e417f5e38f7db8cd76150e4d9
-    pristine_git_object: bf03661ce94611b5886dcb38138fedff16bea36a
+    last_write_checksum: sha1:3f1d8cdba3b0c83d4419adcf69b6cba853a7c64a
+    pristine_git_object: 1f2a8d9d584dcc6e2d192a61a971eafe2810f11f
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -470,8 +472,8 @@ trackedFiles:
     pristine_git_object: 61d7649b3d804f5c3ce4b2e3f7cc7ab8d087c4e1
   src/lib/sdks.ts:
     id: 8a6d91f1218d
-    last_write_checksum: sha1:73bcca736d63e1156570be1b7d329aba9b15c8ed
-    pristine_git_object: dcf4531a1a24629982974657b996043e7c5c115c
+    last_write_checksum: sha1:846fbe69bb010296dec940133d909eb79937107a
+    pristine_git_object: ada2adb863153829e775d1835e567b1092c80475
   src/lib/security.ts:
     id: 0502afa7922e
     last_write_checksum: sha1:3af0bb7100e70d9ee6d9323325a821b75acc944a
@@ -1130,6 +1132,7 @@ examples:
         "500":
           application/json: {"detail": "Internal authorization error"}
 examplesVersion: 1.0.2
+generatedTests: {}
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
