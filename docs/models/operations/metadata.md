@@ -1,11 +1,11 @@
-# SearchMetadata
+# Metadata
 
 ## Example Usage
 
 ```typescript
-import { SearchMetadata } from "@youdotcom-oss/sdk/models/operations";
+import { Metadata } from "@youdotcom-oss/sdk/models/operations";
 
-let value: SearchMetadata = {
+let value: Metadata = {
   searchUuid: "942ccbdd-7705-4d9c-9d37-4ef386658e90",
   query: "Your query",
   latency: 0.123,

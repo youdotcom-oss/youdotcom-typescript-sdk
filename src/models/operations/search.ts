@@ -42,7 +42,7 @@ export type LivecrawlFormats = models.LiveCrawlFormats | string;
 
 export type SearchRequest = {
   /**
-   * The search query used to retrieve relevant results from the web. You can also include [search operators](#search-operators) to refine your search.
+   * The search query used to retrieve relevant results from the web. You can also include [search operators](https://docs.you.com/search/search-operators) to refine your search.
    */
   query?: string | undefined;
   /**
@@ -160,7 +160,7 @@ export type Results = {
   news?: Array<News> | undefined;
 };
 
-export type SearchMetadata = {
+export type Metadata = {
   searchUuid?: string | undefined;
   /**
    * Returns the search query used to retrieve the results.
@@ -174,7 +174,7 @@ export type SearchMetadata = {
  */
 export type SearchResponse = {
   results?: Results | undefined;
-  metadata?: SearchMetadata | undefined;
+  metadata?: Metadata | undefined;
 };
 
 /** @internal */
@@ -387,10 +387,7 @@ export function resultsFromJSON(
 }
 
 /** @internal */
-export const SearchMetadata$inboundSchema: z.ZodMiniType<
-  SearchMetadata,
-  unknown
-> = z.pipe(
+export const Metadata$inboundSchema: z.ZodMiniType<Metadata, unknown> = z.pipe(
   z.object({
     search_uuid: types.optional(types.string()),
     query: types.optional(types.string()),
@@ -403,13 +400,13 @@ export const SearchMetadata$inboundSchema: z.ZodMiniType<
   }),
 );
 
-export function searchMetadataFromJSON(
+export function metadataFromJSON(
   jsonString: string,
-): SafeParseResult<SearchMetadata, SDKValidationError> {
+): SafeParseResult<Metadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchMetadata' from JSON`,
+    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metadata' from JSON`,
   );
 }
 
@@ -419,7 +416,7 @@ export const SearchResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   results: types.optional(z.lazy(() => Results$inboundSchema)),
-  metadata: types.optional(z.lazy(() => SearchMetadata$inboundSchema)),
+  metadata: types.optional(z.lazy(() => Metadata$inboundSchema)),
 });
 
 export function searchResponseFromJSON(
