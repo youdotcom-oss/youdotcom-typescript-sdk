@@ -1,23 +1,25 @@
 lockVersion: 2.0.0
 id: 8f64bc72-2c6f-46dd-98c7-06d8491c2a24
 management:
-  docChecksum: eb69198a5e09a7f299d638516ac57105
+  docChecksum: ab1b784d18de7342e4e39b826f5f8eb0
   docVersion: 0.0.1
-  speakeasyVersion: 1.681.0
-  generationVersion: 2.789.5
-  releaseVersion: 0.10.21
-  configChecksum: ac72786751928770d2607fc7ff1ec8a3
+  speakeasyVersion: 1.701.0
+  generationVersion: 2.803.3
+  releaseVersion: 0.11.0
+  configChecksum: 028a5aa993d0dead52fbf10933b0d6f1
+  repoURL: https://github.com/youdotcom-oss/youdotcom-typescript-sdk.git
+  installationURL: https://github.com/youdotcom-oss/youdotcom-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 4c8a1cb6-60e4-4b3d-9dc8-8953a92dada0
-  pristine_commit_hash: 25a5b6d207f6f2fe63f285e3607029f3aa4b765a
-  pristine_tree_hash: efef53c63613be80fe04295b18f50718b55f297e
+  generation_id: c1057479-4fe7-465b-a761-e78ba799d610
+  pristine_commit_hash: 8279f5f173a46e3c6e1450678925ce8db69a35d0
+  pristine_tree_hash: 51232cfb503d0b365b6d480f1e69badac7f01edb
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.17
+    core: 3.26.23
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
@@ -30,7 +32,7 @@ features:
     methodArguments: 0.1.2
     methodServerURLs: 2.82.1
     nullables: 0.1.1
-    responseFormat: 0.2.3
+    responseFormat: 0.3.0
     retries: 2.83.0
     sdkHooks: 0.4.0
     serverEvents: 0.1.13
@@ -38,8 +40,8 @@ features:
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
-    last_write_checksum: sha1:b6564d2a7c8ae764fff6d1b4666dcd787210a000
-    pristine_git_object: cdef18c30e383534a868742e1b9148f2670606f9
+    last_write_checksum: sha1:9fefd60116749a8d4fb496d3bf1d5f5f9942c37b
+    pristine_git_object: bdb88c46fec07ccd2d70536734af22940dd3533a
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
     last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
@@ -374,12 +376,12 @@ trackedFiles:
     pristine_git_object: 5a65028d9faaac429ac8a63dadea8b91e9b682db
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:da2ff173cc8304f121f68a3143c77ea4d8062d4c
-    pristine_git_object: b9082ba2172fb9208881a8499b4f98fe0f66d5e7
+    last_write_checksum: sha1:816b97654d5529013e9aa62a2f149ac1118e8f3e
+    pristine_git_object: 75c6e8b60f9383d036f87bd6fc42e3761765bf7e
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:801806d0aed29604bebafab5e773de739bb2c5b7
-    pristine_git_object: 7293808444425ac5a03dcf8f7e9ad9d5670f5425
+    last_write_checksum: sha1:0b12a02749764e5458350ba22c391ca473a3f0d1
+    pristine_git_object: 902c71ef3ee0d79f605568f5909d52a22e0d5c1d
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:0fd3e9acbb4f1c941616b608c91cdef843582df2
@@ -418,8 +420,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:ab74d6fc004c383e417f5e38f7db8cd76150e4d9
-    pristine_git_object: bf03661ce94611b5886dcb38138fedff16bea36a
+    last_write_checksum: sha1:27491db9eaadfca163c5be8c05733eec7f5cfbbe
+    pristine_git_object: 733fd5a0ee21577b44cbe100152a09521051a807
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -470,8 +472,8 @@ trackedFiles:
     pristine_git_object: 61d7649b3d804f5c3ce4b2e3f7cc7ab8d087c4e1
   src/lib/sdks.ts:
     id: 8a6d91f1218d
-    last_write_checksum: sha1:73bcca736d63e1156570be1b7d329aba9b15c8ed
-    pristine_git_object: dcf4531a1a24629982974657b996043e7c5c115c
+    last_write_checksum: sha1:589712b2f27e73924806f4c41fb9e9707d67debb
+    pristine_git_object: 53174fbd76fd77c87d7ab1949f61641d871678c7
   src/lib/security.ts:
     id: 0502afa7922e
     last_write_checksum: sha1:3af0bb7100e70d9ee6d9323325a821b75acc944a
@@ -936,6 +938,18 @@ examples:
           application/json: {"detail": "Invalid or expired API key"}
         "422":
           application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
+    speakeasy-default-agents-runs:
+      requestBody:
+        application/json: {"agent": "63773261-b4de-4d8f-9dfd-cff206a5cb51", "input": "What are some insights about my data?", "stream": false}
+      responses:
+        "200":
+          application/json: {"agent": "express", "mode": "express", "input": [{"role": "user", "content": "What is the capital of France?"}], "output": []}
+        "400":
+          application/json: {"detail": "Invalid or expired API key"}
+        "401":
+          application/json: {"detail": "Invalid or expired API key"}
+        "422":
+          application/json: {"detail": [{"type": "model_attributes_type", "loc": ["body", "tools", 0], "msg": "Input should be a valid dictionary or object to extract fields from", "input": "web_search"}]}
   get_/v1/search:
     speakeasy-default-get-/v1-/search:
       parameters:
@@ -1129,7 +1143,20 @@ examples:
       responses:
         "500":
           application/json: {"detail": "Internal authorization error"}
+    speakeasy-default-contents:
+      requestBody:
+        application/json: {"urls": ["https://www.you.com"], "format": "html"}
+      responses:
+        "200":
+          application/json: [{"url": "https://www.you.com", "title": "The best website in the world", "metadata": {"site_name": "You.com", "favicon_url": "https://www.you.com/favicon.ico"}}]
+        "401":
+          application/json: {}
+        "403":
+          application/json: {}
+        "500":
+          application/json: {}
 examplesVersion: 1.0.2
+generatedTests: {}
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
