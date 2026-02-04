@@ -1,4 +1,4 @@
-speakeasyVersion: 1.698.0
+speakeasyVersion: 1.703.0
 sources:
     You.com API:
         sourceNamespace: you-com-agents-api
@@ -16,8 +16,8 @@ sources:
             - 0.0.1
     You.com SDK:
         sourceNamespace: you-com-sdk
-        sourceRevisionDigest: sha256:8836cbf37b1084fdebd41358bc138db80b4e3c8b88af11e4dd7d616b0add89db
-        sourceBlobDigest: sha256:a882d58174443e42b8b2d80aba003588ad12b44842999831dc62946848f1e6f3
+        sourceRevisionDigest: sha256:3a61df2616a575a750ca527fbff7a9b494807dbc176d07f6fbd56b0c5c48fe63
+        sourceBlobDigest: sha256:1872848920cdda14af385f5b64af9774d542ff97c68af379e29f7b5ff9c30a42
         tags:
             - latest
             - 1.0.0
@@ -25,18 +25,18 @@ targets:
     you:
         source: You.com SDK
         sourceNamespace: you-com-sdk
-        sourceRevisionDigest: sha256:8836cbf37b1084fdebd41358bc138db80b4e3c8b88af11e4dd7d616b0add89db
-        sourceBlobDigest: sha256:a882d58174443e42b8b2d80aba003588ad12b44842999831dc62946848f1e6f3
+        sourceRevisionDigest: sha256:3a61df2616a575a750ca527fbff7a9b494807dbc176d07f6fbd56b0c5c48fe63
+        sourceBlobDigest: sha256:1872848920cdda14af385f5b64af9774d542ff97c68af379e29f7b5ff9c30a42
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         You.com SDK:
             inputs:
-                - location: https://youdotcom-pr-11667.vercel.app/specs/openapi_unified_agents.yaml
-                - location: https://youdotcom-pr-11667.vercel.app/specs/openapi_search_v1.yaml
-                - location: https://youdotcom-pr-11667.vercel.app/specs/openapi_contents.yaml
-                - location: https://youdotcom-pr-11667.vercel.app/specs/openapi_base.yaml
+                - location: https://you.com/specs/openapi_unified_agents.yaml
+                - location: https://you.com/specs/openapi_search_v1.yaml
+                - location: https://you.com/specs/openapi_contents.yaml
+                - location: https://you.com/specs/openapi_base.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/youcom/documentation/you-com-sdk

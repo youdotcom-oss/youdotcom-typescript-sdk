@@ -233,15 +233,7 @@ paths:
                               description: The age of the search result.
                               example: "2025-06-25T11:41:00"
                             contents:
-                              type: object
-                              properties:
-                                html:
-                                  type: string
-                                  description: The HTML content of the page.
-                                markdown:
-                                  type: string
-                                  description: The Markdown content of the page.
-                              description: Contents of the page if livecrawl was enabled.
+                              $ref: '#/components/schemas/Contents'
                             authors:
                               type: array
                               items:
@@ -278,6 +270,8 @@ paths:
                               type: string
                               description: The URL of the news result.
                               example: "https://www.you.com/news/eu-ai-strategy-youcom"
+                            contents:
+                              $ref: '#/components/schemas/Contents'
                   metadata:
                     type: object
                     properties:
@@ -1088,6 +1082,16 @@ components:
         - html
         - markdown
       description: Indicates the format of the livecrawled content.
+    Contents:
+      type: object
+      properties:
+        html:
+          type: string
+          description: The HTML content of the page.
+        markdown:
+          type: string
+          description: The Markdown content of the page.
+      description: Contents of the page if livecrawl was enabled.
     ContentsFormats:
       type: array
       items:

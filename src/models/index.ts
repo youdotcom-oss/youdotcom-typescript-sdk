@@ -9,6 +9,7 @@ export * from "./agentrunsresponseoutput.js";
 export * from "./agentrunsresponsewebsearchresult.js";
 export * from "./agentrunsstreamingresponse.js";
 export * from "./computetool.js";
+export * from "./contents.js";
 export * from "./contentsformats.js";
 export * from "./contentsmetadata.js";
 export * from "./country.js";

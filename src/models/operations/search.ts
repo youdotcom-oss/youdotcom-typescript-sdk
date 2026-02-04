@@ -79,20 +79,6 @@ export type SearchRequest = {
   livecrawlFormats?: models.LiveCrawlFormats | string | undefined;
 };
 
-/**
- * Contents of the page if livecrawl was enabled.
- */
-export type Contents = {
-  /**
-   * The HTML content of the page.
-   */
-  html?: string | undefined;
-  /**
-   * The Markdown content of the page.
-   */
-  markdown?: string | undefined;
-};
-
 export type Web = {
   /**
    * The URL of the specific search result.
@@ -121,7 +107,7 @@ export type Web = {
   /**
    * Contents of the page if livecrawl was enabled.
    */
-  contents?: Contents | undefined;
+  contents?: models.Contents | undefined;
   /**
    * An array of authors of the search result.
    */
@@ -153,6 +139,10 @@ export type News = {
    * The URL of the news result.
    */
   url?: string | undefined;
+  /**
+   * Contents of the page if livecrawl was enabled.
+   */
+  contents?: models.Contents | undefined;
 };
 
 export type Results = {
@@ -295,23 +285,6 @@ export function searchRequestToJSON(searchRequest: SearchRequest): string {
 }
 
 /** @internal */
-export const Contents$inboundSchema: z.ZodMiniType<Contents, unknown> = z
-  .object({
-    html: types.optional(types.string()),
-    markdown: types.optional(types.string()),
-  });
-
-export function contentsFromJSON(
-  jsonString: string,
-): SafeParseResult<Contents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Contents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contents' from JSON`,
-  );
-}
-
-/** @internal */
 export const Web$inboundSchema: z.ZodMiniType<Web, unknown> = z.pipe(
   z.object({
     url: types.optional(types.string()),
@@ -320,7 +293,7 @@ export const Web$inboundSchema: z.ZodMiniType<Web, unknown> = z.pipe(
     snippets: types.optional(z.array(types.string())),
     thumbnail_url: types.optional(types.string()),
     page_age: types.optional(types.date()),
-    contents: types.optional(z.lazy(() => Contents$inboundSchema)),
+    contents: types.optional(models.Contents$inboundSchema),
     authors: types.optional(z.array(types.string())),
     favicon_url: types.optional(types.string()),
   }),
@@ -351,6 +324,7 @@ export const News$inboundSchema: z.ZodMiniType<News, unknown> = z.pipe(
     page_age: types.optional(types.date()),
     thumbnail_url: types.optional(types.string()),
     url: types.optional(types.string()),
+    contents: types.optional(models.Contents$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
