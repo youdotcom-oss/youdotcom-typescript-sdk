@@ -5,7 +5,7 @@ Contents of the page if livecrawl was enabled.
 ## Example Usage
 
 ```typescript
-import { Contents } from "@youdotcom-oss/sdk/models/operations";
+import { Contents } from "@youdotcom-oss/sdk/models";
 
 let value: Contents = {};
 ```

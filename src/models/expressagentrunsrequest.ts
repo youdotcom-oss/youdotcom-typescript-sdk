@@ -3,13 +3,11 @@
  */
 
 import * as z from "zod/v4-mini";
-
-export type ExpressAgentRunsRequestTool = {
-  /**
-   * Setting this value to "web_search" is mandatory to use the web_search tool.
-   */
-  type: "web_search";
-};
+import {
+  WebSearchTool,
+  WebSearchTool$Outbound,
+  WebSearchTool$outboundSchema,
+} from "./websearchtool.js";
 
 export type ExpressAgentRunsRequest = {
   /**
@@ -27,38 +25,15 @@ export type ExpressAgentRunsRequest = {
   /**
    * You can optionally ground the express agent response using results fetched from the web (max 1 web search)
    */
-  tools?: Array<ExpressAgentRunsRequestTool> | undefined;
+  tools?: Array<WebSearchTool> | undefined;
 };
-
-/** @internal */
-export type ExpressAgentRunsRequestTool$Outbound = {
-  type: "web_search";
-};
-
-/** @internal */
-export const ExpressAgentRunsRequestTool$outboundSchema: z.ZodMiniType<
-  ExpressAgentRunsRequestTool$Outbound,
-  ExpressAgentRunsRequestTool
-> = z.object({
-  type: z.literal("web_search"),
-});
-
-export function expressAgentRunsRequestToolToJSON(
-  expressAgentRunsRequestTool: ExpressAgentRunsRequestTool,
-): string {
-  return JSON.stringify(
-    ExpressAgentRunsRequestTool$outboundSchema.parse(
-      expressAgentRunsRequestTool,
-    ),
-  );
-}
 
 /** @internal */
 export type ExpressAgentRunsRequest$Outbound = {
   agent: "express";
   input: string;
   stream: boolean;
-  tools?: Array<ExpressAgentRunsRequestTool$Outbound> | undefined;
+  tools?: Array<WebSearchTool$Outbound> | undefined;
 };
 
 /** @internal */
@@ -69,9 +44,7 @@ export const ExpressAgentRunsRequest$outboundSchema: z.ZodMiniType<
   agent: z.literal("express"),
   input: z.string(),
   stream: z._default(z.boolean(), false),
-  tools: z.optional(
-    z.array(z.lazy(() => ExpressAgentRunsRequestTool$outboundSchema)),
-  ),
+  tools: z.optional(z.array(WebSearchTool$outboundSchema)),
 });
 
 export function expressAgentRunsRequestToJSON(

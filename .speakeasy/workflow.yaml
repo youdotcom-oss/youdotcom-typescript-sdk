@@ -3,9 +3,10 @@ speakeasyVersion: latest
 sources:
     You.com SDK:
         inputs:
-            - location: ./openapi_schemas/openapi_unified_agents.yaml
-            - location: ./openapi_schemas/openapi_search_v1.yaml
-            - location: ./openapi_schemas/openapi_contents.yaml
+            - location: https://you.com/specs/openapi_unified_agents.yaml
+            - location: https://you.com/specs/openapi_search_v1.yaml
+            - location: https://you.com/specs/openapi_contents.yaml
+            - location: https://you.com/specs/openapi_base.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/youcom/documentation/you-com-sdk

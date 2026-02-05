@@ -8,7 +8,10 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-You.com Contents API: Get the best search results from web and news sources
+You.com API: Comprehensive API for You.com services:
+- **Agents API**: Execute queries using Express, Advanced, and Custom AI agents
+- **Search API**: Get search results from web and news sources
+- **Contents API**: Retrieve and process web page content
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->

@@ -5,34 +5,10 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const FormatEnum2 = {
-  Html: "html",
-  Markdown: "markdown",
-} as const;
-export type FormatEnum2 = ClosedEnum<typeof FormatEnum2>;
-
-/**
- * The format of the content to be returned.
- */
-export const FormatEnum1 = {
-  Html: "html",
-  Markdown: "markdown",
-} as const;
-/**
- * The format of the content to be returned.
- */
-export type FormatEnum1 = ClosedEnum<typeof FormatEnum1>;
-
-/**
- * The format of the content to be returned.
- */
-export type Format = FormatEnum1 | FormatEnum2;
+import * as models from "../index.js";
 
 export type ContentsRequest = {
   /**
@@ -40,20 +16,13 @@ export type ContentsRequest = {
    */
   urls?: Array<string> | undefined;
   /**
-   * The format of the content to be returned.
+   * The formats of the content to be returned. Can include 'html', 'markdown', and/or 'metadata'.
    */
-  format?: FormatEnum1 | FormatEnum2 | undefined;
-};
-
-export type ContentsMetadata = {
+  formats?: Array<models.ContentsFormats> | undefined;
   /**
-   * The OpenGraph site name of the web page.
+   * The timeout in seconds for crawling each URL. Must be between 1 and 60 seconds.
    */
-  siteName?: string | undefined;
-  /**
-   * The URL of the favicon of the web page's domain.
-   */
-  faviconUrl?: string | undefined;
+  crawlTimeout?: number | undefined;
 };
 
 export type ContentsResponse = {
@@ -73,76 +42,40 @@ export type ContentsResponse = {
    * The retrieved Markdown content of the web page.
    */
   markdown?: string | null | undefined;
-  metadata?: ContentsMetadata | undefined;
+  /**
+   * Metadata about the web page. Only returned when 'metadata' is included in the formats array.
+   */
+  metadata?: models.ContentsMetadata | null | undefined;
 };
-
-/** @internal */
-export const FormatEnum2$outboundSchema: z.ZodMiniEnum<typeof FormatEnum2> = z
-  .enum(FormatEnum2);
-
-/** @internal */
-export const FormatEnum1$outboundSchema: z.ZodMiniEnum<typeof FormatEnum1> = z
-  .enum(FormatEnum1);
-
-/** @internal */
-export type Format$Outbound = string | string;
-
-/** @internal */
-export const Format$outboundSchema: z.ZodMiniType<Format$Outbound, Format> =
-  smartUnion([FormatEnum1$outboundSchema, FormatEnum2$outboundSchema]);
-
-export function formatToJSON(format: Format): string {
-  return JSON.stringify(Format$outboundSchema.parse(format));
-}
 
 /** @internal */
 export type ContentsRequest$Outbound = {
   urls?: Array<string> | undefined;
-  format?: string | string | undefined;
+  formats?: Array<string> | undefined;
+  crawl_timeout?: number | undefined;
 };
 
 /** @internal */
 export const ContentsRequest$outboundSchema: z.ZodMiniType<
   ContentsRequest$Outbound,
   ContentsRequest
-> = z.object({
-  urls: z.optional(z.array(z.string())),
-  format: z.optional(
-    smartUnion([FormatEnum1$outboundSchema, FormatEnum2$outboundSchema]),
-  ),
-});
+> = z.pipe(
+  z.object({
+    urls: z.optional(z.array(z.string())),
+    formats: z.optional(z.array(models.ContentsFormats$outboundSchema)),
+    crawlTimeout: z.optional(z.number()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      crawlTimeout: "crawl_timeout",
+    });
+  }),
+);
 
 export function contentsRequestToJSON(
   contentsRequest: ContentsRequest,
 ): string {
   return JSON.stringify(ContentsRequest$outboundSchema.parse(contentsRequest));
-}
-
-/** @internal */
-export const ContentsMetadata$inboundSchema: z.ZodMiniType<
-  ContentsMetadata,
-  unknown
-> = z.pipe(
-  z.object({
-    site_name: types.optional(types.string()),
-    favicon_url: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "site_name": "siteName",
-      "favicon_url": "faviconUrl",
-    });
-  }),
-);
-
-export function contentsMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<ContentsMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ContentsMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ContentsMetadata' from JSON`,
-  );
 }
 
 /** @internal */
@@ -154,7 +87,7 @@ export const ContentsResponse$inboundSchema: z.ZodMiniType<
   title: types.optional(types.string()),
   html: z.optional(z.nullable(types.string())),
   markdown: z.optional(z.nullable(types.string())),
-  metadata: types.optional(z.lazy(() => ContentsMetadata$inboundSchema)),
+  metadata: z.optional(z.nullable(models.ContentsMetadata$inboundSchema)),
 });
 
 export function contentsResponseFromJSON(

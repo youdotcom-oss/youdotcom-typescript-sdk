@@ -6,7 +6,7 @@ import * as z from "zod/v4-mini";
 
 export type CustomAgentRunsRequest = {
   /**
-   * Set the value to a Custom Agent's ID. Learn how to obtain an agent ID here [Create Custom Agents](/agents/custom/create-agents).
+   * Set the value to a Custom Agent's ID. Learn how to obtain an agent ID here [Create Custom Agents](https://docs.you.com/agents/custom/create-agents).
    */
   agent: string;
   /**

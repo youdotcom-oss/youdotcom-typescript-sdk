@@ -8,7 +8,7 @@ import {
   type CustomAgentRunsRequest,
   type AgentRunsStreamingResponse,
   Language,
-  Freshness, LiveCrawl, LiveCrawlFormats } from "@youdotcom-oss/sdk/models";
+  Freshness, LiveCrawl, LiveCrawlFormats, ContentsFormats } from "@youdotcom-oss/sdk/models";
 
 import { type EventStream } from "@youdotcom-oss/sdk/lib/event-streams.js";
 import type { SearchRequest, ContentsRequest } from "@youdotcom-oss/sdk/models/operations";
@@ -130,8 +130,8 @@ async function searchRequest() {
 
 async function contentRequest() {
   const request: ContentsRequest = {
-    urls: ["https://you.com"],
-    format: "markdown",
+    urls: ["https://www.apple.com"],
+    formats: [ContentsFormats.Markdown, ContentsFormats.Metadata],
   };
   const result = await you.contents(request);
   console.log(result);
