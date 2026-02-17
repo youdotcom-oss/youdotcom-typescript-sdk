@@ -16,7 +16,11 @@ export const SearchServerList = [
 ] as const;
 
 /**
- * Specifies the freshness of the results to return.
+ * Specifies the freshness of the results to return. Provide either one of `day`, `week`, `month`, `year`, or a date range string in the format `YYYY-MM-DDtoYYYY-MM-DD`.
+ *
+ * @remarks
+ *
+ * When your search query includes a temporal keyword and you also set a freshness parameter, the search will use the broader (i.e., less restrictive) of the two timeframes. For example, if you use `query=news+this+week&freshness=month`, the results will use a freshness of month.
  */
 export type Freshness = models.Freshness | string;
 
@@ -50,7 +54,11 @@ export type SearchRequest = {
    */
   count?: number | undefined;
   /**
-   * Specifies the freshness of the results to return.
+   * Specifies the freshness of the results to return. Provide either one of `day`, `week`, `month`, `year`, or a date range string in the format `YYYY-MM-DDtoYYYY-MM-DD`.
+   *
+   * @remarks
+   *
+   * When your search query includes a temporal keyword and you also set a freshness parameter, the search will use the broader (i.e., less restrictive) of the two timeframes. For example, if you use `query=news+this+week&freshness=month`, the results will use a freshness of month.
    */
   freshness?: models.Freshness | string | undefined;
   /**
@@ -237,7 +245,7 @@ export function livecrawlFormatsToJSON(
 /** @internal */
 export type SearchRequest$Outbound = {
   query: string;
-  count?: number | undefined;
+  count: number;
   freshness?: string | string | undefined;
   offset?: number | undefined;
   country?: string | string | undefined;
@@ -254,7 +262,7 @@ export const SearchRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     query: z._default(z.string(), "Your query"),
-    count: z.optional(z.int()),
+    count: z._default(z.int(), 10),
     freshness: z.optional(
       smartUnion([models.Freshness$outboundSchema, z.string()]),
     ),

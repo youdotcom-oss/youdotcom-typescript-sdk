@@ -29,6 +29,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Returns a list of unified search results from web and news sources
+ *
+ * @remarks
+ * This endpoint is designed to return LLM-ready web results based on a user's query. Based on a classification mechanism, it can return web results and news associated with your query. If you need to feed an LLM with the results of a query that sounds like `What are the latest geopolitical updates from India`, then this endpoint is the right one for you.
  */
 export function search(
   client: YouCore,

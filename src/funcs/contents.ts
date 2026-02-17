@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Returns the content of the web pages
+ *
+ * @remarks
+ * Returns the HTML or Markdown of a target webpage.
  */
 export function contents(
   client: YouCore,

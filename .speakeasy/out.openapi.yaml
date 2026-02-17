@@ -1,7 +1,10 @@
 openapi: 3.1.0
 info:
   title: You.com API
-  description: |
+  description: |-
+    Unified API for Express, Advanced, and Custom Agents from You.com
+    Get the best search results from web and news sources
+    Returns the HTML or Markdown of a target webpage
     Comprehensive API for You.com services:
     - **Agents API**: Execute queries using Express, Advanced, and Custom AI agents
     - **Search API**: Get search results from web and news sources
@@ -116,6 +119,7 @@ paths:
     get:
       operationId: search
       summary: Returns a list of unified search results from web and news sources
+      description: This endpoint is designed to return LLM-ready web results based on a user's query. Based on a classification mechanism, it can return web results and news associated with your query. If you need to feed an LLM with the results of a query that sounds like `What are the latest geopolitical updates from India`, then this endpoint is the right one for you.
       servers:
         - url: https://ydc-index.io
       security:
@@ -137,9 +141,13 @@ paths:
             type: integer
             maximum: 100
             minimum: 1
+            default: 10
         - name: freshness
           in: query
-          description: Specifies the freshness of the results to return.
+          description: |-
+            Specifies the freshness of the results to return. Provide either one of `day`, `week`, `month`, `year`, or a date range string in the format `YYYY-MM-DDtoYYYY-MM-DD`.
+
+            When your search query includes a temporal keyword and you also set a freshness parameter, the search will use the broader (i.e., less restrictive) of the two timeframes. For example, if you use `query=news+this+week&freshness=month`, the results will use a freshness of month.
           required: false
           schema:
             oneOf:
@@ -345,6 +353,7 @@ paths:
     post:
       operationId: contents
       summary: Returns the content of the web pages
+      description: Returns the HTML or Markdown of a target webpage.
       requestBody:
         content:
           application/json:
@@ -361,10 +370,11 @@ paths:
                 formats:
                   $ref: '#/components/schemas/ContentsFormats'
                 crawl_timeout:
-                  type: number
+                  type: integer
                   maximum: 60
                   minimum: 1
-                  description: The timeout in seconds for crawling each URL. Must be between 1 and 60 seconds.
+                  description: Maximum time in seconds to wait for page content. Must be between 1 and 60 seconds. Default is 10 seconds.
+                  default: 10
                   example: 10
         required: true
       responses:
@@ -397,7 +407,7 @@ paths:
                     metadata:
                       $ref: '#/components/schemas/ContentsMetadata'
         "401":
-          description: Unauthorized
+          description: Unauthorized. Problems with API key.
           content:
             application/json:
               schema:
@@ -420,7 +430,7 @@ paths:
                   value:
                     detail: "<error message>"
         "403":
-          description: Forbidden
+          description: Forbidden. API key lacks scope for this path.
           content:
             application/json:
               schema:
@@ -434,7 +444,7 @@ paths:
                   value:
                     detail: "Missing required scopes"
         "500":
-          description: Internal Server Error
+          description: Internal Server Error during authentication/authorization middleware.
           content:
             application/json:
               schema:
@@ -457,7 +467,7 @@ components:
       type: apiKey
       in: header
       name: X-API-Key
-      description: "The unique API Key required to authorize API access. Learn how to get yours in the [“Get your API key” section of the documentation](https://docs.you.com/get-started/quickstart#get-your-api-key)."
+      description: "A unique API Key is required to authorize API access. [Get your API Key with free credits](https://you.com/platform/api-keys)."
   schemas:
     # REQUEST SCHEMAS
     ExpressAgentRunsRequest:
@@ -1100,7 +1110,7 @@ components:
           - html
           - markdown
           - metadata
-      description: The formats of the content to be returned. Can include 'html', 'markdown', and/or 'metadata'.
+      description: Array of content formats to return. All included formats are returned in the response. Include "metadata" to get JSON-LD and OpenGraph information, if available.
       example: ["html", "markdown"]
     ContentsMetadata:
       type: object

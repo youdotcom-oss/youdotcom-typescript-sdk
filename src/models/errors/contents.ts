@@ -7,14 +7,14 @@ import * as types from "../../types/primitives.js";
 import { YouError } from "./youerror.js";
 
 /**
- * Internal Server Error
+ * Internal Server Error during authentication/authorization middleware.
  */
 export type ContentsInternalServerErrorData = {
   detail?: string | undefined;
 };
 
 /**
- * Internal Server Error
+ * Internal Server Error during authentication/authorization middleware.
  */
 export class ContentsInternalServerError extends YouError {
   detail?: string | undefined;
@@ -38,14 +38,14 @@ export class ContentsInternalServerError extends YouError {
 }
 
 /**
- * Forbidden
+ * Forbidden. API key lacks scope for this path.
  */
 export type ContentsForbiddenErrorData = {
   detail?: string | undefined;
 };
 
 /**
- * Forbidden
+ * Forbidden. API key lacks scope for this path.
  */
 export class ContentsForbiddenError extends YouError {
   detail?: string | undefined;
@@ -69,7 +69,7 @@ export class ContentsForbiddenError extends YouError {
 }
 
 /**
- * Unauthorized
+ * Unauthorized. Problems with API key.
  */
 export type ContentsUnauthorizedErrorData = {
   /**
@@ -79,7 +79,7 @@ export type ContentsUnauthorizedErrorData = {
 };
 
 /**
- * Unauthorized
+ * Unauthorized. Problems with API key.
  */
 export class ContentsUnauthorizedError extends YouError {
   /**
