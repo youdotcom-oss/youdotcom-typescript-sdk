@@ -1,11 +1,11 @@
-# ContentsUnauthorizedError
+# ResearchUnauthorizedError
 
 Unauthorized. Problems with API key.
 
 ## Example Usage
 
 ```typescript
-import { ContentsUnauthorizedError } from "@youdotcom-oss/sdk/models/errors";
+import { ResearchUnauthorizedError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

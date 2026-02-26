@@ -4,6 +4,7 @@
 
 import { agentsRuns } from "../funcs/agentsRuns.js";
 import { contents } from "../funcs/contents.js";
+import { research } from "../funcs/research.js";
 import { search } from "../funcs/search.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -35,6 +36,9 @@ export class You extends ClientSDK {
 
   /**
    * Returns a list of unified search results from web and news sources
+   *
+   * @remarks
+   * This endpoint is designed to return LLM-ready web results based on a user's query. Based on a classification mechanism, it can return web results and news associated with your query. If you need to feed an LLM with the results of a query that sounds like `What are the latest geopolitical updates from India`, then this endpoint is the right one for you.
    */
   async search(
     request: operations.SearchRequest,
@@ -49,12 +53,32 @@ export class You extends ClientSDK {
 
   /**
    * Returns the content of the web pages
+   *
+   * @remarks
+   * Returns the HTML or Markdown of a target webpage.
    */
   async contents(
     request: operations.ContentsRequest,
     options?: RequestOptions,
   ): Promise<Array<operations.ContentsResponse>> {
     return unwrapAsync(contents(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Returns comprehensive research-grade answers with multi-step reasoning
+   *
+   * @remarks
+   * Research goes beyond a single web search. In response to your question, it runs multiple searches, reads through the sources, and synthesizes everything into a thorough, well-cited answer. Use it when a question is too complex for a simple lookup, and when you need a response you can actually trust and verify.
+   */
+  async research(
+    request: operations.ResearchRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ResearchResponse> {
+    return unwrapAsync(research(
       this,
       request,
       options,

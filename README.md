@@ -8,7 +8,11 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-You.com API: Comprehensive API for You.com services:
+You.com API: Unified API for Express, Advanced, and Custom Agents from You.com
+Get the best search results from web and news sources
+Returns the HTML or Markdown of a target webpage
+Multi-step reasoning with comprehensive research capabilities
+Comprehensive API for You.com services:
 - **Agents API**: Execute queries using Express, Advanced, and Custom AI agents
 - **Search API**: Get search results from web and news sources
 - **Contents API**: Retrieve and process web page content
@@ -241,6 +245,7 @@ run();
 * [agentsRuns](docs/sdks/you/README.md#agentsruns) - Run an Agent
 * [search](docs/sdks/you/README.md#search) - Returns a list of unified search results from web and news sources
 * [contents](docs/sdks/you/README.md#contents) - Returns the content of the web pages
+* [research](docs/sdks/you/README.md#research) - Returns comprehensive research-grade answers with multi-step reasoning
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -262,6 +267,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`agentsRuns`](docs/sdks/you/README.md#agentsruns) - Run an Agent
 - [`contents`](docs/sdks/you/README.md#contents) - Returns the content of the web pages
+- [`research`](docs/sdks/you/README.md#research) - Returns comprehensive research-grade answers with multi-step reasoning
 - [`search`](docs/sdks/you/README.md#search) - Returns a list of unified search results from web and news sources
 
 </details>
@@ -480,7 +486,7 @@ run();
 **Primary error:**
 * [`YouError`](./src/models/errors/youerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (15)</summary>
+<details><summary>Less common errors (19)</summary>
 
 <br />
 
@@ -493,15 +499,19 @@ run();
 
 
 **Inherit from [`YouError`](./src/models/errors/youerror.ts)**:
-* [`AgentRuns400ResponseError`](./src/models/errors/agentruns400responseerror.ts): The message returned by the error. Status code `400`. Applicable to 1 of 3 methods.*
-* [`AgentRuns401ResponseError`](./src/models/errors/agentruns401responseerror.ts): The message returned by the error. Status code `401`. Applicable to 1 of 3 methods.*
-* [`SearchUnauthorizedError`](./src/models/errors/searchunauthorizederror.ts): Unauthorized. Problems with API key. Status code `401`. Applicable to 1 of 3 methods.*
-* [`ContentsUnauthorizedError`](./src/models/errors/contentsunauthorizederror.ts): Unauthorized. Status code `401`. Applicable to 1 of 3 methods.*
-* [`SearchForbiddenError`](./src/models/errors/searchforbiddenerror.ts): Forbidden. API key lacks scope for this path. Status code `403`. Applicable to 1 of 3 methods.*
-* [`ContentsForbiddenError`](./src/models/errors/contentsforbiddenerror.ts): Forbidden. Status code `403`. Applicable to 1 of 3 methods.*
-* [`AgentRuns422ResponseError`](./src/models/errors/agentruns422responseerror.ts): Unprocessable Entity - Invalid request data. Status code `422`. Applicable to 1 of 3 methods.*
-* [`SearchInternalServerError`](./src/models/errors/searchinternalservererror.ts): Internal Server Error during authentication/authorization middleware. Status code `500`. Applicable to 1 of 3 methods.*
-* [`ContentsInternalServerError`](./src/models/errors/contentsinternalservererror.ts): Internal Server Error. Status code `500`. Applicable to 1 of 3 methods.*
+* [`AgentRuns400ResponseError`](./src/models/errors/agentruns400responseerror.ts): The message returned by the error. Status code `400`. Applicable to 1 of 4 methods.*
+* [`AgentRuns401ResponseError`](./src/models/errors/agentruns401responseerror.ts): The message returned by the error. Status code `401`. Applicable to 1 of 4 methods.*
+* [`SearchUnauthorizedError`](./src/models/errors/searchunauthorizederror.ts): Unauthorized. Problems with API key. Status code `401`. Applicable to 1 of 4 methods.*
+* [`ContentsUnauthorizedError`](./src/models/errors/contentsunauthorizederror.ts): Unauthorized. Problems with API key. Status code `401`. Applicable to 1 of 4 methods.*
+* [`ResearchUnauthorizedError`](./src/models/errors/researchunauthorizederror.ts): Unauthorized. Problems with API key. Status code `401`. Applicable to 1 of 4 methods.*
+* [`SearchForbiddenError`](./src/models/errors/searchforbiddenerror.ts): Forbidden. API key lacks scope for this path. Status code `403`. Applicable to 1 of 4 methods.*
+* [`ContentsForbiddenError`](./src/models/errors/contentsforbiddenerror.ts): Forbidden. API key lacks scope for this path. Status code `403`. Applicable to 1 of 4 methods.*
+* [`ResearchForbiddenError`](./src/models/errors/researchforbiddenerror.ts): Forbidden. API key lacks scope for this path. Status code `403`. Applicable to 1 of 4 methods.*
+* [`AgentRuns422ResponseError`](./src/models/errors/agentruns422responseerror.ts): Unprocessable Entity - Invalid request data. Status code `422`. Applicable to 1 of 4 methods.*
+* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Unprocessable Entity. Request validation failed. Status code `422`. Applicable to 1 of 4 methods.*
+* [`SearchInternalServerError`](./src/models/errors/searchinternalservererror.ts): Internal Server Error during authentication/authorization middleware. Status code `500`. Applicable to 1 of 4 methods.*
+* [`ContentsInternalServerError`](./src/models/errors/contentsinternalservererror.ts): Internal Server Error during authentication/authorization middleware. Status code `500`. Applicable to 1 of 4 methods.*
+* [`ResearchInternalServerError`](./src/models/errors/researchinternalservererror.ts): Internal Server Error during authentication/authorization middleware. Status code `500`. Applicable to 1 of 4 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -519,7 +529,7 @@ The default server can be overridden globally by passing a URL to the `serverURL
 import { You } from "@youdotcom-oss/sdk";
 
 const you = new You({
-  serverURL: "https://ydc-index.io",
+  serverURL: "https://api.you.com",
   apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
 });
 
@@ -548,12 +558,8 @@ const you = new You({
 });
 
 async function run() {
-  const result = await you.agentsRuns({
-    agent: "express",
-    input: "What is the capital of France?",
-    stream: false,
-  }, {
-    serverURL: "https://api.you.com",
+  const result = await you.search({}, {
+    serverURL: "https://ydc-index.io",
   });
 
   console.log(result);
@@ -577,19 +583,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { You } from "@youdotcom-oss/sdk";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "@youdotcom-oss/sdk/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {

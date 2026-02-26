@@ -10,17 +10,21 @@ import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
 
+export const ContentsServerList = [
+  "https://ydc-index.io",
+] as const;
+
 export type ContentsRequest = {
   /**
    * Array of URLs to fetch the contents from.
    */
   urls?: Array<string> | undefined;
   /**
-   * The formats of the content to be returned. Can include 'html', 'markdown', and/or 'metadata'.
+   * Array of content formats to return. All included formats are returned in the response. Include "metadata" to get JSON-LD and OpenGraph information, if available.
    */
   formats?: Array<models.ContentsFormats> | undefined;
   /**
-   * The timeout in seconds for crawling each URL. Must be between 1 and 60 seconds.
+   * Maximum time in seconds to wait for page content. Must be between 1 and 60 seconds. Default is 10 seconds.
    */
   crawlTimeout?: number | undefined;
 };
@@ -52,7 +56,7 @@ export type ContentsResponse = {
 export type ContentsRequest$Outbound = {
   urls?: Array<string> | undefined;
   formats?: Array<string> | undefined;
-  crawl_timeout?: number | undefined;
+  crawl_timeout: number;
 };
 
 /** @internal */
@@ -63,7 +67,7 @@ export const ContentsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     urls: z.optional(z.array(z.string())),
     formats: z.optional(z.array(models.ContentsFormats$outboundSchema)),
-    crawlTimeout: z.optional(z.number()),
+    crawlTimeout: z._default(z.int(), 10),
   }),
   z.transform((v) => {
     return remap$(v, {

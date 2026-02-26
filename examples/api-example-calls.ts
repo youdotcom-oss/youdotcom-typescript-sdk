@@ -11,7 +11,8 @@ import {
   Freshness, LiveCrawl, LiveCrawlFormats, ContentsFormats } from "@youdotcom-oss/sdk/models";
 
 import { type EventStream } from "@youdotcom-oss/sdk/lib/event-streams.js";
-import type { SearchRequest, ContentsRequest } from "@youdotcom-oss/sdk/models/operations";
+import type { SearchRequest, ContentsRequest, ResearchRequest } from "@youdotcom-oss/sdk/models/operations";
+import { ResearchEffort } from "@youdotcom-oss/sdk/models/operations";
 
 // Will be initialized after user provides API key
 let you: You;
@@ -137,10 +138,54 @@ async function contentRequest() {
   console.log(result);
 }
 
+async function researchRequest() {
+  const question = "What are the top 5 electric vehicle companies by global sales in 2025?";
+  const request: ResearchRequest = {
+    input: question,
+    researchEffort: ResearchEffort.Standard,
+  };
+
+  console.log("📝 Question:", question);
+  console.log("⚙️  Effort level:", request.researchEffort);
+  console.log("");
+
+  const spinnerFrames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  let frameIndex = 0;
+  const startTime = Date.now();
+
+  const spinner = setInterval(() => {
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    process.stdout.write(`\r${spinnerFrames[frameIndex]} Researching... (${elapsed}s)`);
+    frameIndex = (frameIndex + 1) % spinnerFrames.length;
+  }, 80);
+
+  try {
+    const result = await you.research(request);
+    clearInterval(spinner);
+    const totalTime = ((Date.now() - startTime) / 1000).toFixed(2);
+    process.stdout.write(`\r✅ Research complete! (${totalTime}s)\n\n`);
+
+    console.log("📖 Research Answer:");
+    console.log("─".repeat(50));
+    console.log(result.output.content);
+    console.log("─".repeat(50));
+    console.log("\n🔗 Sources:");
+    result.output.sources.forEach((source, index) => {
+      console.log(`  [${index + 1}] ${source.title ?? source.url}`);
+      console.log(`      ${source.url}`);
+    });
+  } catch (error) {
+    clearInterval(spinner);
+    process.stdout.write(`\r❌ Research failed!\n`);
+    throw error;
+  }
+}
+
 // Interactive CLI menu
 import * as readline from "readline/promises";
 
 const functions = [
+  { name: "Research Request", fn: researchRequest },
   { name: "Express Batch Request", fn: expressBatchRequest },
   { name: "Express Streaming Request", fn: expressStreamingRequest },
   { name: "Advanced Batch Request", fn: advancedBatchRequest },

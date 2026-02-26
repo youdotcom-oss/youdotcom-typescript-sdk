@@ -1,11 +1,11 @@
-# ContentsForbiddenError
+# ResearchInternalServerError
 
-Forbidden. API key lacks scope for this path.
+Internal Server Error during authentication/authorization middleware.
 
 ## Example Usage
 
 ```typescript
-import { ContentsForbiddenError } from "@youdotcom-oss/sdk/models/errors";
+import { ResearchInternalServerError } from "@youdotcom-oss/sdk/models/errors";
 
 // No examples available for this model
 ```

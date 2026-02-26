@@ -4,26 +4,27 @@
 
 import * as z from "zod/v4-mini";
 import * as types from "../../types/primitives.js";
+import * as operations from "../operations/index.js";
 import { YouError } from "./youerror.js";
 
 /**
  * Internal Server Error during authentication/authorization middleware.
  */
-export type ContentsInternalServerErrorData = {
+export type ResearchInternalServerErrorData = {
   detail?: string | undefined;
 };
 
 /**
  * Internal Server Error during authentication/authorization middleware.
  */
-export class ContentsInternalServerError extends YouError {
+export class ResearchInternalServerError extends YouError {
   detail?: string | undefined;
 
   /** The original data that was passed to this error instance. */
-  data$: ContentsInternalServerErrorData;
+  data$: ResearchInternalServerErrorData;
 
   constructor(
-    err: ContentsInternalServerErrorData,
+    err: ResearchInternalServerErrorData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
     const message = "message" in err && typeof err.message === "string"
@@ -33,28 +34,59 @@ export class ContentsInternalServerError extends YouError {
     this.data$ = err;
     if (err.detail != null) this.detail = err.detail;
 
-    this.name = "ContentsInternalServerError";
+    this.name = "ResearchInternalServerError";
+  }
+}
+
+/**
+ * Unprocessable Entity. Request validation failed.
+ */
+export type UnprocessableEntityErrorData = {
+  detail?: Array<operations.Detail> | undefined;
+};
+
+/**
+ * Unprocessable Entity. Request validation failed.
+ */
+export class UnprocessableEntityError extends YouError {
+  detail?: Array<operations.Detail> | undefined;
+
+  /** The original data that was passed to this error instance. */
+  data$: UnprocessableEntityErrorData;
+
+  constructor(
+    err: UnprocessableEntityErrorData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = "message" in err && typeof err.message === "string"
+      ? err.message
+      : `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    if (err.detail != null) this.detail = err.detail;
+
+    this.name = "UnprocessableEntityError";
   }
 }
 
 /**
  * Forbidden. API key lacks scope for this path.
  */
-export type ContentsForbiddenErrorData = {
+export type ResearchForbiddenErrorData = {
   detail?: string | undefined;
 };
 
 /**
  * Forbidden. API key lacks scope for this path.
  */
-export class ContentsForbiddenError extends YouError {
+export class ResearchForbiddenError extends YouError {
   detail?: string | undefined;
 
   /** The original data that was passed to this error instance. */
-  data$: ContentsForbiddenErrorData;
+  data$: ResearchForbiddenErrorData;
 
   constructor(
-    err: ContentsForbiddenErrorData,
+    err: ResearchForbiddenErrorData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
     const message = "message" in err && typeof err.message === "string"
@@ -64,14 +96,14 @@ export class ContentsForbiddenError extends YouError {
     this.data$ = err;
     if (err.detail != null) this.detail = err.detail;
 
-    this.name = "ContentsForbiddenError";
+    this.name = "ResearchForbiddenError";
   }
 }
 
 /**
  * Unauthorized. Problems with API key.
  */
-export type ContentsUnauthorizedErrorData = {
+export type ResearchUnauthorizedErrorData = {
   /**
    * Error detail message.
    */
@@ -81,17 +113,17 @@ export type ContentsUnauthorizedErrorData = {
 /**
  * Unauthorized. Problems with API key.
  */
-export class ContentsUnauthorizedError extends YouError {
+export class ResearchUnauthorizedError extends YouError {
   /**
    * Error detail message.
    */
   detail?: string | undefined;
 
   /** The original data that was passed to this error instance. */
-  data$: ContentsUnauthorizedErrorData;
+  data$: ResearchUnauthorizedErrorData;
 
   constructor(
-    err: ContentsUnauthorizedErrorData,
+    err: ResearchUnauthorizedErrorData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
     const message = "message" in err && typeof err.message === "string"
@@ -101,13 +133,13 @@ export class ContentsUnauthorizedError extends YouError {
     this.data$ = err;
     if (err.detail != null) this.detail = err.detail;
 
-    this.name = "ContentsUnauthorizedError";
+    this.name = "ResearchUnauthorizedError";
   }
 }
 
 /** @internal */
-export const ContentsInternalServerError$inboundSchema: z.ZodMiniType<
-  ContentsInternalServerError,
+export const ResearchInternalServerError$inboundSchema: z.ZodMiniType<
+  ResearchInternalServerError,
   unknown
 > = z.pipe(
   z.object({
@@ -117,7 +149,7 @@ export const ContentsInternalServerError$inboundSchema: z.ZodMiniType<
     body$: z.string(),
   }),
   z.transform((v) => {
-    return new ContentsInternalServerError(v, {
+    return new ResearchInternalServerError(v, {
       request: v.request$,
       response: v.response$,
       body: v.body$,
@@ -126,18 +158,20 @@ export const ContentsInternalServerError$inboundSchema: z.ZodMiniType<
 );
 
 /** @internal */
-export const ContentsForbiddenError$inboundSchema: z.ZodMiniType<
-  ContentsForbiddenError,
+export const UnprocessableEntityError$inboundSchema: z.ZodMiniType<
+  UnprocessableEntityError,
   unknown
 > = z.pipe(
   z.object({
-    detail: types.optional(types.string()),
+    detail: types.optional(
+      z.array(z.lazy(() => operations.Detail$inboundSchema)),
+    ),
     request$: z.custom<Request>(x => x instanceof Request),
     response$: z.custom<Response>(x => x instanceof Response),
     body$: z.string(),
   }),
   z.transform((v) => {
-    return new ContentsForbiddenError(v, {
+    return new UnprocessableEntityError(v, {
       request: v.request$,
       response: v.response$,
       body: v.body$,
@@ -146,8 +180,8 @@ export const ContentsForbiddenError$inboundSchema: z.ZodMiniType<
 );
 
 /** @internal */
-export const ContentsUnauthorizedError$inboundSchema: z.ZodMiniType<
-  ContentsUnauthorizedError,
+export const ResearchForbiddenError$inboundSchema: z.ZodMiniType<
+  ResearchForbiddenError,
   unknown
 > = z.pipe(
   z.object({
@@ -157,7 +191,27 @@ export const ContentsUnauthorizedError$inboundSchema: z.ZodMiniType<
     body$: z.string(),
   }),
   z.transform((v) => {
-    return new ContentsUnauthorizedError(v, {
+    return new ResearchForbiddenError(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
+  }),
+);
+
+/** @internal */
+export const ResearchUnauthorizedError$inboundSchema: z.ZodMiniType<
+  ResearchUnauthorizedError,
+  unknown
+> = z.pipe(
+  z.object({
+    detail: types.optional(types.string()),
+    request$: z.custom<Request>(x => x instanceof Request),
+    response$: z.custom<Response>(x => x instanceof Response),
+    body$: z.string(),
+  }),
+  z.transform((v) => {
+    return new ResearchUnauthorizedError(v, {
       request: v.request$,
       response: v.response$,
       body: v.body$,
