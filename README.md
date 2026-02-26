@@ -95,11 +95,12 @@ npx tsx api-example-calls.ts
 ```
 
 The example file includes:
-- **Express Agent** - Batch and streaming requests
-- **Advanced Agent** - Research-powered requests
-- **Custom Agent** - Using your own agent configurations
-- **Search API** - Web search queries
-- **Contents API** - URL content extraction
+- **Research API** - Runs multiple searches, reads sources, and synthesizes a thorough, well-cited answer
+- **Express Agent** - Fast responses with optional web search, available as batch or streaming
+- **Advanced Agent** - Complex queries with multi-turn reasoning, planning, and tool usage
+- **Custom Agent** - Queries routed through your own agent configurations created in the You.com UI
+- **Search API** - LLM-ready web and news results with optional livecrawl for full page content
+- **Contents API** - Fetches and returns the HTML or Markdown of any target webpage
 
 ### SDK Performance
 

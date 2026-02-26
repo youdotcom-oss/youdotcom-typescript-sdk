@@ -17,31 +17,71 @@ import { ResearchEffort } from "@youdotcom-oss/sdk/models/operations";
 // Will be initialized after user provides API key
 let you: You;
 
+function createSpinner(label: string) {
+  const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  let frameIndex = 0;
+  const startTime = Date.now();
+  const interval = setInterval(() => {
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    process.stdout.write(`\r${frames[frameIndex]} ${label}... (${elapsed}s)`);
+    frameIndex = (frameIndex + 1) % frames.length;
+  }, 80);
+  return {
+    stop(success = true, doneLabel?: string) {
+      clearInterval(interval);
+      const totalTime = ((Date.now() - startTime) / 1000).toFixed(2);
+      const icon = success ? "✅" : "❌";
+      const msg = doneLabel ?? label;
+      process.stdout.write(`\r\x1b[K${icon} ${msg} (${totalTime}s)\n\n`);
+    },
+  };
+}
+
 async function expressBatchRequest() {
+  const input = "What is the capital of France?";
   const request: ExpressAgentRunsRequest = {
     agent: "express",
     stream: false,
-    input: "What is the capital of France?",
-    tools: [{
-      type: "web_search"
-    }]
+    input,
+    tools: [{ type: "web_search" }],
   };
-  const result = await you.agentsRuns(request);
-  console.log(result);
+
+  console.log("📝 Query:", input);
+  console.log("");
+
+  const spinner = createSpinner("Waiting for response");
+  try {
+    const result = await you.agentsRuns(request);
+    spinner.stop(true, "Response received");
+    console.log("📄 Result:");
+    console.log("─".repeat(50));
+    console.log(result);
+    console.log("─".repeat(50));
+  } catch (error) {
+    spinner.stop(false, "Request failed");
+    throw error;
+  }
 }
 
 async function expressStreamingRequest() {
+  const input = "Restaurants in San Francisco";
   const request: ExpressAgentRunsRequest = {
     agent: "express",
     stream: true,
-    input: "Restaurants in San Francisco",
-    tools: [{
-      type: "web_search"
-    }]
+    input,
+    tools: [{ type: "web_search" }],
   };
-  const result = await you.agentsRuns(request) as EventStream<AgentRunsStreamingResponse>;
 
-  // Iterate over the streaming response and print tokens as they arrive
+  console.log("📝 Query:", input);
+  console.log("");
+
+  const spinner = createSpinner("Waiting for stream");
+  const result = await you.agentsRuns(request) as EventStream<AgentRunsStreamingResponse>;
+  spinner.stop(true, "Stream connected");
+
+  console.log("📡 Streaming response:");
+  console.log("─".repeat(50));
+
   for await (const chunk of result) {
     switch(chunk.data.type) {
       case "response.created": {
@@ -57,16 +97,13 @@ async function expressStreamingRequest() {
         break;
       }
       case "response.output_content.full": {
-        console.log("\nWeb Search Results:");
-        let urls = chunk.data.response.full.map((result) => {
-          return result.url
-        })
+        console.log("\n🔗 Web Search Results:");
+        const urls = chunk.data.response.full.map((r) => r.url);
         console.log(urls);
         break;
       }
       case "response.output_text.delta": {
-        // This contains incremental text content
-        process.stdout.write(chunk.data.response.delta)
+        process.stdout.write(chunk.data.response.delta);
         break;
       }
       case "response.output_item.done": {
@@ -74,9 +111,10 @@ async function expressStreamingRequest() {
         break;
       }
       case "response.done": {
-        console.log("\nResponse completed!");
-        console.log("Runtime:", chunk.data.response.runTimeMs, "ms");
-        console.log("Finished:", chunk.data.response.finished);
+        console.log("\n─".repeat(50));
+        console.log("✅ Stream complete!");
+        console.log("⏱  Runtime:", chunk.data.response.runTimeMs, "ms");
+        console.log("🏁 Finished:", chunk.data.response.finished);
         break;
       }
       default: {
@@ -88,54 +126,116 @@ async function expressStreamingRequest() {
 }
 
 async function advancedBatchRequest() {
+  const input = "What is the capital of France?";
   const request: AdvancedAgentRunsRequest = {
     agent: "advanced",
     stream: true,
-    input: "What is the capital of France?",
+    input,
     tools: [{
       type: "research",
       searchEffort: "low",
-      reportVerbosity: "medium"
-    }]
+      reportVerbosity: "medium",
+    }],
   };
-  const result = await you.agentsRuns(request);
-  console.log(result);
+
+  console.log("📝 Query:", input);
+  console.log("🔧 Tools: research (low effort, medium verbosity)");
+  console.log("");
+
+  const spinner = createSpinner("Waiting for response");
+  try {
+    const result = await you.agentsRuns(request);
+    spinner.stop(true, "Response received");
+    console.log("📄 Result:");
+    console.log("─".repeat(50));
+    console.log(result);
+    console.log("─".repeat(50));
+  } catch (error) {
+    spinner.stop(false, "Request failed");
+    throw error;
+  }
 }
 
 async function customBatchRequest() {
+  const input = "What is the capital of France?";
+  const agentId = "63773261-b4de-4d8f-9dfd-cff206a5cb51";
   const request: CustomAgentRunsRequest = {
-    agent: "63773261-b4de-4d8f-9dfd-cff206a5cb51",
+    agent: agentId,
     stream: false,
-    input: "What is the capital of France?"
+    input,
   };
-  const result = await you.agentsRuns(request);
-  console.log(result);
+
+  console.log("📝 Query:", input);
+  console.log("🤖 Agent ID:", agentId);
+  console.log("");
+
+  const spinner = createSpinner("Waiting for response");
+  try {
+    const result = await you.agentsRuns(request);
+    spinner.stop(true, "Response received");
+    console.log("📄 Result:");
+    console.log("─".repeat(50));
+    console.log(result);
+    console.log("─".repeat(50));
+  } catch (error) {
+    spinner.stop(false, "Request failed");
+    throw error;
+  }
 }
 
 async function searchRequest() {
+  const query = "artificial intelligence in farming";
   const request: SearchRequest = {
-    query: "artificial intelligence in farming",
+    query,
     count: 1,
     livecrawl: LiveCrawl.Web,
     livecrawlFormats: LiveCrawlFormats.Markdown,
   };
-  const result = await you.search(request);
-  console.log("Metadata:");
-  console.log(result.metadata);
-  console.log("Web Results:");
-  let webResults = result.results?.web?.map((result) => {
-    return result.url
-  }) ?? [];
-  console.log(webResults);
+
+  console.log("📝 Query:", query);
+  console.log("⚙️  Livecrawl:", request.livecrawl, "| Format:", request.livecrawlFormats);
+  console.log("");
+
+  const spinner = createSpinner("Searching");
+  try {
+    const result = await you.search(request);
+    spinner.stop(true, "Search complete");
+    console.log("🔍 Metadata:");
+    console.log(result.metadata);
+    console.log("\n🌐 Web Results:");
+    console.log("─".repeat(50));
+    const webResults = result.results?.web?.map((r) => r.url) ?? [];
+    console.log(webResults);
+    console.log("─".repeat(50));
+  } catch (error) {
+    spinner.stop(false, "Search failed");
+    throw error;
+  }
 }
 
 async function contentRequest() {
+  const urls = ["https://www.apple.com"];
   const request: ContentsRequest = {
-    urls: ["https://www.apple.com"],
+    urls,
     formats: [ContentsFormats.Markdown, ContentsFormats.Metadata],
   };
-  const result = await you.contents(request);
-  console.log(result);
+
+  console.log("📝 URLs:", urls.join(", "));
+  console.log("⚙️  Formats: markdown, metadata");
+  console.log("");
+
+  const spinner = createSpinner("Fetching content");
+  try {
+    const result = await you.contents(request);
+    spinner.stop(true, "Content fetched");
+    console.log("📄 Result:");
+    console.log("─".repeat(50));
+    console.log(result);
+    console.log("─".repeat(50));
+  } catch (error) {
+    spinner.stop(false, "Content fetch failed");
+    throw error;
+  }
 }
 
 async function researchRequest() {
@@ -149,22 +249,10 @@ async function researchRequest() {
   console.log("⚙️  Effort level:", request.researchEffort);
   console.log("");
 
-  const spinnerFrames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
-  let frameIndex = 0;
-  const startTime = Date.now();
-
-  const spinner = setInterval(() => {
-    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-    process.stdout.write(`\r${spinnerFrames[frameIndex]} Researching... (${elapsed}s)`);
-    frameIndex = (frameIndex + 1) % spinnerFrames.length;
-  }, 80);
-
+  const spinner = createSpinner("Researching");
   try {
     const result = await you.research(request);
-    clearInterval(spinner);
-    const totalTime = ((Date.now() - startTime) / 1000).toFixed(2);
-    process.stdout.write(`\r✅ Research complete! (${totalTime}s)\n\n`);
-
+    spinner.stop(true, "Research complete");
     console.log("📖 Research Answer:");
     console.log("─".repeat(50));
     console.log(result.output.content);
@@ -175,8 +263,7 @@ async function researchRequest() {
       console.log(`      ${source.url}`);
     });
   } catch (error) {
-    clearInterval(spinner);
-    process.stdout.write(`\r❌ Research failed!\n`);
+    spinner.stop(false, "Research failed");
     throw error;
   }
 }
