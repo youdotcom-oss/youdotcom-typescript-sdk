@@ -27,27 +27,22 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Run an Agent
+ * Returns comprehensive research-grade answers with multi-step reasoning
  *
  * @remarks
- * Execute queries using You.com's AI agents. This endpoint supports three agent types:
- *
- * - **Express Agent**: Fast responses with optional web search (max 1 search)
- * - **Advanced Agent**: Complex queries with multi-turn reasoning, planning, and tool usage
- * - **Custom Agent**: User-configured assistants created in the You.com UI
- *
- * The response format depends on the `stream` parameter - either a complete JSON payload or Server-Sent Events (SSE).
+ * Research goes beyond a single web search. In response to your question, it runs multiple searches, reads through the sources, and synthesizes everything into a thorough, well-cited answer. Use it when a question is too complex for a simple lookup, and when you need a response you can actually trust and verify.
  */
-export function agentsRuns(
+export function research(
   client: YouCore,
-  request: operations.AgentsRunsRequest,
+  request: operations.ResearchRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.AgentsRunsResponse,
-    | errors.AgentRuns400ResponseError
-    | errors.AgentRuns401ResponseError
-    | errors.AgentRuns422ResponseError
+    operations.ResearchResponse,
+    | errors.ResearchUnauthorizedError
+    | errors.ResearchForbiddenError
+    | errors.UnprocessableEntityError
+    | errors.ResearchInternalServerError
     | YouError
     | ResponseValidationError
     | ConnectionError
@@ -67,15 +62,16 @@ export function agentsRuns(
 
 async function $do(
   client: YouCore,
-  request: operations.AgentsRunsRequest,
+  request: operations.ResearchRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.AgentsRunsResponse,
-      | errors.AgentRuns400ResponseError
-      | errors.AgentRuns401ResponseError
-      | errors.AgentRuns422ResponseError
+      operations.ResearchResponse,
+      | errors.ResearchUnauthorizedError
+      | errors.ResearchForbiddenError
+      | errors.UnprocessableEntityError
+      | errors.ResearchInternalServerError
       | YouError
       | ResponseValidationError
       | ConnectionError
@@ -90,7 +86,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.AgentsRunsRequest$outboundSchema, value),
+    (value) => z.parse(operations.ResearchRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -99,11 +95,11 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v1/agents/runs")();
+  const path = pathToFunc("/v1/research")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
-    Accept: "application/json;q=1, text/event-stream;q=0",
+    Accept: "application/json",
   }));
 
   const secConfig = await extractSecurity(client._options.apiKeyAuth);
@@ -113,7 +109,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "AgentsRuns",
+    operationID: "research",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -142,7 +138,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "422", "4XX", "5XX"],
+    errorCodes: ["401", "403", "422", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -156,10 +152,11 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.AgentsRunsResponse,
-    | errors.AgentRuns400ResponseError
-    | errors.AgentRuns401ResponseError
-    | errors.AgentRuns422ResponseError
+    operations.ResearchResponse,
+    | errors.ResearchUnauthorizedError
+    | errors.ResearchForbiddenError
+    | errors.UnprocessableEntityError
+    | errors.ResearchInternalServerError
     | YouError
     | ResponseValidationError
     | ConnectionError
@@ -169,11 +166,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.AgentsRunsResponse$inboundSchema),
-    M.sse(200, operations.AgentsRunsResponse$inboundSchema),
-    M.jsonErr(400, errors.AgentRuns400ResponseError$inboundSchema),
-    M.jsonErr(401, errors.AgentRuns401ResponseError$inboundSchema),
-    M.jsonErr(422, errors.AgentRuns422ResponseError$inboundSchema),
+    M.json(200, operations.ResearchResponse$inboundSchema),
+    M.jsonErr(401, errors.ResearchUnauthorizedError$inboundSchema),
+    M.jsonErr(403, errors.ResearchForbiddenError$inboundSchema),
+    M.jsonErr(422, errors.UnprocessableEntityError$inboundSchema),
+    M.jsonErr(500, errors.ResearchInternalServerError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

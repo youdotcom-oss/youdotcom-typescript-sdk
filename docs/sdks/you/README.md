@@ -2,17 +2,21 @@
 
 ## Overview
 
-You.com API: Comprehensive API for You.com services:
+You.com API: Unified API for Express, Advanced, and Custom Agents from You.com
+Get the best search results from web and news sources
+Returns the HTML or Markdown of a target webpage
+Multi-step reasoning with comprehensive research capabilities
+Comprehensive API for You.com services:
 - **Agents API**: Execute queries using Express, Advanced, and Custom AI agents
 - **Search API**: Get search results from web and news sources
 - **Contents API**: Retrieve and process web page content
-
 
 ### Available Operations
 
 * [agentsRuns](#agentsruns) - Run an Agent
 * [search](#search) - Returns a list of unified search results from web and news sources
 * [contents](#contents) - Returns the content of the web pages
+* [research](#research) - Returns comprehensive research-grade answers with multi-step reasoning
 
 ## agentsRuns
 
@@ -25,9 +29,245 @@ Execute queries using You.com's AI agents. This endpoint supports three agent ty
 The response format depends on the `stream` parameter - either a complete JSON payload or Server-Sent Events (SSE).
 
 
-### Example Usage
+### Example Usage: advanced_batch
 
-<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" -->
+<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" example="advanced_batch" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.agentsRuns({
+    agent: "advanced",
+    input: "You are a biologist studying the impacts of microplastics. Explain what microplastics are to a group of engineers, explain the impacts of microplastics on the body, and what the common sources and dosages of microplastics are. Highlight what a safe dosage might be and how to achieve it",
+    stream: false,
+    tools: [
+      {
+        type: "research",
+        searchEffort: "auto",
+        reportVerbosity: "medium",
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await agentsRuns(you, {
+    agent: "advanced",
+    input: "You are a biologist studying the impacts of microplastics. Explain what microplastics are to a group of engineers, explain the impacts of microplastics on the body, and what the common sources and dosages of microplastics are. Highlight what a safe dosage might be and how to achieve it",
+    stream: false,
+    tools: [
+      {
+        type: "research",
+        searchEffort: "auto",
+        reportVerbosity: "medium",
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsRuns failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: advanced_stream
+
+<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" example="advanced_stream" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.agentsRuns({
+    agent: "express",
+    input: "Analyze the economic impact of renewable energy adoption",
+    stream: true,
+    tools: [
+      {
+        type: "web_search",
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await agentsRuns(you, {
+    agent: "express",
+    input: "Analyze the economic impact of renewable energy adoption",
+    stream: true,
+    tools: [
+      {
+        type: "web_search",
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsRuns failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: custom_batch
+
+<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" example="custom_batch" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.agentsRuns({
+    agent: "63773261-b4de-4d8f-9dfd-cff206a5cb51",
+    input: "What is the capital of France?",
+    stream: false,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await agentsRuns(you, {
+    agent: "63773261-b4de-4d8f-9dfd-cff206a5cb51",
+    input: "What is the capital of France?",
+    stream: false,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsRuns failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: custom_stream
+
+<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" example="custom_stream" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.agentsRuns({
+    agent: "63773261-b4de-4d8f-9dfd-cff206a5cb51",
+    input: "Tell me about the history of Paris",
+    stream: true,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await agentsRuns(you, {
+    agent: "63773261-b4de-4d8f-9dfd-cff206a5cb51",
+    input: "Tell me about the history of Paris",
+    stream: true,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsRuns failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: express_batch
+
+<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" example="express_batch" -->
 ```typescript
 import { You } from "@youdotcom-oss/sdk";
 
@@ -78,6 +318,69 @@ async function run() {
 
 run();
 ```
+### Example Usage: express_stream
+
+<!-- UsageSnippet language="typescript" operationID="AgentsRuns" method="post" path="/v1/agents/runs" example="express_stream" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.agentsRuns({
+    agent: "express",
+    input: "What are some great recipes I can make in under half an hour",
+    stream: true,
+    tools: [
+      {
+        type: "web_search",
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { agentsRuns } from "@youdotcom-oss/sdk/funcs/agentsRuns.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await agentsRuns(you, {
+    agent: "express",
+    input: "What are some great recipes I can make in under half an hour",
+    stream: true,
+    tools: [
+      {
+        type: "web_search",
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsRuns failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -87,7 +390,6 @@ run();
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-| `options.serverURL`                                                                                                                                                            | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | An optional server URL to use.                                                                                                                                                 |
 
 ### Response
 
@@ -104,7 +406,7 @@ run();
 
 ## search
 
-Returns a list of unified search results from web and news sources
+This endpoint is designed to return LLM-ready web results based on a user's query. Based on a classification mechanism, it can return web results and news associated with your query. If you need to feed an LLM with the results of a query that sounds like `What are the latest geopolitical updates from India`, then this endpoint is the right one for you.
 
 ### Example Usage
 
@@ -177,11 +479,11 @@ run();
 
 ## contents
 
-Returns the content of the web pages
+Returns the HTML or Markdown of a target webpage.
 
-### Example Usage
+### Example Usage: authFailure
 
-<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" -->
+<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" example="authFailure" -->
 ```typescript
 import { You } from "@youdotcom-oss/sdk";
 
@@ -198,7 +500,6 @@ async function run() {
       "html",
       "markdown",
     ],
-    crawlTimeout: 10,
   });
 
   console.log(result);
@@ -230,7 +531,311 @@ async function run() {
       "html",
       "markdown",
     ],
-    crawlTimeout: 10,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contents failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: authorizationFailure
+
+<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" example="authorizationFailure" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.contents({
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { contents } from "@youdotcom-oss/sdk/funcs/contents.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contents(you, {
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contents failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidOrExpired
+
+<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" example="invalidOrExpired" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.contents({
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { contents } from "@youdotcom-oss/sdk/funcs/contents.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contents(you, {
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contents failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingApiKey
+
+<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" example="missingApiKey" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.contents({
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { contents } from "@youdotcom-oss/sdk/funcs/contents.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contents(you, {
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contents failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingScopes
+
+<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" example="missingScopes" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.contents({
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { contents } from "@youdotcom-oss/sdk/funcs/contents.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contents(you, {
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("contents failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: otherAuthParsing
+
+<!-- UsageSnippet language="typescript" operationID="contents" method="post" path="/v1/contents" example="otherAuthParsing" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.contents({
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { contents } from "@youdotcom-oss/sdk/funcs/contents.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await contents(you, {
+    urls: [
+      "https://www.you.com",
+    ],
+    formats: [
+      "html",
+      "markdown",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -251,6 +856,7 @@ run();
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+| `options.serverURL`                                                                                                                                                            | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | An optional server URL to use.                                                                                                                                                 |
 
 ### Response
 
@@ -263,4 +869,522 @@ run();
 | errors.ContentsUnauthorizedError   | 401                                | application/json                   |
 | errors.ContentsForbiddenError      | 403                                | application/json                   |
 | errors.ContentsInternalServerError | 500                                | application/json                   |
+| errors.YouDefaultError             | 4XX, 5XX                           | \*/\*                              |
+
+## research
+
+Research goes beyond a single web search. In response to your question, it runs multiple searches, reads through the sources, and synthesizes everything into a thorough, well-cited answer. Use it when a question is too complex for a simple lookup, and when you need a response you can actually trust and verify.
+
+### Example Usage: authFailure
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="authFailure" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: authorizationFailure
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="authorizationFailure" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidEnum
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="invalidEnum" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidJson
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="invalidJson" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: invalidOrExpired
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="invalidOrExpired" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingApiKey
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="missingApiKey" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingField
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="missingField" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: missingScopes
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="missingScopes" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: otherAuthParsing
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="otherAuthParsing" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: stringTooLong
+
+<!-- UsageSnippet language="typescript" operationID="research" method="post" path="/v1/research" example="stringTooLong" -->
+```typescript
+import { You } from "@youdotcom-oss/sdk";
+
+const you = new You({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await you.research({
+    input: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { YouCore } from "@youdotcom-oss/sdk/core.js";
+import { research } from "@youdotcom-oss/sdk/funcs/research.js";
+
+// Use `YouCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const you = new YouCore({
+  apiKeyAuth: process.env["YOU_API_KEY_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await research(you, {
+    input: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("research failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ResearchRequest](../../models/operations/researchrequest.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ResearchResponse](../../models/operations/researchresponse.md)\>**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.ResearchUnauthorizedError   | 401                                | application/json                   |
+| errors.ResearchForbiddenError      | 403                                | application/json                   |
+| errors.UnprocessableEntityError    | 422                                | application/json                   |
+| errors.ResearchInternalServerError | 500                                | application/json                   |
 | errors.YouDefaultError             | 4XX, 5XX                           | \*/\*                              |

@@ -10,10 +10,6 @@ import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
 
-export const AgentsRunsServerList = [
-  "https://api.you.com",
-] as const;
-
 /**
  * The parameters to ask the agent a question
  */

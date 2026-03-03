@@ -7,6 +7,7 @@ export * from "./agentruns401responseerror.js";
 export * from "./agentruns422responseerror.js";
 export * from "./contents.js";
 export * from "./httpclienterrors.js";
+export * from "./research.js";
 export * from "./responsevalidationerror.js";
 export * from "./sdkvalidationerror.js";
 export * from "./search.js";

@@ -11,7 +11,7 @@ import { Params, pathToFunc } from "./url.js";
  * Contains the list of servers available to the SDK
  */
 export const ServerList = [
-  "https://ydc-index.io",
+  "https://api.you.com",
 ] as const;
 
 export type SDKOptions = {
@@ -58,7 +58,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "0.13.0",
-  genVersion: "2.803.3",
-  userAgent: "speakeasy-sdk/typescript 0.13.0 2.803.3 1.0.0 @youdotcom-oss/sdk",
+  sdkVersion: "0.13.1",
+  genVersion: "2.845.1",
+  userAgent: "speakeasy-sdk/typescript 0.13.1 2.845.1 1.0.0 @youdotcom-oss/sdk",
 } as const;

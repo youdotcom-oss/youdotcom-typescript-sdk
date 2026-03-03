@@ -4,4 +4,5 @@
 
 export * from "./agentsruns.js";
 export * from "./contents.js";
+export * from "./research.js";
 export * from "./search.js";
