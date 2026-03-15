@@ -57,6 +57,7 @@ export const AgentsRunsResponse$inboundSchema: z.ZodMiniType<
     z.transform(stream => {
       return new EventStream(stream, rawEvent => {
         return {
+          done: false,
           value: models.AgentRunsStreamingResponse$inboundSchema.parse(
             rawEvent,
           ),
