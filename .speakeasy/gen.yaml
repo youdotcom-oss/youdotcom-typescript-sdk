@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.13.1
+  version: 0.13.2
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
@@ -57,6 +57,7 @@ typescript:
   enumFormat: union
   envVarPrefix: YOU
   exportZodModelNamespace: false
+  fixEnumNameSanitization: false
   flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
@@ -92,4 +93,6 @@ typescript:
   unionStrategy: populated-fields
   usageSDKInitImports: []
   useIndexModules: true
+  useOxlint: false
+  useTsgo: false
   zodVersion: v4-mini
