@@ -10,11 +10,11 @@ The type of output. This can either be:
 import { Type } from "@youdotcom-oss/sdk/models";
 
 let value: Type = "web_search.results";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "message.answer" | "web_search.results" | Unrecognized<string>

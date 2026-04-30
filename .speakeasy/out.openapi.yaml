@@ -354,6 +354,8 @@ paths:
       operationId: contents
       summary: Returns the content of the web pages
       description: Returns the HTML or Markdown of a target webpage.
+      security:
+        - ApiKeyAuth: []
       requestBody:
         content:
           application/json:
@@ -1405,5 +1407,3 @@ components:
           example: "https://api.ydc-index.io/favicon?domain=you.com&size=128"
       description: Metadata about the web page. Only returned when 'metadata' is included in the formats array.
       nullable: true
-security:
-  - ApiKeyAuth: []
